@@ -1,0 +1,16 @@
+{
+  "itemTypes": [
+    {"id": 1, "name": "ToDo", "weight": 1.3},
+    {"id": 2, "name": "Wait for Meeting", "weight": 1.1},
+    {"id": 3, "name": "Wait for Response", "weight": 1.15},
+    {"id": 4, "name": "Follow-up", "weight": 1.2},
+    {"id": 5, "name": "Nothing yet", "weight": 1},
+    {"id": 6, "name": "Fully Done", "weight": 0}
+  ],
+  "importanceTypes": [
+    {"id": 1, "name": "High", "weight": 1.2},
+    {"id": 2, "name": "Medium", "weight": 1.1},
+    {"id": 3, "name": "Low", "weight": 1}
+  ],
+  "dayDrop": 0.15
+}
