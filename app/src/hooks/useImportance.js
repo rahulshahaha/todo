@@ -5,19 +5,18 @@ import { FbContext } from '../store/contexts/fbContext';
 export function useImportance(importanceID) {
 
   const { weights } = useContext(FbContext)
-  const [importanceName, setImportanceName] = useState(null)
+  const [importance, setImportance] = useState({name: null, id: null, weight: 0})
 
   useEffect(() => {
 
     const importance = weights ? weights.importanceTypes.filter(iType => {
       return iType.id === importanceID
-    }) : null
+    })[0] : {name: null, id: null, weight: 0}
 
-    const newImportanceName = importance ? importance[0].name : null
 
-    setImportanceName(newImportanceName)
+    setImportance(importance)
 
   }, [weights, importanceID]);
 
-  return importanceName;
+  return importance;
 }

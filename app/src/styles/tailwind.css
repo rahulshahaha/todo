@@ -1,4 +1,6 @@
-/*! tailwindcss v2.0.3 | MIT License | https://tailwindcss.com */
+/* ./src/tailwind.css */
+
+/* ! tailwindcss v2.0.3 | MIT License | https://tailwindcss.com */
 
 /*! modern-normalize v1.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
 
@@ -582,6 +584,43 @@ video {
   .container {
     max-width: 1536px;
   }
+}
+
+table {
+  border-collapse: separate;
+  --tw-border-opacity: 1;
+  border-color: rgba(0, 0, 0, var(--tw-border-opacity));
+  border-width: 4px;
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+  margin-top: 2.5rem;
+  table-layout: auto;
+  border-spacing: 0;
+}
+
+tbody tr{
+  border-width: 1px;
+}
+
+/* thead tr{
+  @apply border-b-4 border-black bg-gray-300;
+} */
+
+table td, table th{
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-width: 1px;
+}
+
+table th{
+  --tw-bg-opacity: 1;
+  background-color: rgba(209, 213, 219, var(--tw-bg-opacity));
+  --tw-border-opacity: 1;
+  border-color: rgba(0, 0, 0, var(--tw-border-opacity));
+  border-bottom-width: 4px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
 }
 
 .space-y-0 > :not([hidden]) ~ :not([hidden]) {
@@ -184192,4 +184231,3 @@ video {
             animation: bounce 1s infinite;
   }
 }
-  

@@ -1,22 +1,26 @@
 import React from 'react'
-import moment from 'moment';
-import { useImportance } from '../hooks/useImportance'
+import ItemName from './ItemInfo/ItemName';
+import ItemImportance from './ItemInfo/ItemImportance';
+import ItemDescription from './ItemInfo/ItemDescription';
+import ItemNotes from './ItemInfo/ItemNotes';
+import ItemActionType from './ItemInfo/ItemActionType';
+import ItemAction from './ItemInfo/ItemAction';
+import ItemExpectedUpdate from './ItemInfo/ItemExpectedUpdate';
 
 
 const ItemRow = ({ item }) => {
 
-  const importanceName = useImportance(item.importance)
-
 
   return ( 
-    <tr>
-      <td>{item.name}</td>
-      <td>{importanceName}</td>
-      <td>{item.description}</td>
-      <td>{item.notes}</td>
-      <td>{item.actionType}</td>
-      <td>{item.action}</td>
-      <td>{moment.unix(item.expectedUpdate.seconds).format("M/DD/YYYY")}</td>
+    <tr className={item.colorClass}>
+      <td>{item.score.toFixed(2)}</td>
+      <ItemName item={item} />
+      <ItemImportance item={item} />
+      <ItemDescription item={item} />
+      <ItemNotes item={item} />
+      <ItemActionType item={item} />
+      <ItemAction item={item} />
+      <ItemExpectedUpdate item={item} />
     </tr>
    );
 }

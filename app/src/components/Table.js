@@ -1,10 +1,14 @@
 import React, { useContext } from 'react'
-import { FbContext } from '../store/contexts/fbContext';
+import { FbContext } from '../store/fbContext';
 import ItemRow from './ItemRow';
 
-const Test = () => {
+const Table = () => {
 
   const { items } = useContext(FbContext)
+  const sortedItems = items ? items.sort((a,b) => {
+    return b.score - a.score
+  }) : null;
+
 
 
   return ( 
@@ -12,7 +16,7 @@ const Test = () => {
       <table>
         <thead>
           <tr>
-            {/* <th>Score</th> */}
+            <th>Score</th>
             <th>Name</th>
             <th>Importance</th>
             <th>Description</th>
@@ -23,7 +27,7 @@ const Test = () => {
           </tr>
         </thead>
         <tbody>
-          { items && items.map(item => {
+          { sortedItems && sortedItems.map(item => {
             return <ItemRow key={item.id} item={item} />
           })}
         </tbody>
@@ -32,4 +36,4 @@ const Test = () => {
    );
 }
  
-export default Test;
+export default Table;
