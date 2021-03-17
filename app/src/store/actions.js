@@ -50,8 +50,40 @@ export const completeOneOff = (id) => {
 }
 
 export const addOneOff = (oneOff) => {
+  const userID = currentUserID()
   firebase.firestore().collection('oneOffs').add({
     name: oneOff,
-    done: false
+    done: false,
+    userID
   })
+}
+
+export const login = (email, pass) => {
+  firebase.auth().signInWithEmailAndPassword(
+    email,
+    pass
+  )
+}
+
+export const logout = () => {
+  firebase.auth().signOut()
+}
+
+export const addNewItem = () => {
+  const userID = currentUserID()
+  const now = new Date(new Date().getFullYear() + 1,new Date().getMonth() , new Date().getDate());
+  firebase.firestore().collection('items').add({
+    action: '',
+    actionType: 1,
+    description: '',
+    expectedUpdate: now,
+    importance: 1,
+    name: 'NewName',
+    notes: '',
+    userID
+  })
+}
+
+const currentUserID = () => {
+  return firebase.auth().currentUser.uid
 }

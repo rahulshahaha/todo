@@ -10,7 +10,6 @@ const Table = () => {
   }) : null;
 
 
-
   return ( 
     <div>
       <table>

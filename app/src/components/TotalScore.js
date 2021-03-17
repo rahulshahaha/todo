@@ -17,7 +17,9 @@ const TotalScore = () => {
   }
 
   return ( 
-    <h1>{ totalScore.toFixed(2) }</h1>
+    <div>
+      <h1 className="text-center text-4xl my-5">{ totalScore.toFixed(2) }</h1>
+    </div>
    );
 }
  

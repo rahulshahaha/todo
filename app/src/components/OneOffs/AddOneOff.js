@@ -17,7 +17,7 @@ const AddOneOff = () => {
 
   return ( 
     <form onSubmit={submit}>
-      <input className="rounded-lg border-2 border-black focus:outline-none" value={newOneOff} onChange={change}></input>
+      <input className="formInput" value={newOneOff} onChange={change}></input>
     </form>
    );
 }

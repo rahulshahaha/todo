@@ -42,7 +42,7 @@ const itemColorClass = (item) => {
   }else if(item.actionType === 1 || item.actionType === 4){
     return 'bg-purple-300'
   }else if(item.actionType === 2 || item.actionType === 3){
-    return 'bg-green-100'
+    return 'bg-gray-400'
   }
 
   return 'bg-white'

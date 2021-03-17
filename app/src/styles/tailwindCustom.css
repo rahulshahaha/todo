@@ -24,4 +24,13 @@ table th{
   @apply sticky top-0 bg-gray-300 border-b-4 border-black;
 }
 
+.formInput{
+  /* @apply rounded-lg border-2 border-black focus:outline-none; */
+  @apply rounded-lg px-5 py-1 border-2 border-black focus:outline-none;
+}
+
+.btn{
+  @apply bg-gray-200 rounded-md px-5 h-8;
+}
+
 @tailwind utilities;
