@@ -4,7 +4,8 @@ import { FbContext } from '../store/fbContext';
 
 const TotalScore = () => {
 
-  const { items, oneOffs } = useContext(FbContext)
+  const { items, oneOffs, weights } = useContext(FbContext)
+  const oneOffWeight = weights ? weights.oneOff : 0;
   var totalScore = 0;
   if(items){
     for(var i = 0; i < items.length; i++){
@@ -13,7 +14,7 @@ const TotalScore = () => {
   }
 
   if(oneOffs){
-    totalScore = totalScore + (oneOffs.length * 0.5)
+    totalScore = totalScore + (oneOffs.length * oneOffWeight)
   }
 
   return ( 

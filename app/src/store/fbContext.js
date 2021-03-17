@@ -12,11 +12,11 @@ export const FbProvider = ({ children }) => {
   const [weights, setWeights] = useState(null)
   const [oneOffs, setOneOffs] = useState(null)
   const [user, setUser] = useState(null)
-  const [FBuser, userLoading] = useAuthState(firebase.auth());
+  const [FBuser] = useAuthState(firebase.auth());
 
   useEffect(() => {
     const userID = user ? user.id : null
-    const unsubItems = firebase.firestore().collection('items').where('userID','==',userID).onSnapshot(itemsSnap => {
+    const unsubItems = firebase.firestore().collection('items').where('userID','==',userID).where('deleted','==',false).onSnapshot(itemsSnap => {
     const itemArray = []
       itemsSnap.docs.forEach(itemDoc => {
         itemArray.push(hydrateItem({...itemDoc.data(), id: itemDoc.id, score: 0}, weights))

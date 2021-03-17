@@ -21,7 +21,7 @@ table td, table th{
 }
 
 table th{
-  @apply sticky top-0 bg-gray-300 border-b-4 border-black;
+  @apply sticky top-0 bg-gray-300 border-b-4 border-black z-10;
 }
 
 .formInput{
@@ -31,6 +31,10 @@ table th{
 
 .btn{
   @apply bg-gray-200 rounded-md px-5 h-8;
+}
+
+tr:hover td .trashIcon{
+  @apply block
 }
 
 @tailwind utilities;

@@ -12,5 +12,8 @@
     {"id": 2, "name": "Medium", "weight": 1.1},
     {"id": 3, "name": "Low", "weight": 1}
   ],
-  "dayDrop": 0.15
+  "dayDrop": 0.15,
+  "oneOff": 0.5
 }
+
+

@@ -6,6 +6,7 @@ import ItemNotes from './ItemInfo/ItemNotes';
 import ItemActionType from './ItemInfo/ItemActionType';
 import ItemAction from './ItemInfo/ItemAction';
 import ItemExpectedUpdate from './ItemInfo/ItemExpectedUpdate';
+import TrashIcon from './TrashIcon';
 
 
 const ItemRow = ({ item }) => {
@@ -13,7 +14,10 @@ const ItemRow = ({ item }) => {
 
   return ( 
     <tr className={item.colorClass}>
-      <td>{item.score.toFixed(2)}</td>
+      <td className='relative'>
+        <TrashIcon itemID={item.id} />
+        {item.score.toFixed(2)}
+      </td>
       <ItemName item={item} />
       <ItemImportance item={item} />
       <ItemDescription item={item} />

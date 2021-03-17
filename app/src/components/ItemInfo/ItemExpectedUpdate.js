@@ -1,32 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { updateExpectedUpdate } from '../../store/actions'
 import moment from 'moment';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const ItemExpectedUpdate = ({ item }) => {
-  const expectedUpdate = moment.unix(item.expectedUpdate.seconds).format("L")
+  const expectedUpdate = moment.unix(item.expectedUpdate.seconds)
   
-  const [editing, setEditing] = useState(0)
-  const [newExpectedUpdate, setNewExpectedUpdate] = useState(expectedUpdate)
-
-  const lostFocus = () => {
-    const newDateMoment = moment(newExpectedUpdate, "L");
-    const newDate = new Date(newDateMoment.year(), newDateMoment.month(), newDateMoment.date())
+  const dateChange = (newDate) => {
     updateExpectedUpdate(newDate, item.id)
-    setEditing(0)
   }
 
-  const textChange = (e) => {
-    setNewExpectedUpdate(e.target.value)
-  }
 
-  const onClick = () => {
-    setEditing(1)
-  }
-
-  if(editing === 1) return <td><input className={item.colorClass} autoFocus onChange={textChange} onBlur={lostFocus} value={newExpectedUpdate}></input></td>
 
   return ( 
-    <td onClick={onClick}>{ expectedUpdate }</td>
+    <td><DatePicker wrapperClassName='mr-10' className={item.colorClass + ' static'} selected={expectedUpdate.toDate()} onChange={dateChange} /></td>
    );
 }
  

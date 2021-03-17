@@ -80,7 +80,14 @@ export const addNewItem = () => {
     importance: 1,
     name: 'NewName',
     notes: '',
-    userID
+    userID,
+    deleted: false
+  })
+}
+
+export const deleteItem = (itemID) => {
+  firebase.firestore().collection('items').doc(itemID).update({
+    deleted: true
   })
 }
 

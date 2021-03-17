@@ -1,6 +1,6 @@
 /* ./src/tailwind.css */
 
-/* ! tailwindcss v2.0.3 | MIT License | https://tailwindcss.com */
+/* ! tailwindcss v2.0.4 | MIT License | https://tailwindcss.com */
 
 /*! modern-normalize v1.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
 
@@ -621,6 +621,7 @@ table th{
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
+  z-index: 10;
 }
 
 .formInput{
@@ -650,6 +651,10 @@ table th{
   height: 2rem;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+}
+
+tr:hover td .trashIcon{
+  display: block
 }
 
 .space-y-0 > :not([hidden]) ~ :not([hidden]) {
