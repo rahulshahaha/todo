@@ -4,7 +4,6 @@ import { deleteItem } from '../store/actions'
 const TrashIcon = ({itemID}) => {
 
   const clicked = (e) => {
-    console.log('delete')
     if(window.confirm('Are you sure you want to delete?') === true){
       deleteItem(itemID)
     }

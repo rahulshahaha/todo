@@ -12,7 +12,7 @@ export const hydrateItem = (item, weights) =>{
     })[0]
 
     const daysTo = numberDaysTo(item.expectedUpdate)
-    const score = Math.max(0,(1 * importance.weight * actionType.weight) - (daysTo * weights.dayDrop));
+    const score = item.expectedUpdate ? Math.max(0,(1 * importance.weight * actionType.weight) - (daysTo * weights.dayDrop)) : 0;
 
     const colorClass = itemColorClass(item)
   
@@ -24,12 +24,14 @@ export const hydrateItem = (item, weights) =>{
 
 
 const numberDaysTo = (timestamp) => {
+  if(timestamp === null) return 0;
   const now = moment(new Date(new Date().getFullYear(),new Date().getMonth() , new Date().getDate()));
   const expectedUpdate = moment.unix(timestamp.seconds)
   return expectedUpdate.diff(now,'days')
 }
 
 const itemColorClass = (item) => {
+  if(item.expectedUpdate === null) return 'bg-white'
   const now = moment(new Date(new Date().getFullYear(),new Date().getMonth() , new Date().getDate()));
   const expectedUpdate = moment.unix(item.expectedUpdate.seconds)
 

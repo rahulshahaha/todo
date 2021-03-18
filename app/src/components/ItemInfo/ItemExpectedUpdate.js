@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const ItemExpectedUpdate = ({ item }) => {
-  const expectedUpdate = moment.unix(item.expectedUpdate.seconds)
+  const expectedUpdate = item.expectedUpdate ? moment.unix(item.expectedUpdate.seconds).toDate() : null
   
   const dateChange = (newDate) => {
     updateExpectedUpdate(newDate, item.id)
@@ -14,7 +14,7 @@ const ItemExpectedUpdate = ({ item }) => {
 
 
   return ( 
-    <td><DatePicker wrapperClassName='mr-10' className={item.colorClass + ' static'} selected={expectedUpdate.toDate()} onChange={dateChange} /></td>
+    <td><DatePicker wrapperClassName='mr-10' className={item.colorClass + ' static'} selected={expectedUpdate} onChange={dateChange} /></td>
    );
 }
  

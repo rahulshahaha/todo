@@ -71,12 +71,11 @@ export const logout = () => {
 
 export const addNewItem = () => {
   const userID = currentUserID()
-  const now = new Date(new Date().getFullYear() + 1,new Date().getMonth() , new Date().getDate());
   firebase.firestore().collection('items').add({
     action: '',
     actionType: 1,
     description: '',
-    expectedUpdate: now,
+    expectedUpdate: null,
     importance: 1,
     name: 'NewName',
     notes: '',
@@ -88,6 +87,32 @@ export const addNewItem = () => {
 export const deleteItem = (itemID) => {
   firebase.firestore().collection('items').doc(itemID).update({
     deleted: true
+  })
+}
+
+export const updateImportanceTypes = (newITypes) => {
+  firebase.firestore().collection('users').doc(currentUserID()).get().then(userDoc => {
+    var currentWeights = JSON.parse(userDoc.data().weights)
+    var currentITypes = currentWeights.importanceTypes
+    for(var i = 0; i < newITypes.length; i++){
+      if(!isNaN(parseFloat(newITypes[i].weight))){
+        for(var j = 0; j < currentITypes.length; j++){
+          if(currentITypes[j].id === newITypes[i].id){
+            console.log('t')
+            currentITypes[j] = {
+              ...currentITypes[j],
+              weight: parseFloat(newITypes[i].weight)
+            }
+          }
+        }
+      }
+    }
+    currentWeights.importanceTypes = currentITypes;
+    firebase.firestore().collection('users').doc(currentUserID()).update({
+      weights: JSON.stringify(currentWeights)
+    }).then(t => {
+      window.location.reload();
+    })
   })
 }
 

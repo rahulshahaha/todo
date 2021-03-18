@@ -6,6 +6,8 @@ const Table = () => {
 
   const { items } = useContext(FbContext)
   const sortedItems = items ? items.sort((a,b) => {
+    if(a.expectedUpdate === null) return 1
+    if(b.expectedUpdate === null) return -1
     return b.score - a.score
   }) : null;
 
