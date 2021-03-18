@@ -14,33 +14,24 @@ export const FbProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [FBuser] = useAuthState(firebase.auth());
 
-  useEffect(() => {
-    const userID = user ? user.id : null
-    const unsubItems = firebase.firestore().collection('items').where('userID','==',userID).where('deleted','==',false).onSnapshot(itemsSnap => {
-    const itemArray = []
-      itemsSnap.docs.forEach(itemDoc => {
-        itemArray.push(hydrateItem({...itemDoc.data(), id: itemDoc.id, score: 0}, weights))
-     })
-    setItems(itemArray)
-   })
-   return () => {
-     unsubItems();
-   }
-  }, [weights, user]);
 
   useEffect(() => {
-    if(user){
-      firebase.firestore().collection('users').doc(user.id).get().then(userDoc => {
+    const userID = user ? user.id : null
+      const unsubUser = firebase.firestore().collection('users').doc("/" + userID).onSnapshot(userDoc => {
+        if(userDoc.exists){
         setWeights(JSON.parse(userDoc.data().weights))
+        }else{
+          setWeights(null)
+        }
       })
-    }else{
-      setWeights(null)
+    return () => {
+      unsubUser();
     }
   }, [user])
 
   useEffect(() => {
     const userID = user ? user.id : null
-    const unsubOneOffs = firebase.firestore().collection('oneOffs').where('done','==',false).where('userID','==',userID).onSnapshot(oneOffSnap => {
+    const unsubOneOffs = firebase.firestore().collection('users/' + userID + '/oneOffs').where('done','==',false).onSnapshot(oneOffSnap => {
       const oneOffArray = []
       oneOffSnap.docs.forEach(oneOffDoc => {
         oneOffArray.push({...oneOffDoc.data(), id: oneOffDoc.id})
@@ -52,6 +43,21 @@ export const FbProvider = ({ children }) => {
       unsubOneOffs();
     }
   }, [user])
+
+  useEffect(() => {
+    const userID = user ? user.id : null
+    const unsubItems = firebase.firestore().collection('users/' + userID + '/items').where('deleted','==',false).onSnapshot(itemsSnap => {
+      const itemArray = []
+      itemsSnap.docs.forEach(itemDoc => {
+        itemArray.push(hydrateItem({...itemDoc.data(), id: itemDoc.id, score: 0}, weights))
+      })
+    setItems(itemArray)
+    })
+
+  return () => {
+    unsubItems();
+  }
+  },[weights, user])
 
   useEffect(() => {
     if(FBuser){

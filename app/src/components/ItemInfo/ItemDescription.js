@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { updateDescription } from '../../store/actions'
+import TextareaAutosize from 'react-textarea-autosize';
+
 
 
 const ItemDescription = ({ item }) => {
@@ -9,7 +11,9 @@ const ItemDescription = ({ item }) => {
   const [newDescription, setNewDescription] = useState(description)
 
   const lostFocus = () => {
-    updateDescription(newDescription, item.id)
+    if(description !== newDescription){
+      updateDescription(newDescription, item.id)
+    }
     setEditing(0)
   }
 
@@ -21,7 +25,11 @@ const ItemDescription = ({ item }) => {
     setEditing(1)
   }
 
-  if(editing === 1) return <td><textarea className={'h-full resize-y ' + item.colorClass} autoFocus onChange={textChange} onBlur={lostFocus} value={newDescription}></textarea></td>
+  const onFocus = (e) => {
+    e.target.select()
+  }
+
+  if(editing === 1) return <td><TextareaAutosize onFocus={onFocus} className={'tableTextArea ' + item.colorClass} autoFocus onChange={textChange} onBlur={lostFocus} value={newDescription}></TextareaAutosize></td>
 
   return ( 
     <td onClick={onClick}>{ description }</td>

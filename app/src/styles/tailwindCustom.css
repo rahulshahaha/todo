@@ -29,6 +29,10 @@ table th{
   @apply rounded-lg px-5 py-1 border-2 border-black focus:outline-none;
 }
 
+.tableTextArea{
+  @apply focus:outline-none h-full w-full resize-none border-0;
+}
+
 .btn{
   @apply bg-gray-200 rounded-md px-5 h-8;
 }

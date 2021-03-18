@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { updateName } from '../../store/actions'
+import TextareaAutosize from 'react-textarea-autosize';
 
 
 const ItemName = ({ item }) => {
@@ -10,7 +11,9 @@ const ItemName = ({ item }) => {
   const [newName, setNewName] = useState(name)
 
   const lostFocus = () => {
-    updateName(newName, item.id)
+    if(newName !== name){
+      updateName(newName, item.id)
+    }
     setEditing(0)
   }
 
@@ -22,7 +25,11 @@ const ItemName = ({ item }) => {
     setEditing(1)
   }
 
-  if(editing === 1) return <td><input className={item.colorClass} autoFocus onChange={textChange} onBlur={lostFocus} value={newName}></input></td>
+  const onFocus = (e) => {
+    e.target.select()
+  }
+
+  if(editing === 1) return <td><TextareaAutosize onFocus={onFocus} className={'tableTextArea ' + item.colorClass} autoFocus onChange={textChange} onBlur={lostFocus} value={newName}></TextareaAutosize></td>
 
   return ( 
     <td onClick={onClick}>{ name }</td>

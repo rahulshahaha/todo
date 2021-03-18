@@ -644,6 +644,21 @@ table th{
   padding-right: 1.25rem;
 }
 
+.tableTextArea{
+  border-width: 0px;
+  height: 100%;
+}
+
+.tableTextArea:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.tableTextArea {
+  resize: none;
+  width: 100%;
+}
+
 .btn{
   --tw-bg-opacity: 1;
   background-color: rgba(229, 231, 235, var(--tw-bg-opacity));

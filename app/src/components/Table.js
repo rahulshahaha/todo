@@ -21,7 +21,7 @@ const Table = () => {
             <th>Name</th>
             <th>Importance</th>
             <th>Description</th>
-            <th>Notes</th>
+            {/* <th>Notes</th> */}
             <th>Action Type</th>
             <th>Action</th>
             <th>Expected Update</th>
