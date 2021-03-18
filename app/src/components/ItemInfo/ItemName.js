@@ -32,7 +32,7 @@ const ItemName = ({ item }) => {
   if(editing === 1) return <td><TextareaAutosize onFocus={onFocus} className={'tableTextArea ' + item.colorClass} autoFocus onChange={textChange} onBlur={lostFocus} value={newName}></TextareaAutosize></td>
 
   return ( 
-    <td onClick={onClick}>{ name }</td>
+    <td onClick={onClick}><p>{ name }</p></td>
    );
 }
  

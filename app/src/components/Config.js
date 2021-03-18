@@ -8,7 +8,7 @@ const Config = () => {
   const { weights } = useContext(FbContext)
    
   return ( 
-    <div>
+    <div className="mx-10 mb-10">
       <div>
         {
           weights ? (

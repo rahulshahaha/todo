@@ -116,6 +116,14 @@ export const updateImportanceTypes = (newITypes) => {
   })
 }
 
+export const logHistory = (newScore) => {
+  const now = new Date()
+  firebase.firestore().collection('users/' + currentUserID() + '/history').add({
+    date: now,
+    score: newScore
+  })
+}
+
 const currentUserID = () => {
   return firebase.auth().currentUser.uid
 }
