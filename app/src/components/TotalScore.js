@@ -4,28 +4,28 @@ import { logHistory } from '../store/actions'
 
 const TotalScore = () => {
 
-  const { items, oneOffs, weights } = useContext(FbContext)
+  const { items, oneOffs, weights, user } = useContext(FbContext)
   const oneOffWeight = weights ? weights.oneOff : 0;
   const [totalScore, setTotalScore] = useState(0)
 
   useEffect(() => {
    var newScore = 0
-    if(items){
+   var hydrated = false;
+    if(items && oneOffs){
       for(var i = 0; i < items.length; i++){
         newScore += items[i].score
       }
-    }
-  
-    if(oneOffs){
+      if(newScore > 0) hydrated = true;
       newScore = newScore + (oneOffs.length * oneOffWeight)
     }
 
-    if(newScore !== totalScore && items && oneOffs){
-      logHistory(newScore)
+    if(newScore !== totalScore && items && oneOffs && hydrated && user){
+      if(newScore === 1) console.log(items)
+      logHistory(newScore.toFixed(2))
     }
 
     setTotalScore(newScore)
-  }, [items, oneOffs, oneOffWeight, totalScore])
+  }, [items, oneOffs, oneOffWeight, totalScore, user])
 
 
   return ( 

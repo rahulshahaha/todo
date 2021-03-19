@@ -11,7 +11,6 @@ import TrashIcon from './TrashIcon';
 
 const ItemRow = ({ item }) => {
 
-
   return ( 
     <tr className={item.colorClass}>
       <td className='relative'>

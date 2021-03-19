@@ -14,6 +14,7 @@ export const hydrateItem = (item, weights) =>{
     const daysTo = numberDaysTo(item.expectedUpdate)
     const score = item.expectedUpdate ? Math.max(0,(1 * importance.weight * actionType.weight) - (daysTo * weights.dayDrop)) : 0;
 
+
     const colorClass = itemColorClass(item)
   
     return {...item, importanceName: importance.name, importanceWeight: importance.weight, actionTypeName: actionType.name, actionTypeWeight: actionType.weight, daysTo, score, colorClass}
