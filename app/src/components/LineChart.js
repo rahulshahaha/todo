@@ -56,7 +56,6 @@ const LineChart = () => {
 
     useEffect(() => {
 
-    if(chartData){
     //graph size
     const graphHeight = 200
     const graphWidth = 500
@@ -86,6 +85,7 @@ const LineChart = () => {
     // graph.selectAll('circle').remove();
     graph.selectAll('path').remove();
 
+    if(chartData){
 
     //create dotted line group and append to graph
     const hoverLineGroup = graph.append('g')
