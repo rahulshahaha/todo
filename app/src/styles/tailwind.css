@@ -672,6 +672,24 @@ tr:hover td .trashIcon{
   display: block
 }
 
+.tip{
+  padding: 10px;
+  background: #333;
+  color: #fff;
+  font-size: 0.75rem;
+}
+
+.tip .score{
+  font-size: 1.125rem;
+  line-height: 1.75rem
+}
+
+.chartAxis{
+  -webkit-user-select: none;
+      -ms-user-select: none;
+          user-select: none
+}
+
 .space-y-0 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));

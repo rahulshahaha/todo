@@ -4,7 +4,7 @@ import { login, logout } from '../../store/actions'
 
 const Login = () => {
 
-  const { user } = useContext(FbContext)
+  const { FBuser } = useContext(FbContext)
   const [creds, setCreds] = useState({
     email: '',
     pass: ''
@@ -14,7 +14,7 @@ const Login = () => {
     logout();
   }
 
-  if(user){
+  if(FBuser){
     return(
       <button onClick={logoutClick} className="btn">Logout</button>
     )

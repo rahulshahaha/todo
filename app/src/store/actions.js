@@ -119,13 +119,14 @@ export const updateImportanceTypes = (newITypes) => {
 export const logHistory = (newScore) => {
   const now = new Date()
   firebase.firestore().collection('users').doc(currentUserID()).get().then(userDoc => {
-    if(userDoc.data().currentScore !== newScore){
+    if(userDoc.data().currentScore.toFixed(2) !== newScore.toFixed(2)){
+      console.log('log history. current:', userDoc.data().currentScore, 'new', newScore)
       firebase.firestore().collection('users').doc(currentUserID()).update({
-        currentScore: parseFloat(newScore)
+        currentScore: parseFloat(newScore.toFixed(2))
       }).then(t => {
         firebase.firestore().collection('users/' + currentUserID() + '/history').add({
           date: now,
-          score: parseFloat(newScore)
+          score: parseFloat(newScore.toFixed(2))
         })
       })
     }

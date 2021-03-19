@@ -41,4 +41,19 @@ tr:hover td .trashIcon{
   @apply block
 }
 
+.tip{
+  padding: 10px;
+  background: #333;
+  color: #fff;
+  font-size: 0.75rem;
+}
+
+.tip .score{
+  @apply text-lg
+}
+
+.chartAxis{
+  @apply select-none
+}
+
 @tailwind utilities;
