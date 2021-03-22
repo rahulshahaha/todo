@@ -192,7 +192,7 @@ const LineChart = ({chartClass}) => {
 
     return (
         <div className="flex justify-center">
-          <div className={chartClass + ' w-1/2'}>
+          <div className={chartClass + ' w-full'}>
               <svg ref={ref}>
                   <g className="chartArea">
 

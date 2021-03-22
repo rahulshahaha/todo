@@ -14,7 +14,7 @@ const CardCollection = () => {
 
 
   return ( 
-    <div className='flex flex-col w-full'>
+    <div className='flex flex-col w-full col-span-8'>
       { sortedItems && sortedItems.map(item => {
         return <ItemCard key={item.id} item={item} />
       })}

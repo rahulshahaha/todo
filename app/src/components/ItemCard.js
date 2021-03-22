@@ -13,7 +13,7 @@ const click = (e) => {
 }
 
   return ( 
-    <div onClick={click} className={'border-2 border-black my-2 w-4/6 self-center grid grid-cols-12 cursor-pointer ' + item.colorClass}>
+    <div onClick={click} className={'border-2 border-black my-2 w-full self-center grid grid-cols-12 cursor-pointer ' + item.colorClass}>
       <div className='mainInfo flex flex-col col-span-3 p-2'>
         <p className='text-sm'>{item.score.toFixed(2)}</p>
         <p className='text-xl'>{item.name}</p>

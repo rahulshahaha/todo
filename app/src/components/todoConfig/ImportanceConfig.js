@@ -34,7 +34,8 @@ const ImportanceConfig = ({importanceTypes}) => {
   }
 
   return ( 
-    <div>
+    <div className='m-auto w-48 mt-10'>
+      <p className="text-lg underline">Importance Weights</p>
       { iTypes && iTypes.map(iType => {
         return(
           <div key={iType.id}>
