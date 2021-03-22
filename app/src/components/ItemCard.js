@@ -9,7 +9,7 @@ const expectedUpdate = item.expectedUpdate ? moment.unix(item.expectedUpdate.sec
 const { dispatch } = useContext(FbContext)
 
 const click = (e) => {
-  dispatch({type: 'SHOW_SHEET', item: item})
+  dispatch({type: 'SHOW_SHEET', itemID: item.id})
 }
 
   return ( 

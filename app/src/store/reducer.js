@@ -5,13 +5,13 @@ export const reducer = (state, action) => {
       return {
         ...state,
         showSheet: true,
-        item: action.item
+        itemID: action.itemID
       }
     case 'HIDE_SHEET':
       return{
         ...state,
         showSheet: false,
-        item: null
+        itemID: null
       }
     default: 
       return state

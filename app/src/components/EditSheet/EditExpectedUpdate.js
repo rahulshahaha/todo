@@ -8,10 +8,17 @@ const EditExpectedUpdate = ({value, change}) => {
 
   const expectedUpdate = value && value.seconds ? moment.unix(value.seconds).toDate() : value ? value : null
 
+  const dateChange = (newDate,g) => {
+    var dateToSend = newDate
+    if(dateToSend !== null){
+      change(dateToSend)
+    }
+  }
+
   return ( 
     <div>
       <p>Expected Update</p>
-      <DatePicker id='expectedUpdate' className='formInput' selected={expectedUpdate} onChange={change} />
+      <DatePicker id='expectedUpdate' isClearable={false} className='formInput' selected={expectedUpdate} onChange={dateChange} />
     </div>
    );
 }

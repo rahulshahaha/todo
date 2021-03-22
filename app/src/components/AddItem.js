@@ -4,10 +4,10 @@ import { FbContext } from '../store/fbContext'
 
 const AddItem = () => {
 
-  const { FBuser } = useContext(FbContext)
+  const { FBuser, dispatch } = useContext(FbContext)
 
   const addItem = () => {
-    addNewItem()
+    addNewItem(dispatch)
   }
 
   if(FBuser === null) return false

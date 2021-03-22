@@ -10,12 +10,11 @@ export const FbContext = React.createContext();
 
 export const FbProvider = ({ children }) => {
 
-  // const [history, setHistory] = useState(null)
   const [FBuser] = useAuthState(firebase.auth());
   const userID = FBuser ? FBuser.uid : null
   const [status, dispatch] = useReducer(reducer, {
     showSheet: false,
-    item: null
+    itemID: null
   });
 
   const [oneOffs] = useCollectionData(firebase.firestore().collection('users/'+ userID +'/oneOffs').where('done','==',false), {
