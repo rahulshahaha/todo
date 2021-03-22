@@ -11,7 +11,8 @@ export const hydrateItem = (item, weights) =>{
       return aType.id === item.actionType
     })[0]
 
-    const daysTo = numberDaysTo(item.expectedUpdate)
+    const daysTo = weekDaysBetween(item.expectedUpdate)
+    // weekDaysBetween(item.expectedUpdate)
     const score = item.expectedUpdate ? Math.max(0,(1 * importance.weight * actionType.weight) - (daysTo * weights.dayDrop)) : 0;
 
 
@@ -24,11 +25,34 @@ export const hydrateItem = (item, weights) =>{
 }
 
 
-const numberDaysTo = (timestamp) => {
+const weekDaysBetween = (timestamp) => {
   if(timestamp === null) return 0;
-  const now = moment(new Date(new Date().getFullYear(),new Date().getMonth() , new Date().getDate()));
-  const expectedUpdate = moment.unix(timestamp.seconds)
-  return expectedUpdate.diff(now,'days')
+  const expectedUpdate = moment.unix(timestamp.seconds).startOf('days')
+  const now = moment().startOf('days');
+  var end = moment(expectedUpdate)
+  var start = moment(now)
+  var multiplier = 1
+  const dailyInfo = [false, true, true, true, true, true, false]
+  let totalDays = 0;
+
+  if(expectedUpdate.isSame(now)){
+    return 0;
+  }
+  if(expectedUpdate.isBefore(now)){
+    start = moment(expectedUpdate)
+    end = moment(now)
+    multiplier = -1;
+  }
+
+  while(!start.isSame(end)){
+    start.add(1,'d')
+    if(dailyInfo[start.day()]){
+      totalDays++;
+    }
+  }
+
+  return totalDays * multiplier
+
 }
 
 const itemColorClass = (item) => {

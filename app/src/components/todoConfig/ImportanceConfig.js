@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { updateImportanceTypes } from '../store/actions'
+import { updateImportanceTypes } from '../../store/actions'
 
 const ImportanceConfig = ({importanceTypes}) => {
 

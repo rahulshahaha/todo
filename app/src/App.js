@@ -1,8 +1,9 @@
 import AddItem from "./components/AddItem";
 import Login from "./components/auth/Login";
-import Config from "./components/Config";
+import CardCollection from "./components/CardCollection";
+import Config from "./components/todoConfig/Config";
+import EditSheet from "./components/EditSheet/EditSheet";
 import OneOffs from "./components/OneOffs/OneOffs";
-import Table from "./components/Table";
 import TotalScore from "./components/TotalScore";
 import { FbProvider } from './store/fbContext.js'
 
@@ -13,7 +14,8 @@ function App() {
         <Login />
         <TotalScore />
         <OneOffs />
-        <Table />
+        <CardCollection />
+        <EditSheet />
         <AddItem />
         <Config />
       </div>

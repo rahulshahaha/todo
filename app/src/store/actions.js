@@ -134,6 +134,17 @@ export const logHistory = (newScore) => {
 
 }
 
+export const updateItem = (newItem) => {
+  firebase.firestore().collection('users/' + currentUserID() + '/items').doc(newItem.id).update({
+    action: newItem.action,
+    actionType: parseInt(newItem.actionType),
+    description: newItem.description,
+    expectedUpdate: newItem.expectedUpdate,
+    importance: parseInt(newItem.importance),
+    name: newItem.name
+  })
+}
+
 const currentUserID = () => {
   return firebase.auth().currentUser.uid
 }

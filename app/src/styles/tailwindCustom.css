@@ -25,7 +25,6 @@ table th{
 }
 
 .formInput{
-  /* @apply rounded-lg border-2 border-black focus:outline-none; */
   @apply rounded-lg px-5 py-1 border-2 border-black focus:outline-none;
 }
 
@@ -35,6 +34,14 @@ table th{
 
 .btn{
   @apply bg-gray-200 rounded-md px-5 h-8;
+}
+
+.importantBtn{
+  @apply bg-red-200 rounded-md px-5 h-8;
+}
+
+.doneBtn{
+  @apply bg-blue-600 rounded-md px-5 h-8 text-white;
 }
 
 tr:hover td .trashIcon{
