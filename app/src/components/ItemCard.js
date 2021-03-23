@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import moment from 'moment'
 import { FbContext } from '../store/fbContext'
+import ImportanceIcon from './ImportanceIcon'
 
 
 const ItemCard = ({item}) => {
@@ -15,9 +16,10 @@ const click = (e) => {
   return ( 
     <div onClick={click} className={'border-2 border-black my-2 w-full self-center grid grid-cols-12 cursor-pointer '}>
       <div className='mainInfo flex flex-col col-span-4 p-2 bg-black text-white'>
-        <p className='text-sm'>{item.score.toFixed(2)}</p>
+        <p className='text-xs'>{item.score.toFixed(2)}</p>
         <p className='text-xl'>{item.name}</p>
-        <p className='text-xs'>{item.importanceName}</p>
+        {/* <p className='text-xs'>{item.importanceName}</p> */}
+        <ImportanceIcon importance={item.importance} />
         <p className='text-sm'>{item.description}</p>
       </div>
       <div className={"col-span-8 p-2 " + item.colorClass}>

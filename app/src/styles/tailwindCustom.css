@@ -33,15 +33,18 @@ table th{
 }
 
 .btn{
-  @apply bg-gray-200 rounded-md px-5 h-8;
+  @apply bg-gray-200 rounded-md px-5;
+  min-height: 2rem;
 }
 
 .importantBtn{
-  @apply bg-red-200 rounded-md px-5 h-8;
+  @apply bg-red-200 rounded-md px-5;
+  min-height: 2rem;
 }
 
 .doneBtn{
-  @apply bg-blue-600 rounded-md px-5 h-8 text-white;
+  @apply bg-blue-600 rounded-md px-5 text-white;
+  min-height: 2rem;
 }
 
 tr:hover td .trashIcon{
