@@ -16,7 +16,7 @@ const EditExpectedUpdate = ({value, change}) => {
   }
 
   return ( 
-    <div>
+    <div className="mt-2">
       <p>Expected Update</p>
       <DatePicker id='expectedUpdate' isClearable={false} className='formInput' selected={expectedUpdate} onChange={dateChange} />
     </div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 const EditActionType = ({value, change}) => {
   return ( 
-    <div>
+    <div className="mt-2">
       <p>Action Type</p>
       <select className='border-2 border-black' onChange={change} id='actionType' value={value}>
         <option value={1}>ToDo</option>

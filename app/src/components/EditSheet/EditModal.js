@@ -86,7 +86,8 @@ const EditModal = () => {
 
 
   return ( 
-    <div ref={node} className="bg-white h-3/4 w-1/4 mt-10 p-5">
+    <div ref={node} className="overflow-scroll bg-white h-5/6 w-1/4 mt-10 p-5">
+      <p className="text-xl font-bold">Edit Item</p>
       <EditName value={newItem.name} change={change} />
       <EditImportance value={newItem.importance} change={change} />
       <EditDescription value={newItem.description} change={change} />  
