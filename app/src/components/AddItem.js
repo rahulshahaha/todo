@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import { addNewItem } from '../store/actions'
 import { FbContext } from '../store/fbContext'
 
 const AddItem = () => {
@@ -7,7 +6,8 @@ const AddItem = () => {
   const { FBuser, dispatch } = useContext(FbContext)
 
   const addItem = () => {
-    addNewItem(dispatch)
+    // addNewItem(dispatch)
+    dispatch({type:'SHOW_SHEET'})
   }
 
   if(FBuser === null) return false

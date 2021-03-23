@@ -69,21 +69,15 @@ export const logout = () => {
   firebase.auth().signOut()
 }
 
-export const addNewItem = (dispatch) => {
-  const userID = currentUserID()
+export const addNewItem = (newItem) => {
   firebase.firestore().collection('users/' + currentUserID() + '/items').add({
-    action: '',
-    actionType: 1,
-    description: '',
-    expectedUpdate: null,
-    importance: 1,
-    name: 'NewName',
-    notes: '',
-    userID,
-    deleted: false,
-    new: true
-  }).then(newItem => {
-    dispatch({type:'SHOW_SHEET',itemID:newItem.id})
+    action: newItem.action,
+    actionType: parseInt(newItem.actionType),
+    description: newItem.description,
+    expectedUpdate: newItem.expectedUpdate,
+    importance: parseInt(newItem.importance),
+    name: newItem.name,
+    deleted: false
   })
 }
 
