@@ -1,15 +1,17 @@
 import CardCollection from "./components/CardCollection";
 import EditSheet from "./components/EditSheet/EditSheet";
 import { FbProvider } from './store/fbContext.js'
-import TopView from "./components/TopView";
+import LeftBar from "./components/LeftBar";
+import RightBar from "./components/rightBar/RightBar";
 
 function App() {
   return (
     <FbProvider>
       <div className="App">
         <div className="grid grid-cols-12">
-          <TopView />
+          <LeftBar />
           <CardCollection />
+          <RightBar />
         </div>
         <EditSheet />
       </div>

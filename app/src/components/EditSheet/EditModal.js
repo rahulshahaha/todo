@@ -40,7 +40,6 @@ const EditModal = () => {
       }
       dispatch({type:'HIDE_SHEET'})
     }
-    
     // add when mounted
     document.addEventListener("mousedown", handleClick);
     // return function to be called when unmounted
@@ -87,7 +86,7 @@ const EditModal = () => {
 
 
   return ( 
-    <div ref={node} className="bg-white h-3/4 w-5/6 mt-10 p-5">
+    <div ref={node} className="bg-white h-3/4 w-1/4 mt-10 p-5">
       <EditName value={newItem.name} change={change} />
       <EditImportance value={newItem.importance} change={change} />
       <EditDescription value={newItem.description} change={change} />  

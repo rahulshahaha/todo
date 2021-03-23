@@ -14,7 +14,14 @@ export const FbProvider = ({ children }) => {
   const userID = FBuser ? FBuser.uid : null
   const [status, dispatch] = useReducer(reducer, {
     showSheet: false,
-    itemID: null
+    itemID: null,
+    importanceFilters: {
+      1: true,
+      2: true,
+      3: true
+    },
+    dayFilter: 'all',
+    actionFilters: {1: true, 2: true, 3: true, 4: true, 5: true, 6: true}
   });
 
   const [oneOffs] = useCollectionData(firebase.firestore().collection('users/'+ userID +'/oneOffs').where('done','==',false), {

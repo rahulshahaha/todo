@@ -6,9 +6,9 @@ import Config from './todoConfig/Config'
 import TotalScore from './TotalScore'
 
 
-const TopView = () => {
+const LeftBar = () => {
   return ( 
-    <div className="col-span-3" >
+    <div className="fixed w-1/4 col-span-3" >
       <Login />
       <AddItem />
       <TotalScore />
@@ -18,4 +18,4 @@ const TopView = () => {
    );
 }
  
-export default TopView;
+export default LeftBar;
