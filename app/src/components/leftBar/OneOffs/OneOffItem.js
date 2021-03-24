@@ -1,5 +1,5 @@
 import React from 'react'
-import { completeOneOff } from '../../store/actions'
+import { completeOneOff } from '../../../store/actions'
 
 const OneOffItem = ({oneOff}) => {
 

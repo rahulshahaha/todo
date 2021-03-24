@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import AddItem from './AddItem'
-import Login from './auth/Login'
+import Login from '../auth/Login'
 import OneOffs from './OneOffs/OneOffs'
-import Config from './todoConfig/Config'
+import Config from '../todoConfig/Config'
 import TotalScore from './TotalScore'
 
 

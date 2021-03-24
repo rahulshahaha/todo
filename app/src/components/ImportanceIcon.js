@@ -1,20 +1,23 @@
 import React from 'react';
 
-const ImportanceIcon = ({importance}) => {
+const ImportanceIcon = ({importance, importances}) => {
 
-  var color = "green"
-  switch(importance){
-    case 1:
-      color = "red"
-      break;
-    case 2:
-      color = "yellow"
-      break;
-    default:
-      color = "green"
+  const colors = ["green","yellow","orange","red"]
+  var color = colors[0]
+
+  const sortedImportances = importances.sort((a,b) => {
+    return a.weight - b.weight
+  })
+  
+  var numberOfDots = 1;
+  for(var i = 1; i <= sortedImportances.length; i++){
+    if(sortedImportances[i-1].id === importance){
+      numberOfDots = i;
+      color = colors[i-1]
+    }
   }
 
-  const numberOfDots = importance === 1 ? 3 : importance === 3 ? 1 : 2;
+  
 
   var dots = []
   for (let i = 1; i <= numberOfDots; i++) {

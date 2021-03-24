@@ -26,11 +26,11 @@ const ActionTypeFilter = () => {
   }
 
   const selectAll = (e) => {
-    dispatch({type: 'ALL_ACTION', value: true})
+    dispatch({type: 'ALL_ACTION', value: true, actionTypes: weights.actionTypes})
   }
 
   const deSelectAll = (e) => {
-    dispatch({type: 'ALL_ACTION', value: false})
+    dispatch({type: 'ALL_ACTION', value: false, actionTypes: weights.actionTypes})
   }
 
   return ( 

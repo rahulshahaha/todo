@@ -151,6 +151,24 @@ export const updateItem = (newItem) => {
   })
 }
 
+export const addImportance = (importanceTypes) => {
+  const keys = Object.keys(importanceTypes)
+  const newID = keys.length + 1;
+  const newKey = "importanceTypes." + newID
+  firebase.firestore().collection('users').doc(currentUserID()).update({
+    [newKey]: {id: newID, name: "New", weight: 0}
+  })
+}
+
+export const addActionType = (actionTypes) => {
+  const keys = Object.keys(actionTypes)
+  const newID = keys.length + 1;
+  const newKey = "actionTypes." + newID
+  firebase.firestore().collection('users').doc(currentUserID()).update({
+    [newKey]: {id: newID, name: "New", weight: 0}
+  })
+}
+
 const currentUserID = () => {
   return firebase.auth().currentUser.uid
 }

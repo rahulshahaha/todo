@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { FbContext } from '../store/fbContext';
-import { logHistory } from '../store/actions'
+import { FbContext } from '../../store/fbContext';
+import { logHistory } from '../../store/actions'
 import LineChart from './LineChart'
 
 const TotalScore = () => {

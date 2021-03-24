@@ -1,7 +1,7 @@
 import CardCollection from "./components/CardCollection";
 import EditSheet from "./components/EditSheet/EditSheet";
 import { FbProvider } from './store/fbContext.js'
-import LeftBar from "./components/LeftBar";
+import LeftBar from "./components/leftBar/LeftBar";
 import RightBar from "./components/rightBar/RightBar";
 
 

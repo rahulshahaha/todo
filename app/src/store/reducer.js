@@ -31,13 +31,14 @@ export const reducer = (state, action) => {
         }
       }
     case 'ALL_IMPORTANCE':
+      var newImportanceFilters = {}
+      const ikeys = Object.keys(action.importances)
+      for (const key of ikeys) {
+        newImportanceFilters[key] = action.value
+      }
       return{
         ...state,
-        importanceFilters:{
-          1: action.value,
-          2: action.value,
-          3: action.value
-        }
+        importanceFilters: newImportanceFilters
       }
     case 'SET_ACTION_FILTER':
       return{
@@ -48,16 +49,14 @@ export const reducer = (state, action) => {
         }
       }
     case 'ALL_ACTION':
+      var newActionFilters = {}
+      const akeys = Object.keys(action.actionTypes)
+      for (const key of akeys) {
+        newActionFilters[key] = action.value
+      }
       return{
         ...state,
-        actionFilters:{
-          1: action.value,
-          2: action.value,
-          3: action.value,
-          4: action.value,
-          5: action.value,
-          6: action.value
-        }
+        actionFilters: newActionFilters
       }
     case 'SET_DAY_FILTER':
       return{

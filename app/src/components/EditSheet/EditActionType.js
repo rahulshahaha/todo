@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { FbContext } from '../../store/fbContext';
 
 const EditActionType = ({value, change}) => {
+
+  const { weights } = useContext(FbContext)
+
+  var actionTypes = weights ? weights.actionTypeArray : null
+  if(actionTypes){
+    actionTypes = actionTypes.sort((a,b) => {
+      return b.weight - a.weight
+    })
+  }
+
   return ( 
     <div className="mt-2">
       <p>Action Type</p>
       <select className='border-2 border-black' onChange={change} id='actionType' value={value}>
-        <option value={1}>ToDo</option>
-        <option value={2}>Wait for Meeting</option>
-        <option value={3}>Wait for Response</option>
-        <option value={4}>Follow-up</option>
-        <option value={5}>Nothing yet</option>
-        <option value={6}>Fully done</option>
+        { actionTypes && actionTypes.map(aType => {
+          return <option value={aType.id}>{aType.name}</option> 
+        })}
       </select>
     </div>
    );

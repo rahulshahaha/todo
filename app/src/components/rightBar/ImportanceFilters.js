@@ -13,8 +13,12 @@ const ImportanceFilters = () => {
     weights.importanceArray.forEach(importance => {
       filters.push({
         id: importance.id,
-        name: importance.name
+        name: importance.name,
+        weight: importance.weight
       })
+    })
+    filters = filters.sort((a,b) => {
+      return b.weight - a.weight
     })
   }else{
     return null
@@ -25,14 +29,18 @@ const ImportanceFilters = () => {
   }
 
   const selectAll = (e) => {
-    dispatch({type: 'ALL_IMPORTANCE', value: true})
+    dispatch({type: 'ALL_IMPORTANCE', value: true, importances: weights.importanceTypes})
+  }
+
+  const deSelectAll = (e) => {
+    dispatch({type: 'ALL_IMPORTANCE', value: false, importances: weights.importanceTypes})
   }
 
 
   return ( 
     <div>
       <p className="text-xl font-bold">Filter Importance</p>
-      <div className="flex space-x-2 flex-wrap">
+      <div className="flex flex-col">
         { filters.map(filt => {
           return(
             <div className="flex space-x-1" key={filt.id}>
@@ -42,7 +50,10 @@ const ImportanceFilters = () => {
           )
         })}
       </div>
-      <button className="btn mt-2" onClick={selectAll}>Select All</button>
+      <div className="flex space-x-2">
+        <button className="btn mt-2" onClick={selectAll}>Select All</button>
+        <button className="btn mt-2" onClick={deSelectAll}>De-select All</button>
+      </div>
     </div>
    );
 }

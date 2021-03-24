@@ -7,7 +7,7 @@ import ImportanceIcon from './ImportanceIcon'
 const ItemCard = ({item}) => {
 const expectedUpdate = item.expectedUpdate ? moment.unix(item.expectedUpdate.seconds).format('MM/DD/YY') : null
 
-const { dispatch } = useContext(FbContext)
+const { dispatch, weights } = useContext(FbContext)
 
 const click = (e) => {
   dispatch({type: 'SHOW_SHEET', itemID: item.id})
@@ -19,7 +19,7 @@ const click = (e) => {
         <p className='text-xs'>{item.score.toFixed(2)}</p>
         <p className='text-xl'>{item.name}</p>
         {/* <p className='text-xs'>{item.importanceName}</p> */}
-        <ImportanceIcon importance={item.importance} />
+        <ImportanceIcon importance={item.importance} importances={weights.importanceArray} />
         <p className='text-sm'>{item.description}</p>
       </div>
       <div className={"col-span-8 p-2 " + item.colorClass}>
