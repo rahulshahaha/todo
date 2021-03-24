@@ -3,11 +3,11 @@ import moment from 'moment';
 
 export const hydrateItem = (item, weights) =>{
   if(weights && item){
-    const importance = weights.importanceTypes.filter(iType => {
+    const importance = weights.importanceArray.filter(iType => {
       return iType.id === item.importance
     })[0]
 
-    const actionType = weights.itemTypes.filter(aType => {
+    const actionType = weights.actionTypeArray.filter(aType => {
       return aType.id === item.actionType
     })[0]
 

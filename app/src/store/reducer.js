@@ -13,6 +13,15 @@ export const reducer = (state, action) => {
         showSheet: false,
         itemID: null
       }
+    case 'SETUP_IMPORTANCE_FILTERS':
+      var importanceFilters = {}
+      action.importances.forEach(importance => {
+        importanceFilters[importance.id] = true
+      })
+      return{
+        ...state,
+        importanceFilters
+      }
     case 'SET_IMPORTANCE_FILTER':
       return{
         ...state,

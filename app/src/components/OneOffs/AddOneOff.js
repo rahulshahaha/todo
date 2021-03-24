@@ -17,7 +17,7 @@ const AddOneOff = () => {
 
   return ( 
     <form onSubmit={submit}>
-      <input className="formInput" value={newOneOff} onChange={change}></input>
+      <input className="formInput mt-2" placeholder="Add One Off" value={newOneOff} onChange={change}></input>
     </form>
    );
 }

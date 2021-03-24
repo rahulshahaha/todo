@@ -6,7 +6,6 @@ const AddItem = () => {
   const { FBuser, dispatch } = useContext(FbContext)
 
   const addItem = () => {
-    // addNewItem(dispatch)
     dispatch({type:'SHOW_SHEET'})
   }
 

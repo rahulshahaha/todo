@@ -16,7 +16,7 @@ const RightBar = () => {
 
 
   return ( 
-    <div className="fixed right-0 w-1/4 col-span-3 p-5">
+    <div className="col-span-3 p-5 h-screen overflow-hidden">
       <ImportanceFilters />
       <DayFilter />
       <ActionTypeFilter />

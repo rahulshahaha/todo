@@ -13,7 +13,7 @@ const OneOffs = () => {
   return ( 
     <div className="w-full">
       <div className="m-auto w-48">
-        <h1 className="text-lg underline">One Off Items</h1>
+        <h1 className="text-lg font-bold">One Off Items</h1>
         { oneOffs && oneOffs.map(oneOff => {
           return (
             <OneOffItem oneOff={oneOff} key={oneOff.id} />

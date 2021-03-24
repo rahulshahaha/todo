@@ -87,28 +87,36 @@ export const deleteItem = (itemID) => {
   })
 }
 
-export const updateImportanceTypes = (newITypes) => {
-  firebase.firestore().collection('users').doc(currentUserID()).get().then(userDoc => {
-    var currentWeights = JSON.parse(userDoc.data().weights)
-    var currentITypes = currentWeights.importanceTypes
-    for(var i = 0; i < newITypes.length; i++){
-      if(!isNaN(parseFloat(newITypes[i].weight))){
-        for(var j = 0; j < currentITypes.length; j++){
-          if(currentITypes[j].id === newITypes[i].id){
-            console.log('t')
-            currentITypes[j] = {
-              ...currentITypes[j],
-              weight: parseFloat(newITypes[i].weight)
-            }
-          }
-        }
+export const updateImportanceTypes = (newITypes, oldITypes) => {
+  const keys = Object.keys(newITypes)
+  for (const key of keys) {
+    if(!isNaN(parseFloat(newITypes[key].weight))){
+      oldITypes[key] = {
+        ...newITypes[key],
+        weight: parseFloat(newITypes[key].weight)
       }
     }
-    currentWeights.importanceTypes = currentITypes;
+  }
+  firebase.firestore().collection('users').doc(currentUserID()).get().then(userDoc => {
     firebase.firestore().collection('users').doc(currentUserID()).update({
-      weights: JSON.stringify(currentWeights)
-    }).then(t => {
-      window.location.reload();
+      importanceTypes: oldITypes
+    })
+  })
+}
+
+export const updateActionTypes = (newATypes, oldATypes) => {
+  const keys = Object.keys(newATypes)
+  for (const key of keys) {
+    if(!isNaN(parseFloat(newATypes[key].weight))){
+      oldATypes[key] = {
+        ...newATypes[key],
+        weight: parseFloat(newATypes[key].weight)
+      }
+    }
+  }
+  firebase.firestore().collection('users').doc(currentUserID()).get().then(userDoc => {
+    firebase.firestore().collection('users').doc(currentUserID()).update({
+      actionTypes: oldATypes
     })
   })
 }

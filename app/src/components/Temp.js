@@ -4,10 +4,11 @@ import firebase from '../config/fbConfig'
 
 const Temp = () => {
 
-  firebase.firestore().collection('oneOffs').get().then(itemSnap => {
-    itemSnap.docs.forEach(itemDoc => {
-      firebase.firestore().collection('users/' + itemDoc.data().userID + '/oneOffs').doc(itemDoc.id).set({
-        ...itemDoc.data()
+  firebase.firestore().collection('users').get().then(userSnap => {
+    userSnap.docs.forEach(userDoc => {
+      firebase.firestore().collection('users').doc(userDoc.id).update({
+        dayDrop: 0.15,
+        oneOff: 0.5
       })
     })
   })

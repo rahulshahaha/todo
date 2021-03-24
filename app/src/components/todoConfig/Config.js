@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { FbContext } from '../../store/fbContext';
+import ActionConfig from './ActionConfig';
 import ImportanceConfig from './ImportanceConfig';
 
 
@@ -12,7 +13,10 @@ const Config = () => {
       <div>
         {
           weights ? (
-            <ImportanceConfig importanceTypes={weights.importanceTypes} /> 
+            <div>
+              <ImportanceConfig importanceTypes={weights.importanceTypes} />
+              <ActionConfig actionTypes={weights.actionTypes} />
+            </div>
           ) : null
         }
       </div>

@@ -4,6 +4,7 @@ import {hydrateItem} from './hydrateItem'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData, useDocumentData } from 'react-firebase-hooks/firestore';
 import { reducer } from './reducer'
+import { hydrateWeights } from './hydrateWeights'
 
 export const FbContext = React.createContext();
 
@@ -15,13 +16,7 @@ export const FbProvider = ({ children }) => {
   const [status, dispatch] = useReducer(reducer, {
     showSheet: false,
     itemID: null,
-    importanceFilters: {
-      1: true,
-      2: true,
-      3: true
-    },
-    dayFilter: 'all',
-    actionFilters: {1: true, 2: true, 3: true, 4: true, 5: true, 6: true}
+    dayFilter: 'all'
   });
 
   const [oneOffs] = useCollectionData(firebase.firestore().collection('users/'+ userID +'/oneOffs').where('done','==',false), {
@@ -30,7 +25,12 @@ export const FbProvider = ({ children }) => {
 
   const [weights] = useDocumentData(firebase.firestore().collection('users').doc("/" + userID), {
     transform: function t(d){
-      return {...JSON.parse(d.weights)}
+      return hydrateWeights({
+        importanceTypes: d.importanceTypes,
+        actionTypes: d.actionTypes,
+        dayDrop: d.dayDrop,
+        oneOff: d.oneOff
+      })
     }
   })
 
@@ -42,8 +42,6 @@ export const FbProvider = ({ children }) => {
   })
 
   const [history] = useCollectionData(firebase.firestore().collection('users/' + userID + '/history').orderBy('date','asc'))
-
-
 
 
 

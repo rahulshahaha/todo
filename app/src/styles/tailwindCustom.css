@@ -28,6 +28,10 @@ table th{
   @apply rounded-lg px-5 py-1 border-2 border-black focus:outline-none;
 }
 
+.formInputSmall{
+  @apply rounded-lg w-12 px-1 border-2 border-black focus:outline-none;
+}
+
 .tableTextArea{
   @apply focus:outline-none h-full w-full resize-none border-0;
 }
@@ -65,5 +69,21 @@ tr:hover td .trashIcon{
 .chartAxis{
   @apply select-none
 }
+
+body{
+  @apply overflow-hidden;
+}
+
+
+.hideBar::-webkit-scrollbar {
+  display: none;
+}
+
+
+.hideBar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 
 @tailwind utilities;

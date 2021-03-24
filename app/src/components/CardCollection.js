@@ -13,9 +13,10 @@ const CardCollection = () => {
     return b.score - a.score
   }) : null;
 
-  if(status && sortedItems){
+  if(status && status.importanceFilters && sortedItems){
     const importanceFilters = status.importanceFilters
     sortedItems = sortedItems.filter(item => {
+      if(importanceFilters[item.importance] === undefined) return true
       return importanceFilters[item.importance]
     })
   }
@@ -36,19 +37,22 @@ const CardCollection = () => {
     }
   }
 
-  if(status && sortedItems){
+  if(status && status.actionFilters && sortedItems){
     const actionFilters = status.actionFilters
     sortedItems = sortedItems.filter(item => {
+      if(actionFilters[item.actionType] === undefined) return true
       return actionFilters[item.actionType]
     })
   }
 
 
   return ( 
-    <div className='flex flex-col w-full col-span-6 col-start-4 p-2'>
-      { sortedItems && sortedItems.map(item => {
-        return <ItemCard key={item.id} item={item} />
-      })}
+    <div className='flex flex-col w-full col-span-6 col-start-4 p-2 h-screen overflow-hidden'>
+      <div className="overflow-scroll h-full hideBar">
+        { sortedItems && sortedItems.map(item => {
+          return <ItemCard key={item.id} item={item} />
+        })}
+      </div>
     </div>
    );
 }

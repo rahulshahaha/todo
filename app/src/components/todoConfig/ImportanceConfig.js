@@ -1,50 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { updateImportanceTypes } from '../../store/actions'
 
 const ImportanceConfig = ({importanceTypes}) => {
 
-  const iTypes = importanceTypes;
   const [newITypes, setNewITypes] = useState([])
 
+  useEffect(() => {
+    if(importanceTypes){
+      setNewITypes(importanceTypes)
+    }
+  },[importanceTypes])
+
   const inputChange = (e) => {
-    var found = false;
-    const iT = newITypes
-    for(var i = 0; i < iT.length; i++){
-      if(iT[i].id === parseInt(e.target.id)){
-        found = true;
-        iT[i] = {
-          id: iT[i].id,
-          weight: e.target.value
-        }
-      }
-    }
-
-    if(found){
-      setNewITypes(iT)
-    }else{
-      iT.push({
-        id: parseInt(e.target.id),
+    setNewITypes({
+      ...newITypes,
+      [e.target.attributes.importanceid.nodeValue]: {
+        ...newITypes[e.target.attributes.importanceid.nodeValue],
         weight: e.target.value
-      })
-    }
+      }
+    })
   }
 
-  const changeITypes = () => {
-    updateImportanceTypes(newITypes)
+  const onBlur = (e) => {
+    const newValue = isNaN(parseFloat(e.target.value)) ? importanceTypes[e.target.attributes.importanceid.nodeValue].weight : parseFloat(e.target.value)
+    updateImportanceTypes({
+      ...newITypes,
+      [e.target.attributes.importanceid.nodeValue]: {
+        ...newITypes[e.target.attributes.importanceid.nodeValue],
+        weight: newValue
+      }
+    }, importanceTypes)
   }
+
+  const keys = Object.keys(newITypes)
+  var importanceArray = []
+  for (const key of keys) {
+    importanceArray.push(newITypes[key])
+  }
+  importanceArray = importanceArray.sort((a,b) => {
+    return b.weight - a.weight
+  })
 
   return ( 
-    <div className='m-auto w-48 mt-10'>
-      <p className="text-lg underline">Importance Weights</p>
-      { iTypes && iTypes.map(iType => {
-        return(
-          <div key={iType.id}>
-            <p>{iType.name}</p>
-            <input defaultValue={iType.weight} id={iType.id} onChange={inputChange} className="formInput" />
-          </div>
-        )
-      })}
-      <button className='btn' onClick={changeITypes}>Change</button>
+    <div className='m-auto w-56 mt-10'>
+      <p className="text-lg font-bold">Importance Weights</p>
+      <div className="flex flex-col space-y-1">
+        { importanceArray && importanceArray.map(iType => {
+          return(
+            <div key={iType.id} className="grid grid-cols-12">
+              <p className="col-span-8">{iType.name}</p>
+              <input onBlur={onBlur} value={iType.weight} importanceid={iType.id} onChange={inputChange} className="formInputSmall col-span-4" />
+            </div>
+          )
+        })}
+      </div>
     </div>
    );
 }

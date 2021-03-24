@@ -643,6 +643,24 @@ table th{
   padding-right: 1.25rem;
 }
 
+.formInputSmall{
+  --tw-border-opacity: 1;
+  border-color: rgba(0, 0, 0, var(--tw-border-opacity));
+  border-radius: 0.5rem;
+  border-width: 2px;
+}
+
+.formInputSmall:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.formInputSmall {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  width: 3rem;
+}
+
 .tableTextArea{
   border-width: 0px;
   height: 100%;
@@ -707,6 +725,19 @@ tr:hover td .trashIcon{
   -webkit-user-select: none;
       -ms-user-select: none;
           user-select: none
+}
+
+body{
+  overflow: hidden;
+}
+
+.hideBar::-webkit-scrollbar {
+  display: none;
+}
+
+.hideBar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 .space-y-0 > :not([hidden]) ~ :not([hidden]) {
