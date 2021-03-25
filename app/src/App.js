@@ -1,7 +1,7 @@
-import EditSheet from "./components/EditSheet/EditSheet";
+import EditSheet from "./components/modals/EditSheet/EditSheet";
 import { FbProvider } from './store/fbContext.js'
 import Main from "./components/Main";
-import ProjectEditSheet from "./components/leftBar/projectEdit/ProjectEditSheet";
+import ProjectEditSheet from "./components/modals/projectEdit/ProjectEditSheet";
 
 
 

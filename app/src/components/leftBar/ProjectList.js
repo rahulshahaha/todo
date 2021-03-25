@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { FbContext } from '../../store/fbContext';
 import ProjectListItem from './ProjectListItem';
-import PlusIcon from '../PlusIcon'
+import PlusIcon from '../icons/PlusIcon'
 
 const ProjectList = () => {
 

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { FbContext } from '../store/fbContext';
+import { FbContext } from '../../store/fbContext';
 const interpolate = require('color-interpolate');
 
 const ImportanceIcon = ({importance}) => {

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import moment from 'moment'
-import { FbContext } from '../store/fbContext'
+import { FbContext } from '../../store/fbContext'
 
 
 const ItemCardProject = ({item}) => {

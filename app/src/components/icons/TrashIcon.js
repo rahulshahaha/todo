@@ -1,5 +1,5 @@
 import React from 'react';
-import { deleteItem } from '../store/actions'
+import { deleteItem } from '../../store/actions'
 
 const TrashIcon = ({itemID}) => {
 

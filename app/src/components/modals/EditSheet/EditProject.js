@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import useProjectScore from '../../hooks/useProjectScore'
-import { FbContext } from '../../store/fbContext'
+import useProjectScore from '../../../hooks/useProjectScore'
+import { FbContext } from '../../../store/fbContext'
 
 const EditProject = ({value, change}) => {
 

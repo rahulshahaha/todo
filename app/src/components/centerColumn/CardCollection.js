@@ -1,7 +1,7 @@
 import moment from 'moment';
 import React, { useContext } from 'react'
-import { FbContext } from '../store/fbContext';
-import ItemCardContainer from './ItemCardContainer';
+import { FbContext } from '../../store/fbContext';
+import ItemCardContainer from '../itemCards/ItemCardContainer';
 
 
 const CardCollection = () => {

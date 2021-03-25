@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { FbContext } from '../../store/fbContext'
-import ImportanceIcon from '../ImportanceIcon'
+import ImportanceIcon from '../icons/ImportanceIcon'
 
 
 const ProjectListItem = ({proj, weights}) => {

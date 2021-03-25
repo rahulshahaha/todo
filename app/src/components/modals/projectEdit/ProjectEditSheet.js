@@ -4,8 +4,13 @@ import ProjectEditModal from './ProjectEditModal'
 
 const ProjectEditSheet = () => {
 
-  const { status } = useContext(FbContext)
+  const { status, dispatch } = useContext(FbContext)
 
+  const onClick = (e) => {
+    if(e.target.id === 'project-bg'){
+      dispatch({type:'HIDE_PROJECT_SHEET'})
+    }
+  }
 
   if(status.showProjectSheet === false){
     return null
@@ -13,7 +18,7 @@ const ProjectEditSheet = () => {
 
 
   return ( 
-    <div className='flex justify-center w-screen h-screen bg-gray-400 bg-opacity-40 fixed inset-0'>
+    <div onClick={onClick} id="project-bg" className='flex justify-center w-screen h-screen bg-gray-400 bg-opacity-40 fixed inset-0'>
       <ProjectEditModal />
     </div>
    );

@@ -5,9 +5,9 @@ import EditImportance from './EditImportance';
 import EditName from './EditName';
 import { deleteProject, updateProject, addProject } from '../../../store/actions'
 import useItemsInProject from '../../../hooks/useItemsInProject'
-import ItemCardContainer from '../../ItemCardContainer';
-import ExitIcon from '../../ExitIcon';
-import PlusIcon from '../../PlusIcon';
+import ItemCardContainer from '../../itemCards/ItemCardContainer';
+import ExitIcon from '../../icons/ExitIcon';
+import PlusIcon from '../../icons/PlusIcon';
 
 const ProjectEditModal = () => {
 
