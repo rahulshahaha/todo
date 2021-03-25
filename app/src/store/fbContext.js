@@ -15,13 +15,16 @@ export const FbProvider = ({ children }) => {
   const userID = FBuser ? FBuser.uid : null
   const [status, dispatch] = useReducer(reducer, {
     showSheet: false,
+    showProjectSheet: false,
     itemID: null,
     dayFilter: 'all'
   });
 
+
   const [oneOffs] = useCollectionData(firebase.firestore().collection('users/'+ userID +'/oneOffs').where('done','==',false), {
     idField: 'id'
   });
+
 
   const [weights] = useDocumentData(firebase.firestore().collection('users').doc("/" + userID), {
     transform: function t(d){
@@ -34,19 +37,22 @@ export const FbProvider = ({ children }) => {
     }
   })
 
+  const [projects] = useCollectionData(firebase.firestore().collection('users/' + userID + '/projects').where('deleted','==',false),{
+    idField: 'id'
+  })
+
   const [items] = useCollectionData(firebase.firestore().collection('users/' + userID + '/items').where('deleted','==',false),{
     idField: 'id',
     transform: function t(d){
-      return hydrateItem({...d, score: 0}, weights)
+      return hydrateItem({...d, score: 0}, weights, projects)
     }
   })
 
   const [history] = useCollectionData(firebase.firestore().collection('users/' + userID + '/history').orderBy('date','asc'))
 
 
-
   return (
-    <FbContext.Provider value={{ items, oneOffs, weights, FBuser, history, status, dispatch }}>{children}</FbContext.Provider>
+    <FbContext.Provider value={{ items, oneOffs, weights, FBuser, history, status, dispatch, projects }}>{children}</FbContext.Provider>
   );
 };
 

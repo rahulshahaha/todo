@@ -8,13 +8,17 @@ const OneOffs = () => {
 
   const { oneOffs } = useContext(FbContext)
 
+  var sortedOneOffs = oneOffs ? oneOffs.sort((a,b) => {
+    return a.created - b.created
+  }) : null
+
 
 
   return ( 
     <div className="w-full">
       <div className="m-auto w-48">
         <h1 className="text-lg font-bold">One Off Items</h1>
-        { oneOffs && oneOffs.map(oneOff => {
+        { sortedOneOffs && sortedOneOffs.map(oneOff => {
           return (
             <OneOffItem oneOff={oneOff} key={oneOff.id} />
           )

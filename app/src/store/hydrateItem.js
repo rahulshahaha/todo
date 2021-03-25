@@ -1,10 +1,19 @@
 import moment from 'moment';
 
 
-export const hydrateItem = (item, weights) =>{
-  if(weights && item){
+export const hydrateItem = (item, weights, projects) =>{
+
+
+  if(weights && item && projects){
+    const project = projects.filter(proj => {
+      return proj.id === item.projectID
+    })[0]
+
+    const itemDeleted = project ? false : true;
+    if(itemDeleted) return null
+
     const importance = weights.importanceArray.filter(iType => {
-      return iType.id === item.importance
+      return iType.id === project.importance
     })[0]
 
     const actionType = weights.actionTypeArray.filter(aType => {
@@ -12,13 +21,12 @@ export const hydrateItem = (item, weights) =>{
     })[0]
 
     const daysTo = weekDaysBetween(item.expectedUpdate)
-    // weekDaysBetween(item.expectedUpdate)
     const score = item.expectedUpdate ? Math.max(0,(1 * importance.weight * actionType.weight) - (daysTo * weights.dayDrop)) : 0;
 
 
     const colorClass = itemColorClass(item)
   
-    return {...item, importanceName: importance.name, importanceWeight: importance.weight, actionTypeName: actionType.name, actionTypeWeight: actionType.weight, daysTo, score, colorClass}
+    return {...item, deleted: itemDeleted, importanceName: importance.name, importanceWeight: importance.weight, actionTypeName: actionType.name, actionTypeWeight: actionType.weight, daysTo, score, colorClass, project}
     
   }
   return item

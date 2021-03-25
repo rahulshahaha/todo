@@ -41,6 +41,11 @@ table th{
   min-height: 2rem;
 }
 
+.inactiveBtn{
+  @apply bg-gray-200 rounded-md px-5 cursor-default;
+  min-height: 2rem;
+}
+
 .importantBtn{
   @apply bg-red-200 rounded-md px-5;
   min-height: 2rem;

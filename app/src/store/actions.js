@@ -51,10 +51,12 @@ export const completeOneOff = (id) => {
 
 export const addOneOff = (oneOff) => {
   const userID = currentUserID()
+  const now = new Date()
   firebase.firestore().collection('users/' + currentUserID() + '/oneOffs').add({
     name: oneOff,
     done: false,
-    userID
+    userID,
+    created: now
   })
 }
 
@@ -73,11 +75,9 @@ export const addNewItem = (newItem) => {
   firebase.firestore().collection('users/' + currentUserID() + '/items').add({
     action: newItem.action,
     actionType: parseInt(newItem.actionType),
-    description: newItem.description,
     expectedUpdate: newItem.expectedUpdate,
-    importance: parseInt(newItem.importance),
-    name: newItem.name,
-    deleted: false
+    deleted: false,
+    projectID: newItem.projectID
   })
 }
 
@@ -143,11 +143,8 @@ export const updateItem = (newItem) => {
   firebase.firestore().collection('users/' + currentUserID() + '/items').doc(newItem.id).update({
     action: newItem.action,
     actionType: parseInt(newItem.actionType),
-    description: newItem.description,
     expectedUpdate: newItem.expectedUpdate,
-    importance: parseInt(newItem.importance),
-    name: newItem.name,
-    new: false
+    projectID: newItem.projectID
   })
 }
 
@@ -166,6 +163,36 @@ export const addActionType = (actionTypes) => {
   const newKey = "actionTypes." + newID
   firebase.firestore().collection('users').doc(currentUserID()).update({
     [newKey]: {id: newID, name: "New", weight: 0}
+  })
+}
+
+export const updateProject = (newProject) => {
+  firebase.firestore().collection('users/' + currentUserID() + '/projects').doc(newProject.id).update({
+    description: newProject.description,
+    importance: parseInt(newProject.importance),
+    name: newProject.name
+  })
+}
+
+export const deleteProject = (projectID) => {
+  const projectRef = firebase.firestore().collection('users/' + currentUserID() + '/projects').doc(projectID)
+  projectRef.update({
+    deleted: true
+  }).then(t => {
+    firebase.firestore().collection('users/' + currentUserID() + '/items').where('project','==',projectID).where('deleted','!=',true).get().then(itemSnap => {
+
+      var batch = firebase.firestore().batch();
+
+      itemSnap.docs.forEach(itemDoc => {
+        var itemRef = firebase.firestore().collection('users/' + currentUserID() + '/items').doc(itemDoc.id)
+        batch.update(itemRef, {"deleted": true});
+      })
+
+      // Commit the batch
+      batch.commit().then(() => {
+          console.log('deleted')
+      });
+    })
   })
 }
 

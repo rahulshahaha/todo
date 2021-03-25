@@ -5,13 +5,27 @@ export const reducer = (state, action) => {
       return {
         ...state,
         showSheet: true,
-        itemID: action.itemID
+        itemID: action.itemID,
+        itemProjectID: action.itemProjectID
+      }
+    case 'SHOW_PROJECT_SHEET':
+      return {
+        ...state,
+        showProjectSheet: true,
+        projectID: action.projectID
       }
     case 'HIDE_SHEET':
       return{
         ...state,
         showSheet: false,
-        itemID: null
+        itemID: null,
+        itemProjectID: null
+      }
+    case 'HIDE_PROJECT_SHEET':
+      return{
+        ...state,
+        showProjectSheet: false,
+        projectID: null
       }
     case 'SETUP_IMPORTANCE_FILTERS':
       var importanceFilters = {}

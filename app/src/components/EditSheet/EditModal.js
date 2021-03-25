@@ -1,12 +1,11 @@
 import React, { useState, useContext, useEffect, useRef } from 'react'
 import EditAction from './EditAction';
 import EditActionType from './EditActionType';
-import EditDescription from './EditDescription';
 import EditExpectedUpdate from './EditExpectedUpdate';
-import EditImportance from './EditImportance';
-import EditName from './EditName';
 import { updateItem, deleteItem, addNewItem } from '../../store/actions';
 import { FbContext } from '../../store/fbContext';
+import EditProject from './EditProject';
+import ExitIcon from '../ExitIcon';
 
 
 const EditModal = () => {
@@ -15,13 +14,14 @@ const EditModal = () => {
   const { status, dispatch, items } = useContext(FbContext)
 
   const [newItem, setNewItem] = useState({
-    name: '',
     action: '',
-    description:'',
-    importance: 3,
     actionType: 1,
-    expectedUpdate: new Date()
+    expectedUpdate: new Date(),
+    projectID: ''
   })
+
+  const [changed, setChanged] = useState(false)
+
   const [isNew, setNew] = useState(true)
 
   useEffect(() => {
@@ -33,26 +33,42 @@ const EditModal = () => {
         setNew(true)
       }
     }
+    if(status.itemProjectID){
+      setNewItem({
+        action: '',
+        actionType: 1,
+        expectedUpdate: new Date(),
+        projectID: status.itemProjectID
+      })
+    }
   }, [status, items])
 
 
   useEffect(() => {
 
-    const handleClick = (e) => {
+    const handleItemModalClick = (e) => {
       if (node.current.contains(e.target)) {
         return;
       }
       dispatch({type:'HIDE_SHEET'})
     }
     // add when mounted
-    document.addEventListener("mousedown", handleClick);
+    document.addEventListener("mousedown", handleItemModalClick);
     // return function to be called when unmounted
     return () => {
-      document.removeEventListener("mousedown", handleClick);
+      document.removeEventListener("mousedown", handleItemModalClick);
     };
   }, [dispatch]);
 
 
+
+  useEffect(() => {
+    if(newItem.projectID === '' || newItem.action === ''){
+      setChanged(false)
+    }else{
+      setChanged(true)
+    }
+  },[newItem.projectID, newItem.action])
 
   const change = (e) => {
     setNewItem({
@@ -68,56 +84,57 @@ const EditModal = () => {
     })
   }
 
-  const cancelClick = (e) => {
+  const exitClick = (e) => {
     dispatch({type:'HIDE_SHEET'})
   }
 
   const deleteClicked = (e) => {
     if(window.confirm('Are you sure you want to delete?') === true){
       deleteItem(newItem.id)
+      dispatch({type:'HIDE_SHEET'})
     }
-    dispatch({type:'HIDE_SHEET'})
   }
 
 
   const doneClick = (e) => {
+    if(!changed) return;
     updateItem(newItem)
     dispatch({type:'HIDE_SHEET'})
   }
 
   const addClick = (e) => {
+    if(!changed) return;
     addNewItem(newItem)
     dispatch({type:'HIDE_SHEET'})
   }
 
 
   return ( 
-    <div ref={node} className="overflow-scroll bg-white h-5/6 w-1/4 mt-10 p-5">
+    <div ref={node} className="relative overflow-scroll bg-white h-5/6 w-1/4 mt-10 p-5">
+      <div onClick={exitClick} className="h-10 w-10 absolute top-0 right-0">
+        <ExitIcon />
+      </div>
       { isNew ? (
         <p className="text-xl font-bold">New Item</p>
       ) : (
         <p className="text-xl font-bold">Edit Item</p>
       )}
-      <EditName value={newItem.name} change={change} />
-      <EditImportance value={newItem.importance} change={change} />
-      <EditDescription value={newItem.description} change={change} />  
+      <EditProject value={newItem.projectID} change={change} />
       <EditActionType value={newItem.actionType} change={change} />
       <EditExpectedUpdate value={newItem.expectedUpdate} change={dateChange} />
       <EditAction value={newItem.action} change={change} />
       {
         isNew ? (
           <div className="flex space-x-2 mt-5">
-            <button onClick={cancelClick} className="btn">Cancel</button>
-            <button onClick={addClick} className="doneBtn">Add</button>
+            <button onClick={addClick} className={changed ? "doneBtn" : "inactiveBtn"}>Add</button>
           </div>
         ) : (
           <div>
             <div className="flex space-x-2 mt-5">
-              <button onClick={cancelClick} className="btn">Cancel</button>
-              <button onClick={doneClick} className="doneBtn">Done</button>
+              <button onClick={doneClick} className={changed ? "doneBtn" : "inactiveBtn"}>Save</button>
+              <button onClick={deleteClicked} className="importantBtn">Delete Item</button>
             </div>
             <div>
-              <button onClick={deleteClicked} className="importantBtn mt-5">Delete Item</button>
             </div>
           </div>
         )

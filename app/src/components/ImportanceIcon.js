@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { FbContext } from '../store/fbContext';
+const interpolate = require('color-interpolate');
 
-const ImportanceIcon = ({importance, importances}) => {
+const ImportanceIcon = ({importance}) => {
 
-  const colors = ["green","yellow","orange","red"]
-  var color = colors[0]
+  const { weights } = useContext(FbContext)
+  const importances = weights ? weights.importanceArray : null
+
+  // const colors = interpolate([[0, 255, 0],[127,255,0],[255,255,0],[255,127,0],[255,0,0]])
+  const colors = interpolate([[255, 255, 255],[255,0,0]])
+  var color = colors(0)
+  const totalImportances = importances.length
 
   const sortedImportances = importances.sort((a,b) => {
     return a.weight - b.weight
@@ -13,7 +20,7 @@ const ImportanceIcon = ({importance, importances}) => {
   for(var i = 1; i <= sortedImportances.length; i++){
     if(sortedImportances[i-1].id === importance){
       numberOfDots = i;
-      color = colors[i-1]
+      color = colors((i-1)/(totalImportances-1))
     }
   }
 

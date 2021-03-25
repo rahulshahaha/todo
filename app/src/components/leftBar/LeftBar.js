@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import AddItem from './AddItem'
 import Login from '../auth/Login'
 import OneOffs from './OneOffs/OneOffs'
-import Config from '../todoConfig/Config'
+import Config from './todoConfig/Config'
 import TotalScore from './TotalScore'
+import ProjectList from './ProjectList'
 
 
 const LeftBar = () => {
@@ -21,6 +22,7 @@ const LeftBar = () => {
         <AddItem />
         <TotalScore />
         <OneOffs />
+        <ProjectList />
         <p className="mt-10 cursor-pointer underline m-auto w-56" onClick={click}>{showConfig ? 'Hide Config' : 'Show Config'}</p>
         { showConfig ? (
           <div>

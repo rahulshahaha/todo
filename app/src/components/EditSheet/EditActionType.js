@@ -17,7 +17,7 @@ const EditActionType = ({value, change}) => {
       <p>Action Type</p>
       <select className='border-2 border-black' onChange={change} id='actionType' value={value}>
         { actionTypes && actionTypes.map(aType => {
-          return <option value={aType.id}>{aType.name}</option> 
+          return <option key={aType.id} value={aType.id}>{aType.name}</option> 
         })}
       </select>
     </div>

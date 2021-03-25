@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { updateActionTypes, addActionType } from '../../store/actions'
+import { updateActionTypes, addActionType } from '../../../store/actions'
 
 const ActionConfig = ({actionTypes}) => {
 

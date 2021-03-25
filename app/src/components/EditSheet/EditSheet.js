@@ -9,12 +9,12 @@ const EditSheet = () => {
   const { status } = useContext(FbContext)
 
 
-  if(status.showSheet === false || status.item === null){
-    document.body.style.overflow = 'unset';
+  if(status.showSheet === false){
+    // document.body.style.overflow = 'unset';
     return null
   }
 
-  document.body.style.overflow = 'hidden';
+  // document.body.style.overflow = 'hidden';
 
 
   return ( 

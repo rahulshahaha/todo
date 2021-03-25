@@ -1,7 +1,7 @@
 import moment from 'moment';
 import React, { useContext } from 'react'
 import { FbContext } from '../store/fbContext';
-import ItemCard from './ItemCard';
+import ItemCardContainer from './ItemCardContainer';
 
 
 const CardCollection = () => {
@@ -16,8 +16,8 @@ const CardCollection = () => {
   if(status && status.importanceFilters && sortedItems){
     const importanceFilters = status.importanceFilters
     sortedItems = sortedItems.filter(item => {
-      if(importanceFilters[item.importance] === undefined) return true
-      return importanceFilters[item.importance]
+      if(importanceFilters[item.project.importance] === undefined) return true
+      return importanceFilters[item.project.importance]
     })
   }
 
@@ -50,7 +50,7 @@ const CardCollection = () => {
     <div className='flex flex-col w-full col-span-6 col-start-4 p-2 h-screen overflow-hidden'>
       <div className="overflow-scroll h-full hideBar">
         { sortedItems && sortedItems.map(item => {
-          return <ItemCard key={item.id} item={item} />
+          return <ItemCardContainer showProject={true} key={item.id} item={item} />
         })}
       </div>
     </div>
