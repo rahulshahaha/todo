@@ -174,6 +174,15 @@ export const updateProject = (newProject) => {
   })
 }
 
+export const addProject = (newProject) => {
+  firebase.firestore().collection('users/' + currentUserID() + '/projects').add({
+    description: newProject.description,
+    importance: parseInt(newProject.importance),
+    name: newProject.name,
+    deleted: false
+  })
+}
+
 export const deleteProject = (projectID) => {
   const projectRef = firebase.firestore().collection('users/' + currentUserID() + '/projects').doc(projectID)
   projectRef.update({
@@ -189,9 +198,7 @@ export const deleteProject = (projectID) => {
       })
 
       // Commit the batch
-      batch.commit().then(() => {
-          console.log('deleted')
-      });
+      batch.commit()
     })
   })
 }

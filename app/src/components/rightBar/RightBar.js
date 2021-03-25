@@ -6,11 +6,14 @@ import ImportanceFilters from './ImportanceFilters';
 
 const RightBar = () => {
 
-  const { dispatch } = useContext(FbContext)
+  const { dispatch, weights } = useContext(FbContext)
+  const importances = weights ? weights.importanceTypes : {}
+  const actionTypes = weights ? weights.actionTypes : {}
+
 
   const removeAllFilters = (e) => {
-    dispatch({type: 'ALL_IMPORTANCE', value: true})
-    dispatch({type: 'ALL_ACTION', value: true})
+    dispatch({type: 'ALL_IMPORTANCE', value: true, importances})
+    dispatch({type: 'ALL_ACTION', value: true, actionTypes})
     dispatch({type: 'SET_DAY_FILTER', value: 'all'})
   }
 

@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
 import { FbContext } from '../../store/fbContext';
 import ProjectListItem from './ProjectListItem';
+import PlusIcon from '../PlusIcon'
 
 const ProjectList = () => {
 
-  const { projects, items, weights } = useContext(FbContext)
+  const { projects, items, weights, dispatch } = useContext(FbContext)
 
   var newProjects = [];
   if(projects && items){
@@ -22,10 +23,20 @@ const ProjectList = () => {
   newProjects.sort((a,b) => {
     return b.totalScore - a.totalScore
   })
+
+  const addProject = (e) => {
+    dispatch({type: 'SHOW_PROJECT_SHEET', projectID: null})
+  }
   
 
   return ( 
     <div className="m-auto w-60 mt-10">
+      <div className="flex space-x-1">
+        <p className='self-center text-xl font-bold'>Projects</p>
+        <div onClick={addProject} className="self-center w-8 h-8 cursor-pointer">
+          <PlusIcon />
+        </div>
+      </div>
       <div className="flex flex-col space-y-1">
         { newProjects && newProjects.map(proj => {
           return (
