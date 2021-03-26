@@ -1,10 +1,12 @@
 import React, { useContext } from 'react'
-import { FbContext } from '../../store/fbContext'
+import { FbContext } from '../../store/contexts/fbContext'
+import { FilterContext } from '../../store/contexts/filterContext'
 
 
 const ActionTypeFilter = () => {
 
-  const { dispatch, status, weights } = useContext(FbContext)
+  const { weights } = useContext(FbContext)
+  const { filterData, filterDispatch } = useContext(FilterContext)
 
 
   var filters = []
@@ -21,16 +23,15 @@ const ActionTypeFilter = () => {
 
 
   const onCheck = (e) => {
-
-    dispatch({type: 'SET_ACTION_FILTER', actionType: e.target.id, value: e.target.checked})
+    filterDispatch({type: 'SET_ACTION_FILTER', actionType: e.target.id, value: e.target.checked})
   }
 
   const selectAll = (e) => {
-    dispatch({type: 'ALL_ACTION', value: true, actionTypes: weights.actionTypes})
+    filterDispatch({type: 'ALL_ACTION', value: true, actionTypes: weights.actionTypes})
   }
 
   const deSelectAll = (e) => {
-    dispatch({type: 'ALL_ACTION', value: false, actionTypes: weights.actionTypes})
+    filterDispatch({type: 'ALL_ACTION', value: false, actionTypes: weights.actionTypes})
   }
 
   return ( 
@@ -40,7 +41,7 @@ const ActionTypeFilter = () => {
         { filters.map(filt => {
           return(
             <div className="flex space-x-1" key={filt.id}>
-              <input className="self-center" id={filt.id} onChange={onCheck} checked={!status.actionFilters || status.actionFilters[filt.id] === undefined ? true : status.actionFilters[filt.id]} type="checkbox" />
+              <input className="self-center" id={filt.id} onChange={onCheck} checked={!filterData.actionFilters || filterData.actionFilters[filt.id] === undefined ? true : filterData.actionFilters[filt.id]} type="checkbox" />
               <label className="self-center">{filt.name}</label>
             </div>
           )

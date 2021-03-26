@@ -1,20 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { FbContext } from '../../store/fbContext'
+import { FilterContext } from '../../store/contexts/filterContext'
 
 
 const DayFilter = () => {
 
-  const { status, dispatch } = useContext(FbContext)
+  const { filterData, filterDispatch } = useContext(FilterContext)
   const [value, setValue] = useState('all')
 
   useEffect(() => {
-    if(status){
-      setValue(status.dayFilter)
+    if(filterData){
+      setValue(filterData.dayFilter)
     }
-  }, [status])
+  }, [filterData])
 
   const change = (e) => {
-    dispatch({type: 'SET_DAY_FILTER', value: e.target.value})
+    filterDispatch({type: 'SET_DAY_FILTER', value: e.target.value})
   }
 
   const filterTypes = [

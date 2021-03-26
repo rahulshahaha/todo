@@ -1,19 +1,19 @@
 import { useEffect, useContext } from 'react'
-import { FbContext } from '../store/fbContext'
+import { ModalContext } from '../store/contexts/modalContext'
 
 
 const EscDetect = () => {
 
-  const { status, dispatch } = useContext(FbContext)
+  const { modalStatus, modalDispatch } = useContext(ModalContext)
 
   useEffect(() => {
 
     const keyEvent = (e) => {
       if(e.code === "Escape"){
-        if(status.showSheet){
-          dispatch({type:'HIDE_SHEET'})
-        }else if(status.showProjectSheet){
-          dispatch({type:'HIDE_PROJECT_SHEET'})
+        if(modalStatus.showSheet){
+          modalDispatch({type:'HIDE_SHEET'})
+        }else if(modalStatus.showProjectSheet){
+          modalDispatch({type:'HIDE_PROJECT_SHEET'})
         }
       }
     }

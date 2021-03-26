@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
-import { FbContext } from '../../store/fbContext';
+import { FbContext } from '../../store/contexts/fbContext';
+import { FilterContext } from '../../store/contexts/filterContext';
 
 
 
 const ImportanceFilters = () => {
 
-  const { dispatch, status, weights } = useContext(FbContext)
+  const { weights } = useContext(FbContext)
+  const { filterDispatch, filterData } = useContext(FilterContext)
   var filters = []
 
 
@@ -25,15 +27,15 @@ const ImportanceFilters = () => {
   }
 
   const onCheck = (e) => {
-    dispatch({type: 'SET_IMPORTANCE_FILTER', importance: e.target.id, value: e.target.checked})
+    filterDispatch({type: 'SET_IMPORTANCE_FILTER', importance: e.target.id, value: e.target.checked})
   }
 
   const selectAll = (e) => {
-    dispatch({type: 'ALL_IMPORTANCE', value: true, importances: weights.importanceTypes})
+    filterDispatch({type: 'ALL_IMPORTANCE', value: true, importances: weights.importanceTypes})
   }
 
   const deSelectAll = (e) => {
-    dispatch({type: 'ALL_IMPORTANCE', value: false, importances: weights.importanceTypes})
+    filterDispatch({type: 'ALL_IMPORTANCE', value: false, importances: weights.importanceTypes})
   }
 
 
@@ -44,7 +46,7 @@ const ImportanceFilters = () => {
         { filters.map(filt => {
           return(
             <div className="flex space-x-1" key={filt.id}>
-              <input className="self-center" id={filt.id} onChange={onCheck} checked={!status.importanceFilters || status.importanceFilters[filt.id] === undefined ? true : status.importanceFilters[filt.id]} type="checkbox" />
+              <input className="self-center" id={filt.id} onChange={onCheck} checked={!filterData.importanceFilters || filterData.importanceFilters[filt.id] === undefined ? true : filterData.importanceFilters[filt.id]} type="checkbox" />
               <label className="self-center">{filt.name}</label>
             </div>
           )

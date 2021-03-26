@@ -1,18 +1,18 @@
 import React, { useContext } from 'react'
-import { FbContext } from '../../../store/fbContext'
+import { ModalContext } from '../../../store/contexts/modalContext'
 import ProjectEditModal from './ProjectEditModal'
 
 const ProjectEditSheet = () => {
 
-  const { status, dispatch } = useContext(FbContext)
+  const { modalStatus, modalDispatch } = useContext(ModalContext)
 
   const onClick = (e) => {
     if(e.target.id === 'project-bg'){
-      dispatch({type:'HIDE_PROJECT_SHEET'})
+      modalDispatch({type:'HIDE_PROJECT_SHEET'})
     }
   }
 
-  if(status.showProjectSheet === false){
+  if(modalStatus.showProjectSheet === false){
     return null
   }
 

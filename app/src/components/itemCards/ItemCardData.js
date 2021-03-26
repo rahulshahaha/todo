@@ -1,21 +1,21 @@
 import React, { useContext } from 'react'
 import moment from 'moment'
 import ImportanceIcon from '../icons/ImportanceIcon'
-import { FbContext } from '../../store/fbContext'
+import { ModalContext } from '../../store/contexts/modalContext'
 
 
 const ItemCardData = ({item}) => {
 
-const { dispatch } = useContext(FbContext)
+const { modalDispatch } = useContext(ModalContext)
 
 const expectedUpdate = item.expectedUpdate ? moment.unix(item.expectedUpdate.seconds).format('MM/DD/YY') : null
 
 const itemClick = (e) => {
-  dispatch({type: 'SHOW_SHEET', itemID: item.id})
+  modalDispatch({type: 'SHOW_SHEET', itemID: item.id})
 }
 
 const projectClick = (e) => {
-  dispatch({type: 'SHOW_PROJECT_SHEET', projectID: item.projectID})
+  modalDispatch({type: 'SHOW_PROJECT_SHEET', projectID: item.projectID})
 }
 
   return ( 

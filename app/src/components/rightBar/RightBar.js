@@ -1,20 +1,22 @@
 import React, { useContext } from 'react';
-import { FbContext } from '../../store/fbContext';
+import { FbContext } from '../../store/contexts/fbContext';
+import { FilterContext } from '../../store/contexts/filterContext';
 import ActionTypeFilter from './ActionTypeFilter';
 import DayFilter from './DayFilter';
 import ImportanceFilters from './ImportanceFilters';
 
 const RightBar = () => {
 
-  const { dispatch, weights } = useContext(FbContext)
+  const { weights } = useContext(FbContext)
+  const { filterDispatch } = useContext(FilterContext)
   const importances = weights ? weights.importanceTypes : {}
   const actionTypes = weights ? weights.actionTypes : {}
 
 
   const removeAllFilters = (e) => {
-    dispatch({type: 'ALL_IMPORTANCE', value: true, importances})
-    dispatch({type: 'ALL_ACTION', value: true, actionTypes})
-    dispatch({type: 'SET_DAY_FILTER', value: 'all'})
+    filterDispatch({type: 'ALL_IMPORTANCE', value: true, importances})
+    filterDispatch({type: 'ALL_ACTION', value: true, actionTypes})
+    filterDispatch({type: 'SET_DAY_FILTER', value: 'all'})
   }
 
 

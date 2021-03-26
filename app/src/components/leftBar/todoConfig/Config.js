@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { FbContext } from '../../../store/fbContext';
+import { FbContext } from '../../../store/contexts/fbContext';
 import ActionConfig from './ActionConfig';
 import ImportanceConfig from './ImportanceConfig';
 

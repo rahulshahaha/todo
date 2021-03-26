@@ -3,15 +3,17 @@ import EditAction from './EditAction';
 import EditActionType from './EditActionType';
 import EditExpectedUpdate from './EditExpectedUpdate';
 import { updateItem, deleteItem, addNewItem } from '../../../store/actions';
-import { FbContext } from '../../../store/fbContext';
+import { FbContext } from '../../../store/contexts/fbContext';
 import EditProject from './EditProject';
 import ExitIcon from '../../icons/ExitIcon';
+import { ModalContext } from '../../../store/contexts/modalContext';
 
 
 const EditModal = () => {
 
   const node = useRef(null)
-  const { status, dispatch, items } = useContext(FbContext)
+  const { items } = useContext(FbContext)
+  const { modalStatus, modalDispatch } = useContext(ModalContext)
 
   const [newItem, setNewItem] = useState({
     action: '',
@@ -25,23 +27,23 @@ const EditModal = () => {
   const [isNew, setNew] = useState(true)
 
   useEffect(() => {
-    if(status && status.itemID){
+    if(modalStatus && modalStatus.itemID){
       if(items){
-        setNewItem(items.filter(item => {return item.id === status.itemID})[0])
+        setNewItem(items.filter(item => {return item.id === modalStatus.itemID})[0])
         setNew(false)
       }else{
         setNew(true)
       }
     }
-    if(status.itemProjectID){
+    if(modalStatus.itemProjectID){
       setNewItem({
         action: '',
         actionType: 1,
         expectedUpdate: new Date(),
-        projectID: status.itemProjectID
+        projectID: modalStatus.itemProjectID
       })
     }
-  }, [status, items])
+  }, [modalStatus, items])
 
 
   useEffect(() => {
@@ -67,13 +69,13 @@ const EditModal = () => {
   }
 
   const exitClick = (e) => {
-    dispatch({type:'HIDE_SHEET'})
+    modalDispatch({type:'HIDE_SHEET'})
   }
 
   const deleteClicked = (e) => {
     if(window.confirm('Are you sure you want to delete?') === true){
       deleteItem(newItem.id)
-      dispatch({type:'HIDE_SHEET'})
+      modalDispatch({type:'HIDE_SHEET'})
     }
   }
 
@@ -81,13 +83,13 @@ const EditModal = () => {
   const doneClick = (e) => {
     if(!changed) return;
     updateItem(newItem)
-    dispatch({type:'HIDE_SHEET'})
+    modalDispatch({type:'HIDE_SHEET'})
   }
 
   const addClick = (e) => {
     if(!changed) return;
     addNewItem(newItem)
-    dispatch({type:'HIDE_SHEET'})
+    modalDispatch({type:'HIDE_SHEET'})
   }
 
 

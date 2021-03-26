@@ -80,6 +80,6 @@ const itemColorClass = (item) => {
     return 'bg-gray-400'
   }
 
-  return 'bg-white'
+  return 'bg-gray-300'
 
 }

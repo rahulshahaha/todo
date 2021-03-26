@@ -1,10 +1,9 @@
-import React, { useReducer } from "react";
-import firebase from '../config/fbConfig'
-import {hydrateItem} from './hydrateItem'
+import React from "react";
+import firebase from '../../config/fbConfig'
+import {hydrateItem} from '../hydrateItem'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData, useDocumentData } from 'react-firebase-hooks/firestore';
-import { reducer } from './reducer'
-import { hydrateWeights } from './hydrateWeights'
+import { hydrateWeights } from '../hydrateWeights'
 
 export const FbContext = React.createContext();
 
@@ -13,13 +12,6 @@ export const FbProvider = ({ children }) => {
 
   const [FBuser] = useAuthState(firebase.auth());
   const userID = FBuser ? FBuser.uid : null
-  const [status, dispatch] = useReducer(reducer, {
-    showSheet: false,
-    showProjectSheet: false,
-    itemID: null,
-    dayFilter: 'all'
-  });
-
 
   const [oneOffs] = useCollectionData(firebase.firestore().collection('users/'+ userID +'/oneOffs').where('done','==',false), {
     idField: 'id'
@@ -52,7 +44,7 @@ export const FbProvider = ({ children }) => {
 
 
   return (
-    <FbContext.Provider value={{ items, oneOffs, weights, FBuser, history, status, dispatch, projects }}>{children}</FbContext.Provider>
+    <FbContext.Provider value={{ items, oneOffs, weights, FBuser, history, projects }}>{children}</FbContext.Provider>
   );
 };
 

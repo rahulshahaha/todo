@@ -1,11 +1,13 @@
 import React, { useContext } from 'react'
-import { FbContext } from '../../store/fbContext';
+import { FbContext } from '../../store/contexts/fbContext';
 import ProjectListItem from './ProjectListItem';
 import PlusIcon from '../icons/PlusIcon'
+import { ModalContext } from '../../store/contexts/modalContext';
 
 const ProjectList = () => {
 
-  const { projects, items, weights, dispatch } = useContext(FbContext)
+  const { projects, items, weights } = useContext(FbContext)
+  const { modalDispatch } = useContext(ModalContext)
 
   var newProjects = [];
   if(projects && items){
@@ -25,7 +27,7 @@ const ProjectList = () => {
   })
 
   const addProject = (e) => {
-    dispatch({type: 'SHOW_PROJECT_SHEET', projectID: null})
+    modalDispatch({type: 'SHOW_PROJECT_SHEET', projectID: null})
   }
   
 

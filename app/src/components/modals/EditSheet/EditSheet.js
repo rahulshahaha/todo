@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { FbContext } from '../../../store/fbContext';
+import { ModalContext } from '../../../store/contexts/modalContext';
 import EditModal from './EditModal';
 
 
@@ -7,16 +7,16 @@ import EditModal from './EditModal';
 
 const EditSheet = () => {
 
-  const { status, dispatch } = useContext(FbContext)
+  const { modalStatus, modalDispatch } = useContext(ModalContext)
 
   const onClick = (e) => {
     if(e.target.id === "edit-bg"){
-      dispatch({type:'HIDE_SHEET'})
+      modalDispatch({type:'HIDE_SHEET'})
     }
   }
 
 
-  if(status.showSheet === false){
+  if(modalStatus.showSheet === false){
     return null
   }
 

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { FbContext } from '../../../store/fbContext';
+import { FbContext } from '../../../store/contexts/fbContext';
 import EditDescription from './EditDescription';
 import EditImportance from './EditImportance';
 import EditName from './EditName';
@@ -8,11 +8,13 @@ import useItemsInProject from '../../../hooks/useItemsInProject'
 import ItemCardContainer from '../../itemCards/ItemCardContainer';
 import ExitIcon from '../../icons/ExitIcon';
 import PlusIcon from '../../icons/PlusIcon';
+import { ModalContext } from '../../../store/contexts/modalContext';
 
 const ProjectEditModal = () => {
 
 
-  const { status, dispatch, projects, items } = useContext(FbContext)
+  const { projects, items } = useContext(FbContext)
+  const { modalStatus, modalDispatch } = useContext(ModalContext)
 
   const [newProject, setNewProject] = useState({
     name: '',
@@ -27,15 +29,15 @@ const ProjectEditModal = () => {
   const itemsInProj = useItemsInProject(newProject, items, isNew)
 
   useEffect(() => {
-    if(status && status.projectID){
+    if(modalStatus && modalStatus.projectID){
       if(projects){
-        setNewProject(projects.filter(proj => {return proj.id === status.projectID})[0])
+        setNewProject(projects.filter(proj => {return proj.id === modalStatus.projectID})[0])
         setNew(false)
       }else{
         setNew(true)
       }
     }
-  }, [status, projects])
+  }, [modalStatus, projects])
 
 
   useEffect(() => {
@@ -58,28 +60,28 @@ const ProjectEditModal = () => {
   const deleteClicked = (e) => {
     if(window.confirm('Are you sure you want to delete? Deleting this project will also delete all of your actions under the project.') === true){
       deleteProject(newProject.id)
-      dispatch({type:'HIDE_PROJECT_SHEET'})
+      modalDispatch({type:'HIDE_PROJECT_SHEET'})
     }
   }
 
   const doneClick = (e) => {
     if(!changed) return
     updateProject(newProject)
-    dispatch({type:'HIDE_PROJECT_SHEET'})
+    modalDispatch({type:'HIDE_PROJECT_SHEET'})
   }
 
   const addClick = (e) => {
     if(!changed) return
     addProject(newProject)
-    dispatch({type:'HIDE_PROJECT_SHEET'})
+    modalDispatch({type:'HIDE_PROJECT_SHEET'})
   }
 
   const exitClick = (e) => {
-    dispatch({type:'HIDE_PROJECT_SHEET'})
+    modalDispatch({type:'HIDE_PROJECT_SHEET'})
   }
 
   const addItem = (e) => {
-    dispatch({type: 'SHOW_SHEET', itemProjectID: newProject.id})
+    modalDispatch({type: 'SHOW_SHEET', itemProjectID: newProject.id})
   }
 
 

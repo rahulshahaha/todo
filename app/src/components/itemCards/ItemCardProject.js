@@ -1,17 +1,16 @@
 import React, { useContext } from 'react'
 import moment from 'moment'
-import { FbContext } from '../../store/fbContext'
+import { ModalContext } from '../../store/contexts/modalContext'
 
 
 const ItemCardProject = ({item}) => {
 
-const { dispatch } = useContext(FbContext)
-
+const { modalDispatch } = useContext(ModalContext)
 
 const expectedUpdate = item.expectedUpdate ? moment.unix(item.expectedUpdate.seconds).format('MM/DD/YY') : null
 
 const click = (e) => {
-  dispatch({type: 'SHOW_SHEET', itemID: item.id})
+  modalDispatch({type: 'SHOW_SHEET', itemID: item.id})
 }
 
   return ( 

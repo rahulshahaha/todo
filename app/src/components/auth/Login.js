@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { FbContext } from '../../store/fbContext';
+import { FbContext } from '../../store/contexts/fbContext';
 import { login, logout } from '../../store/actions'
 
 const Login = () => {

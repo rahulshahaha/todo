@@ -1,12 +1,14 @@
 import React, { useContext } from 'react'
-import { FbContext } from '../../store/fbContext'
+import { FbContext } from '../../store/contexts/fbContext'
+import { ModalContext } from '../../store/contexts/modalContext'
 
 const AddItem = () => {
 
-  const { FBuser, dispatch } = useContext(FbContext)
+  const { FBuser } = useContext(FbContext)
+  const { modalDispatch } = useContext(ModalContext)
 
   const addItem = () => {
-    dispatch({type:'SHOW_SHEET'})
+    modalDispatch({type:'SHOW_SHEET'})
   }
 
   if(FBuser === null) return false
