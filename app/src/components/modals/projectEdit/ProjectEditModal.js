@@ -118,7 +118,7 @@ const ProjectEditModal = () => {
         <div>
           <div className="flex space-x-1 mt-10">
             <p className="text-xl font-bold self-center">Actions In Project</p>
-            <div onClick={addItem} className="w-8 h-8 cursor-pointer self-center">
+            <div onClick={addItem} className="w-7 h-7 cursor-pointer self-center">
               <PlusIcon />
             </div>
           </div>

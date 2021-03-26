@@ -35,7 +35,7 @@ const ProjectList = () => {
     <div className="m-auto w-60 mt-10">
       <div className="flex space-x-1">
         <p className='self-center text-xl font-bold'>Projects</p>
-        <div onClick={addProject} className="self-center w-8 h-8 cursor-pointer">
+        <div onClick={addProject} className="self-center w-6 h-6 cursor-pointer">
           <PlusIcon />
         </div>
       </div>

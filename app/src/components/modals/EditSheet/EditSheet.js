@@ -21,7 +21,7 @@ const EditSheet = () => {
   }
 
   return ( 
-    <div onClick={onClick} id="edit-bg" className='flex justify-center w-screen h-screen bg-gray-400 bg-opacity-40 fixed inset-0'>
+    <div onClick={onClick} id="edit-bg" className='flex justify-center w-screen h-screen bg-gray-400 bg-opacity-50 fixed inset-0'>
       <EditModal />
     </div>
    );

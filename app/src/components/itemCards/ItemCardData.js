@@ -19,7 +19,7 @@ const projectClick = (e) => {
 }
 
   return ( 
-    <div className={'border-2 border-black my-2 w-full self-center grid grid-cols-12 '}>
+    <div className={'rounded-md border-2 border-black my-2 w-full self-center grid grid-cols-12 '}>
       <div onClick={projectClick} className='hover:bg-opacity-50 mainInfo flex flex-col col-span-4 p-2 bg-black text-white'>
         <p className='text-xs'>{item.score ? item.score.toFixed(2) : 0}</p>
         <p className='text-xl'>{item.project ? item.project.name : ''}</p>
