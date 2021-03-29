@@ -5,20 +5,40 @@ import ProjectEditSheet from "./components/modals/projectEdit/ProjectEditSheet";
 import EscDetect from "./components/EscDetect";
 import { FilterContextProvider } from "./store/contexts/filterContext";
 import { ModalProvider } from "./store/contexts/modalContext";
+import { DataContextProvider } from "./store/contexts/dataContext";
+import { ItemsProvider } from "./store/contexts/itemsContext";
+import { OneOffsProvider } from "./store/contexts/oneOffsContext";
+import { ProjectsProvider } from "./store/contexts/projectsContext";
+import { WeightsProvider } from "./store/contexts/weightsContext";
+import { HistoryProvider } from "./store/contexts/historyContext";
+import DataHydrator from "./components/DataHydrator";
 
 
 
-function App() {
+const App = () => {
   return (
     <FbProvider>
       <FilterContextProvider>
         <ModalProvider>
-          <div className="App">
-            <Main />
-            <ProjectEditSheet />
-            <EditSheet />
-            <EscDetect />
-          </div>
+          <DataContextProvider>
+            <ItemsProvider>
+              <OneOffsProvider>
+                <ProjectsProvider>
+                  <WeightsProvider>
+                    <HistoryProvider>
+                      <DataHydrator />
+                      <div className="App">
+                        <Main />
+                        <ProjectEditSheet />
+                        <EditSheet />
+                        <EscDetect />
+                      </div>
+                    </HistoryProvider>
+                  </WeightsProvider>
+                </ProjectsProvider>
+              </OneOffsProvider>
+            </ItemsProvider>
+          </DataContextProvider>
         </ModalProvider>
       </FilterContextProvider>
     </FbProvider>

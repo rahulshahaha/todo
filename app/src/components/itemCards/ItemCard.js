@@ -3,7 +3,7 @@ import moment from 'moment'
 import { ModalContext } from '../../store/contexts/modalContext'
 
 
-const ItemCardProject = ({item}) => {
+const ItemCard = ({item}) => {
 
 const { modalDispatch } = useContext(ModalContext)
 
@@ -27,4 +27,4 @@ const click = (e) => {
    );
 }
  
-export default ItemCardProject;
+export default ItemCard;

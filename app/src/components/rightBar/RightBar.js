@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { FbContext } from '../../store/contexts/fbContext';
+import { DataContext } from '../../store/contexts/dataContext';
 import { FilterContext } from '../../store/contexts/filterContext';
 import ActionTypeFilter from './ActionTypeFilter';
 import DayFilter from './DayFilter';
@@ -7,7 +7,7 @@ import ImportanceFilters from './ImportanceFilters';
 
 const RightBar = () => {
 
-  const { weights } = useContext(FbContext)
+  const { weights } = useContext(DataContext)
   const { filterDispatch } = useContext(FilterContext)
   const importances = weights ? weights.importanceTypes : {}
   const actionTypes = weights ? weights.actionTypes : {}

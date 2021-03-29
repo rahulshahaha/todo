@@ -1,15 +1,13 @@
 import React, { useContext } from 'react'
-import useProjectScore from '../../../hooks/useProjectScore'
-import { FbContext } from '../../../store/contexts/fbContext'
+import { DataContext } from '../../../store/contexts/dataContext'
 
 const EditProject = ({value, change}) => {
 
-  const { projects, items } = useContext(FbContext)
-  const projectScores = useProjectScore(projects, items)
+  const { projects } = useContext(DataContext)
 
   var sortedProjects = []
-  if(projectScores){
-    sortedProjects  = projectScores.sort((a,b) => {
+  if(projects){
+    sortedProjects  = projects.sort((a,b) => {
       return b.totalScore - a.totalScore
     })
   }

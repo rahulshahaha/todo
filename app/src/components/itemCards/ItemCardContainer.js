@@ -1,15 +1,15 @@
 import React from 'react'
-import ItemCardData from './ItemCardData'
-import ItemCardProject from './ItemCardProject'
+import ItemCardWithProject from './ItemCardWithProject'
+import ItemCard from './ItemCard'
 
 const ItemCardContainer = ({item, showProject}) => {
 
   return ( 
     <div className='cursor-pointer'>
       { showProject ? (
-        <ItemCardData item={item} />
+        <ItemCardWithProject item={item} />
       ): (
-        <ItemCardProject item={item} />
+        <ItemCard item={item} />
       )}
     </div>
    );

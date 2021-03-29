@@ -3,6 +3,7 @@ import * as d3module from 'd3'
 import d3tip from 'd3-tip'
 import { FbContext } from '../../store/contexts/fbContext';
 import { cleanHistory, dateFormatter, decimalFormatter, xScaleTime, yScaleLinear, getToolTip } from '../../chartHelper'
+import { DataContext } from '../../store/contexts/dataContext';
 
 const d3 = {
   ...d3module,
@@ -12,7 +13,8 @@ const d3 = {
 
 const LineChart = ({chartClass}) => {
 
-    const {history, FBuser} = useContext(FbContext)
+    const { FBuser } = useContext(FbContext)
+    const { history } = useContext(DataContext)
     var chartData = null
 
     //clean history and add chart configs

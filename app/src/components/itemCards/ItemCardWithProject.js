@@ -4,7 +4,7 @@ import ImportanceIcon from '../icons/ImportanceIcon'
 import { ModalContext } from '../../store/contexts/modalContext'
 
 
-const ItemCardData = ({item}) => {
+const ItemCardWithProject = ({item}) => {
 
 const { modalDispatch } = useContext(ModalContext)
 
@@ -23,7 +23,6 @@ const projectClick = (e) => {
       <div onClick={projectClick} className='hover:bg-opacity-50 mainInfo flex flex-col col-span-4 p-2 bg-black text-white'>
         <p className='text-xs'>{item.score ? item.score.toFixed(2) : 0}</p>
         <p className='text-xl'>{item.project ? item.project.name : ''}</p>
-        {/* <p className='text-xs'>{item.importanceName}</p> */}
         <ImportanceIcon importance={item.project ? item.project.importance : 3} />
         <p className='text-sm'>{item.project ? item.project.description : ''}</p>
       </div>
@@ -36,4 +35,4 @@ const projectClick = (e) => {
    );
 }
  
-export default ItemCardData;
+export default ItemCardWithProject;

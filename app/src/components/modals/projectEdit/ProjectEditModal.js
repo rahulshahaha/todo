@@ -1,19 +1,18 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { FbContext } from '../../../store/contexts/fbContext';
 import EditDescription from './EditDescription';
 import EditImportance from './EditImportance';
 import EditName from './EditName';
 import { deleteProject, updateProject, addProject } from '../../../store/actions'
-import useItemsInProject from '../../../hooks/useItemsInProject'
 import ItemCardContainer from '../../itemCards/ItemCardContainer';
 import ExitIcon from '../../icons/ExitIcon';
 import PlusIcon from '../../icons/PlusIcon';
 import { ModalContext } from '../../../store/contexts/modalContext';
+import { DataContext } from '../../../store/contexts/dataContext';
 
 const ProjectEditModal = () => {
 
 
-  const { projects, items } = useContext(FbContext)
+  const { projects } = useContext(DataContext)
   const { modalStatus, modalDispatch } = useContext(ModalContext)
 
   const [newProject, setNewProject] = useState({
@@ -26,7 +25,7 @@ const ProjectEditModal = () => {
 
   const [isNew, setNew] = useState(true)
 
-  const itemsInProj = useItemsInProject(newProject, items, isNew)
+  const itemsInProj = newProject.items
 
   useEffect(() => {
     if(modalStatus && modalStatus.projectID){

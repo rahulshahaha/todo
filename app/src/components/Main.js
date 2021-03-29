@@ -3,6 +3,7 @@ import LeftBar from './leftBar/LeftBar'
 import CardCollection from './centerColumn/CardCollection'
 import RightBar from './rightBar/RightBar'
 
+
 const Main = () => {
 
   return ( 

@@ -1,7 +1,95 @@
 import moment from 'moment';
 
 
-export const hydrateItem = (item, weights, projects) =>{
+export const hydrateData = (items, weights, projects, oneOffs) => {
+  const newWeights = weights ? hydrateWeights(weights) : null
+  const newItems = items && newWeights && projects ? hydrateItems(items, newWeights, projects) : null
+  const newProjects = newItems && projects ? hydrateProjects(newItems, projects) : null
+
+  var totalScore = 0
+  if(newItems){
+    newItems.forEach(item => {
+      totalScore += item.score
+    })
+  }
+
+  if(oneOffs){
+    oneOffs.forEach(oneOff => {
+      totalScore += weights.oneOff
+    })
+  }
+
+  const allDataPulled = items && weights && projects && oneOffs ? true : false
+
+  return {items: newItems, weights: newWeights, projects: newProjects, totalScore, allDataPulled}
+}
+
+
+const hydrateProjects = (items, projects) => {
+  const newProjects = projects.map(proj => {
+    const itemsInProj = itemsInProject(items, proj)
+    var projScore = 0;
+    itemsInProj.forEach(item => projScore += item.score)
+    return {...proj, totalScore: projScore, items: itemsInProj}
+  })
+  return newProjects
+}
+
+const itemsInProject = (items, project) => {
+  if(project && items){
+    return items.filter(item => {
+      return item.projectID === project.id
+    })
+  }else{
+    return null
+  }
+}
+
+const hydrateWeights = (weights) => {
+  weights.importanceArray = importanceArray(weights.importanceTypes)
+  weights.actionTypeArray = actionTypeArray(weights.actionTypes)
+  return weights
+}
+
+
+const importanceArray = (importanceTypes) => {
+  const keys = Object.keys(importanceTypes)
+  var importanceArray = []
+  for (const key of keys) {
+    importanceArray.push(importanceTypes[key])
+  }
+  importanceArray = importanceArray.sort((a,b) => {
+    return a.id - b.id
+  })
+  
+  return importanceArray
+}
+
+const actionTypeArray = (actionTypes) => {
+  const keys = Object.keys(actionTypes)
+  var actionTypeArray = []
+  for(const key of keys){
+    actionTypeArray.push(actionTypes[key])
+  }
+  actionTypeArray = actionTypeArray.sort((a,b) => {
+    return a.id - b.id
+  })
+  return actionTypeArray
+}
+
+
+
+const hydrateItems = (items, weights, projects) => {
+  if(!items || !weights || !projects) return null
+  for(var i = 0; i < items.length; i++){
+    items[i] = hydrateItem(items[i], weights, projects)
+  }
+  return items
+}
+
+
+
+const hydrateItem = (item, weights, projects) =>{
 
 
   if(weights && item && projects){

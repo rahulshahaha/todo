@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
-import { FbContext } from '../../store/contexts/fbContext';
 import ProjectListItem from './ProjectListItem';
 import PlusIcon from '../icons/PlusIcon'
 import { ModalContext } from '../../store/contexts/modalContext';
+import { DataContext } from '../../store/contexts/dataContext';
 
 const ProjectList = () => {
 
-  const { projects, items, weights } = useContext(FbContext)
+  const { projects, items, weights } = useContext(DataContext)
   const { modalDispatch } = useContext(ModalContext)
 
   var newProjects = [];

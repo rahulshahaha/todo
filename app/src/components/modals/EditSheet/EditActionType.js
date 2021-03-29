@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { FbContext } from '../../../store/contexts/fbContext';
+import { DataContext } from '../../../store/contexts/dataContext';
 
 const EditActionType = ({value, change}) => {
 
-  const { weights } = useContext(FbContext)
+  const { weights } = useContext(DataContext)
 
   var actionTypes = weights ? weights.actionTypeArray : null
   if(actionTypes){

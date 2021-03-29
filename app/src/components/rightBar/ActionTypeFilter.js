@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
-import { FbContext } from '../../store/contexts/fbContext'
+import { DataContext } from '../../store/contexts/dataContext'
 import { FilterContext } from '../../store/contexts/filterContext'
 
 
 const ActionTypeFilter = () => {
 
-  const { weights } = useContext(FbContext)
+  const { weights } = useContext(DataContext)
   const { filterData, filterDispatch } = useContext(FilterContext)
 
 

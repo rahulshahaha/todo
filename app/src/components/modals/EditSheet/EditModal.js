@@ -3,16 +3,16 @@ import EditAction from './EditAction';
 import EditActionType from './EditActionType';
 import EditExpectedUpdate from './EditExpectedUpdate';
 import { updateItem, deleteItem, addNewItem } from '../../../store/actions';
-import { FbContext } from '../../../store/contexts/fbContext';
 import EditProject from './EditProject';
 import ExitIcon from '../../icons/ExitIcon';
 import { ModalContext } from '../../../store/contexts/modalContext';
+import { DataContext } from '../../../store/contexts/dataContext';
 
 
 const EditModal = () => {
 
   const node = useRef(null)
-  const { items } = useContext(FbContext)
+  const { items } = useContext(DataContext)
   const { modalStatus, modalDispatch } = useContext(ModalContext)
 
   const [newItem, setNewItem] = useState({

@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
-import { FbContext } from '../../../store/contexts/fbContext';
+import { DataContext } from '../../../store/contexts/dataContext';
 import ActionConfig from './ActionConfig';
 import ImportanceConfig from './ImportanceConfig';
 
 
 const Config = () => {
 
-  const { weights } = useContext(FbContext)
+  const { weights } = useContext(DataContext)
    
   return ( 
     <div className="w-full">

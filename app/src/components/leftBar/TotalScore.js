@@ -2,34 +2,44 @@ import React, { useContext, useEffect, useState } from 'react'
 import { FbContext } from '../../store/contexts/fbContext';
 import { logHistory } from '../../store/actions'
 import LineChart from './LineChart'
+import { DataContext } from '../../store/contexts/dataContext';
 
 const TotalScore = () => {
 
-  const { items, oneOffs, weights, FBuser } = useContext(FbContext)
-  const oneOffWeight = weights ? weights.oneOff : 0;
-  const [totalScore, setTotalScore] = useState(0)
+  const { FBuser } = useContext(FbContext)
+  const { weights, totalScore, allLoaded } = useContext(DataContext)
   const [showChart, setShowChart] = useState(false)
 
   const chartClass = showChart ? 'block' : 'hidden'
 
   useEffect(() => {
-   var newScore = 0
-   var hydrated = false;
-    if(items && oneOffs){
-      for(var i = 0; i < items.length; i++){
-        newScore += items[i].score
-      }
-      if(newScore > 0) hydrated = true;
-      newScore = newScore + (oneOffs.length * oneOffWeight)
-    }
+ 
+ 
+     if(allLoaded && FBuser && weights && weights.currentUserScore.toFixed(2) !== totalScore.toFixed(2)){
+        // console.log('sending score: ', totalScore)
+       logHistory(totalScore)
+     }
+ 
+   }, [allLoaded, FBuser, totalScore, weights])
+
+  // useEffect(() => {
+  //  var newScore = 0
+  //  var hydrated = false;
+  //   if(items && oneOffs){
+  //     for(var i = 0; i < items.length; i++){
+  //       newScore += items[i].score
+  //     }
+  //     if(newScore > 0) hydrated = true;
+  //     newScore = newScore + (oneOffs.length * oneOffWeight)
+  //   }
 
 
-    if(newScore !== totalScore && items && oneOffs && hydrated && FBuser){
-      logHistory(newScore)
-    }
+  //   if(newScore !== totalScore && items && oneOffs && hydrated && FBuser){
+  //     logHistory(newScore)
+  //   }
 
-    setTotalScore(newScore)
-  }, [items, oneOffs, oneOffWeight, totalScore, FBuser])
+  //   setTotalScore(newScore)
+  // }, [items, oneOffs, oneOffWeight, totalScore, FBuser])
 
   const toggleChart = (e) => {
     setShowChart(!showChart)

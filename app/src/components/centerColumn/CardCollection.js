@@ -1,13 +1,13 @@
 import moment from 'moment';
 import React, { useContext } from 'react'
-import { FbContext } from '../../store/contexts/fbContext';
+import { DataContext } from '../../store/contexts/dataContext';
 import { FilterContext } from '../../store/contexts/filterContext';
 import ItemCardContainer from '../itemCards/ItemCardContainer';
 
 
 const CardCollection = () => {
 
-  const { items } = useContext(FbContext)
+  const { items } = useContext(DataContext)
   const { filterData } = useContext(FilterContext)
 
   var sortedItems = items ? items.sort((a,b) => {

@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { FbContext } from '../../store/contexts/fbContext';
+import { DataContext } from '../../store/contexts/dataContext';
 const interpolate = require('color-interpolate');
 
 const ImportanceIcon = ({importance}) => {
 
-  const { weights } = useContext(FbContext)
+  const { weights } = useContext(DataContext)
   const importances = weights ? weights.importanceArray : null
 
   // const colors = interpolate([[0, 255, 0],[127,255,0],[255,255,0],[255,127,0],[255,0,0]])

@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import { FbContext } from '../../store/contexts/fbContext';
+import { DataContext } from '../../store/contexts/dataContext';
 import { FilterContext } from '../../store/contexts/filterContext';
 
 
 
 const ImportanceFilters = () => {
 
-  const { weights } = useContext(FbContext)
+  const { weights } = useContext(DataContext)
   const { filterDispatch, filterData } = useContext(FilterContext)
   var filters = []
 
