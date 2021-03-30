@@ -1,14 +1,16 @@
 import moment from 'moment';
 import React, { useContext } from 'react'
 import { DataContext } from '../../store/contexts/dataContext';
+import { FbContext } from '../../store/contexts/fbContext';
 import { FilterContext } from '../../store/contexts/filterContext';
 import ItemCardContainer from '../itemCards/ItemCardContainer';
 
 
 const CardCollection = () => {
 
-  const { items } = useContext(DataContext)
+  const { items, allLoaded } = useContext(DataContext)
   const { filterData } = useContext(FilterContext)
+  const { FBuser } = useContext(FbContext)
 
   var sortedItems = items ? items.sort((a,b) => {
     if(a.expectedUpdate === null) return 1
@@ -46,6 +48,10 @@ const CardCollection = () => {
       if(actionFilters[item.actionType] === undefined) return true
       return actionFilters[item.actionType]
     })
+  }
+
+  if(!FBuser || !allLoaded){
+    return null
   }
 
 
