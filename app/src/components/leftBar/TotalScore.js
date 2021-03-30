@@ -1,16 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { FbContext } from '../../store/contexts/fbContext';
 import { logHistory } from '../../store/actions'
-import LineChart from './LineChart'
 import { DataContext } from '../../store/contexts/dataContext';
+import { ModalContext } from '../../store/contexts/modalContext';
 
 const TotalScore = () => {
 
   const { FBuser } = useContext(FbContext)
   const { weights, totalScore, allLoaded } = useContext(DataContext)
-  const [showChart, setShowChart] = useState(false)
+  const { modalDispatch } = useContext(ModalContext)
 
-  const chartClass = showChart ? 'block' : 'hidden'
 
   useEffect(() => {
  
@@ -22,27 +21,9 @@ const TotalScore = () => {
  
    }, [allLoaded, FBuser, totalScore, weights])
 
-  // useEffect(() => {
-  //  var newScore = 0
-  //  var hydrated = false;
-  //   if(items && oneOffs){
-  //     for(var i = 0; i < items.length; i++){
-  //       newScore += items[i].score
-  //     }
-  //     if(newScore > 0) hydrated = true;
-  //     newScore = newScore + (oneOffs.length * oneOffWeight)
-  //   }
-
-
-  //   if(newScore !== totalScore && items && oneOffs && hydrated && FBuser){
-  //     logHistory(newScore)
-  //   }
-
-  //   setTotalScore(newScore)
-  // }, [items, oneOffs, oneOffWeight, totalScore, FBuser])
 
   const toggleChart = (e) => {
-    setShowChart(!showChart)
+    modalDispatch({type:'TOGGLE_CHART'})
   }
 
   return ( 
@@ -53,7 +34,6 @@ const TotalScore = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
         </svg>
       </div>
-      <LineChart chartClass={chartClass} />
     </div>
    );
 }

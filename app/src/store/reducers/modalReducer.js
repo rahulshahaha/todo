@@ -27,6 +27,11 @@ export const modalReducer = (state, action) => {
         showProjectSheet: false,
         projectID: null
       }
+    case 'TOGGLE_CHART':
+      return{
+        ...state,
+        showChart: !state.showChart
+      }
     default: 
       return state
   }

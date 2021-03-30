@@ -9,7 +9,8 @@ export const ModalProvider = ({ children }) => {
   const [modalStatus, modalDispatch] = useReducer(modalReducer, {
     showSheet: false,
     showProjectSheet: false,
-    itemID: null
+    itemID: null,
+    showChart: false
   });
 
 

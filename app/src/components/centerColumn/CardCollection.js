@@ -56,12 +56,10 @@ const CardCollection = () => {
 
 
   return ( 
-    <div className='flex flex-col w-full col-span-6 col-start-4 p-2 h-screen overflow-hidden'>
-      <div className="overflow-scroll h-full hideBar">
-        { sortedItems && sortedItems.map(item => {
-          return <ItemCardContainer showProject={true} key={item.id} item={item} />
-        })}
-      </div>
+    <div className="overflow-scroll h-full hideBar">
+      { sortedItems && sortedItems.map(item => {
+        return <ItemCardContainer showProject={true} key={item.id} item={item} />
+      })}
     </div>
    );
 }

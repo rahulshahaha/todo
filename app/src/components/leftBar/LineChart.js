@@ -4,6 +4,7 @@ import d3tip from 'd3-tip'
 import { FbContext } from '../../store/contexts/fbContext';
 import { cleanHistory, dateFormatter, decimalFormatter, xScaleTime, yScaleLinear, getToolTip } from '../../chartHelper'
 import { DataContext } from '../../store/contexts/dataContext';
+import { ModalContext } from '../../store/contexts/modalContext';
 
 const d3 = {
   ...d3module,
@@ -11,11 +12,15 @@ const d3 = {
 }
 
 
-const LineChart = ({chartClass}) => {
+const LineChart = () => {
 
     const { FBuser } = useContext(FbContext)
     const { history } = useContext(DataContext)
+    const { modalStatus } = useContext(ModalContext)
     var chartData = null
+
+    const chartClass = modalStatus.showChart ? 'block' : 'hidden'
+
 
     //clean history and add chart configs
     chartData = cleanHistory(history)
