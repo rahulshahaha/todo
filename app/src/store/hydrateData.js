@@ -153,8 +153,8 @@ const weekDaysBetween = (timestamp) => {
 
 const itemColorClass = (item) => {
   if(item.expectedUpdate === null) return 'bg-white'
-  const now = moment(new Date(new Date().getFullYear(),new Date().getMonth() , new Date().getDate()));
-  const expectedUpdate = moment.unix(item.expectedUpdate.seconds)
+  const now = moment().startOf('day');
+  const expectedUpdate = moment.unix(item.expectedUpdate.seconds).startOf('day')
 
   if(expectedUpdate.isBefore(now) && item.actionType !== 5 && item.actionType !== 6){
     return 'bg-red-600 text-white'
