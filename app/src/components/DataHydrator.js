@@ -21,9 +21,11 @@ const DataHydrator = () => {
 
 
   useEffect(() => {
-    console.log('data effect')
-    dataDispatch({type: 'SET_DATA', data: hydrateData(items, weights, projects, oneOffs)})
-  }, [items, projects, weights, oneOffs, dataDispatch])
+    if(allLoaded){
+      console.log('data effect')
+      dataDispatch({type: 'SET_DATA', data: hydrateData(items, weights, projects, oneOffs)})
+    }
+  }, [items, projects, weights, oneOffs, dataDispatch, allLoaded])
 
   useEffect(() => {
     console.log('history effect')
