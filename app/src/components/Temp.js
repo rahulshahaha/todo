@@ -5,11 +5,9 @@ import firebase from '../config/fbConfig'
 const Temp = () => {
 
 
-  firebase.firestore().collection('users/f6tnPMjmNnPO6rnutT0EbEMjCOg2/items').get().then(userSnap => {
-    userSnap.docs.forEach(userDoc => {
-      firebase.firestore().collection('users/f6tnPMjmNnPO6rnutT0EbEMjCOg2/items').doc(userDoc.id).update({
-        projectID: userDoc.data().project
-      })
+  firebase.firestore().collection('users').doc('f6tnPMjmNnPO6rnutT0EbEMjCOg2').get().then(userSnap => {
+    firebase.firestore().collection('users').doc('b8QWKHIBGyODDezRBoqddnkraLH2').set({
+      ...userSnap.data()
     })
   })
 

@@ -8,7 +8,7 @@ const d3 = {
 }
 
 
-export const cleanHistory = (history) => {
+export const cleanHistory = (history) => {  
   if(history && history.length > 0){
     return buildChartData(cleanDays(removeDuplicates(history)))
   }else{

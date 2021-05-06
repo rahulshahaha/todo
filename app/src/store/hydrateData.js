@@ -1,7 +1,21 @@
 import moment from 'moment';
 
 
+// var currentItems, currentWeights, currentProjects
+
 export const hydrateData = (items, weights, projects, oneOffs) => {
+
+  // if(items !== currentItems){
+  //   console.log('NEW ITEMS')
+  // }
+  // if(weights !== currentWeights){
+  //   console.log('NEW WEIGHTS')
+  // }
+  // if(projects !== currentProjects){
+  //   console.log('NEW PROJECTS')
+  // }
+
+
   const newWeights = weights ? hydrateWeights(weights) : null
   const newItems = items && newWeights && projects ? hydrateItems(items, newWeights, projects) : null
   const newProjects = newItems && projects ? hydrateProjects(newItems, projects) : null
@@ -20,6 +34,10 @@ export const hydrateData = (items, weights, projects, oneOffs) => {
   }
 
   const allDataPulled = items && weights && projects && oneOffs ? true : false
+
+  // currentItems = items
+  // currentWeights = weights
+  // currentProjects = projects
 
   return {items: newItems, weights: newWeights, projects: newProjects, totalScore, allDataPulled}
 }
@@ -125,8 +143,8 @@ const weekDaysBetween = (timestamp) => {
   if(timestamp === null) return 0;
   const expectedUpdate = moment.unix(timestamp.seconds).startOf('days')
   const now = moment().startOf('days');
-  var end = moment(expectedUpdate)
-  var start = moment(now)
+  var end = moment(expectedUpdate).startOf('days')
+  var start = moment(now).startOf('days')
   var multiplier = 1
   const dailyInfo = [false, true, true, true, true, true, false]
   let totalDays = 0;

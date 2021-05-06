@@ -5,7 +5,7 @@ import { FilterContext } from '../../store/contexts/filterContext'
 const DayFilter = () => {
 
   const { filterData, filterDispatch } = useContext(FilterContext)
-  const [value, setValue] = useState('all')
+  const [value, setValue] = useState('1000000')
 
   useEffect(() => {
     if(filterData){
@@ -17,12 +17,7 @@ const DayFilter = () => {
     filterDispatch({type: 'SET_DAY_FILTER', value: e.target.value})
   }
 
-  const filterTypes = [
-    {name:"dateFilter", value:"all", label:"All"},
-    {name:"dateFilter", value:"today", label:"Today"},
-    {name:"dateFilter", value:"nextThree", label:"Next 3 Days"},
-    {name:"dateFilter", value:"overdue", label:"Overdue"}
-  ]
+  const filterTypes = filterData.dayFilters
 
   return ( 
     <div className="mt-5">
@@ -30,9 +25,9 @@ const DayFilter = () => {
       <div>
         { filterTypes.map(filt => {
           return (
-            <div key={filt.value} className="flex space-x-1">
-              <input className="self-center" onChange={change} type="radio" name={filt.name} value={filt.value} id={filt.value} checked={value === filt.value}></input>
-              <label className="self-center">{filt.label}</label>
+            <div key={filt.id} className="flex space-x-1">
+              <input className="self-center" onChange={change} type="radio" name={filt.filtName} value={filt.value} checked={value === filt.value}></input>
+              <label className="self-center">{filt.name}</label>
             </div>
           )
         })}

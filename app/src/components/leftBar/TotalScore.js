@@ -13,9 +13,7 @@ const TotalScore = () => {
 
   useEffect(() => {
  
- 
-     if(allLoaded && FBuser && weights && weights.currentUserScore.toFixed(2) !== totalScore.toFixed(2)){
-        // console.log('sending score: ', totalScore)
+     if(allLoaded && FBuser && weights && weights.currentUserScore && weights.currentUserScore.toFixed(2) !== totalScore.toFixed(2)){
        logHistory(totalScore)
      }
  

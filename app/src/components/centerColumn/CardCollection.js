@@ -1,4 +1,3 @@
-import moment from 'moment';
 import React, { useContext } from 'react'
 import { DataContext } from '../../store/contexts/dataContext';
 import { FbContext } from '../../store/contexts/fbContext';
@@ -27,17 +26,10 @@ const CardCollection = () => {
   }
 
   if(filterData && sortedItems){
-    if(filterData.dayFilter === 'today'){
+    if(filterData.dayFilter !== 'all'){
+      const filterNumber = parseInt(filterData.dayFilter);
       sortedItems = sortedItems.filter(item => {
-        return moment.unix(item.expectedUpdate.seconds).startOf('day').isSameOrBefore(moment().startOf('day'))
-      })
-    }else if(filterData.dayFilter === 'nextThree'){
-      sortedItems = sortedItems.filter(item => {
-        return moment.unix(item.expectedUpdate.seconds).startOf('day').isSameOrBefore(moment().add(3,'days').startOf('day'))
-      })
-    }else if(filterData.dayFilter === 'overdue'){
-      sortedItems = sortedItems.filter(item => {
-        return moment.unix(item.expectedUpdate.seconds).startOf('day').isBefore(moment().startOf('day'))
+        return item.daysTo <= filterNumber
       })
     }
   }
