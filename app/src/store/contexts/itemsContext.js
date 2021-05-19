@@ -13,7 +13,7 @@ export const ItemsProvider = ({ children }) => {
   const userID = FBuser ? FBuser.uid : null
 
 
-  const [items, itemsLoading] = useCollectionData(firebase.firestore().collection('users/' + userID + '/items').where('deleted','==',false),{
+  const [items, itemsLoading] = useCollectionData(firebase.firestore().collection('users/' + userID + '/items').where('deleted','==',false).where('completed','==',false),{
     idField: 'id'
   })
 

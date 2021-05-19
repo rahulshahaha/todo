@@ -11,6 +11,7 @@ import { OneOffsProvider } from "./store/contexts/oneOffsContext";
 import { ProjectsProvider } from "./store/contexts/projectsContext";
 import { WeightsProvider } from "./store/contexts/weightsContext";
 import { HistoryProvider } from "./store/contexts/historyContext";
+import { ConfigProvider } from "./store/contexts/configContext";
 import DataHydrator from "./components/DataHydrator";
 
 
@@ -26,6 +27,7 @@ const App = () => {
                 <ProjectsProvider>
                   <WeightsProvider>
                     <HistoryProvider>
+                      <ConfigProvider>
                       <DataHydrator />
                       <div className="App">
                         <Main />
@@ -33,6 +35,7 @@ const App = () => {
                         <EditSheet />
                         <EscDetect />
                       </div>
+                      </ConfigProvider>
                     </HistoryProvider>
                   </WeightsProvider>
                 </ProjectsProvider>

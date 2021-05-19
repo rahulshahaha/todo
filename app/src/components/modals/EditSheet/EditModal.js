@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect, useRef } from 'react'
 import EditAction from './EditAction';
 import EditActionType from './EditActionType';
 import EditExpectedUpdate from './EditExpectedUpdate';
-import { updateItem, deleteItem, addNewItem } from '../../../store/actions';
+import { updateItem, deleteItem, addNewItem, completeItem } from '../../../store/actions';
 import EditProject from './EditProject';
 import ExitIcon from '../../icons/ExitIcon';
 import { ModalContext } from '../../../store/contexts/modalContext';
@@ -92,6 +92,13 @@ const EditModal = () => {
     modalDispatch({type:'HIDE_SHEET'})
   }
 
+  const completeClick = (e) => {
+    if(window.confirm('Are you sure you want to complete?') === true){
+      completeItem(newItem.id)
+      modalDispatch({type:'HIDE_SHEET'})
+    }
+  }
+
 
   return ( 
       <div ref={node} id="modal" className="relative overflow-scroll bg-white h-5/6 mt-10 p-5">
@@ -116,6 +123,7 @@ const EditModal = () => {
             <div>
               <div className="flex space-x-2 mt-5">
                 <button onClick={doneClick} className={changed ? "doneBtn" : "inactiveBtn"}>Save</button>
+                <button onClick={completeClick} className="completeBtn">Complete Task</button>
                 <button onClick={deleteClicked} className="importantBtn">Delete Item</button>
               </div>
               <div>

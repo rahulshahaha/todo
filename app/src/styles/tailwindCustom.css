@@ -56,6 +56,11 @@ table th{
   min-height: 2rem;
 }
 
+.completeBtn{
+  @apply bg-green-600 rounded-md px-5 text-white;
+  min-height: 2rem;
+}
+
 tr:hover td .trashIcon{
   @apply block
 }

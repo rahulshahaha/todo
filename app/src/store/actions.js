@@ -72,18 +72,31 @@ export const logout = () => {
 }
 
 export const addNewItem = (newItem) => {
+  const now = new Date()
   firebase.firestore().collection('users/' + currentUserID() + '/items').add({
     action: newItem.action,
     actionType: parseInt(newItem.actionType),
     expectedUpdate: newItem.expectedUpdate,
     deleted: false,
-    projectID: newItem.projectID
+    completed: false,
+    projectID: newItem.projectID,
+    created: now
   })
 }
 
 export const deleteItem = (itemID) => {
+  const now = new Date()
   firebase.firestore().collection('users/' + currentUserID() + '/items').doc(itemID).update({
-    deleted: true
+    deleted: true,
+    deletedDate: now
+  })
+}
+
+export const completeItem = (itemID) => {
+  const now = new Date()
+  firebase.firestore().collection('users/' + currentUserID() + '/items').doc(itemID).update({
+    completed: true,
+    completedDate: now
   })
 }
 

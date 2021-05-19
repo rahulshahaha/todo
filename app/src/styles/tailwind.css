@@ -715,6 +715,17 @@ table th{
   min-height: 2rem;
 }
 
+.completeBtn{
+  --tw-bg-opacity: 1;
+  background-color: rgba(5, 150, 105, var(--tw-bg-opacity));
+  border-radius: 0.375rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+  min-height: 2rem;
+}
+
 tr:hover td .trashIcon{
   display: block
 }

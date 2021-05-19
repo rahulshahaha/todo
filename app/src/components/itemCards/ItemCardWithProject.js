@@ -29,9 +29,9 @@ const daysToText = item && item.daysTo === 1 ? 'Tomorrow' : item && item.daysTo 
         <p className='text-sm'>{item.project ? item.project.description : ''}</p>
       </div>
       <div onClick={itemClick} className={"relative hover:bg-opacity-75 col-span-8 p-2 " + item.colorClass}>
-        <p className='text-xl'>{item.actionTypeName}</p>
+        <p className='text-xl'>{item.action}</p>
         <p className='text-sm'>{expectedUpdate}</p>
-        <p className='text-base'>{item.action}</p>
+        <p className='text-base'>{item.actionTypeName}</p>
         <p className="absolute right-1 top-0">{daysToText}</p>
       </div>
     </div>

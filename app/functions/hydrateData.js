@@ -1,9 +1,9 @@
-import moment from 'moment';
-
+const moment = require('moment')
 
 // var currentItems, currentWeights, currentProjects
 
-export const hydrateData = (items, weights, projects, oneOffs) => {
+exports.hydrateData = (items, weights, projects, oneOffs) => {
+
   // if(items !== currentItems){
   //   console.log('NEW ITEMS')
   // }
@@ -18,7 +18,6 @@ export const hydrateData = (items, weights, projects, oneOffs) => {
   const newWeights = weights ? hydrateWeights(weights) : null
   const newItems = items && newWeights && projects ? hydrateItems(items, newWeights, projects) : null
   const newProjects = newItems && projects ? hydrateProjects(newItems, projects) : null
-
 
   var totalScore = 0
   if(newItems){

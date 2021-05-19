@@ -6,7 +6,7 @@ const Temp = () => {
 
 
   firebase.firestore().collection('users').doc('f6tnPMjmNnPO6rnutT0EbEMjCOg2').get().then(userSnap => {
-    firebase.firestore().collection('users').doc('b8QWKHIBGyODDezRBoqddnkraLH2').set({
+    firebase.firestore().collection('users').doc('A7C42qyQDOd3MeNo9UBMEw7CHAQ2').set({
       ...userSnap.data()
     })
   })
