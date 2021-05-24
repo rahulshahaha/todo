@@ -8,7 +8,7 @@ const OneOffItem = ({oneOff}) => {
   }
 
   return (
-    <div className="flex space-x-2">
+    <div className="flex space-x-2 bg-gray-100 my-1">
       <input className='self-center' onChange={onCheck} type="checkbox" />
       <label className='self-center'>{oneOff.name}</label>
     </div>

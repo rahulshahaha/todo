@@ -86,11 +86,14 @@ const buildChartData = (history) => {
     })
   })
 
+  // return lineData
+
   return {
     "lines":[
       {
         "name": "Score History",
-        "data": lineData
+        "data": lineData,
+        "color": "black"
       }
     ],
     "minY":0,

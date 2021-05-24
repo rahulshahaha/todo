@@ -8,6 +8,9 @@ export const dataReducer = (state, action) => {
         projects: action.data.projects,
         weights: action.data.weights,
         totalScore: action.data.totalScore,
+        todaysScore: action.data.todaysScore,
+        tomorrowsScore: action.data.tomorrowsScore,
+        thisWeeksScore: action.data.thisWeeksScore,
         allDataPulled: action.data.allDataPulled
       }
     case 'SET_HISTORY':

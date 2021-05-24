@@ -25,7 +25,10 @@ const ProjectEditModal = () => {
 
   const [isNew, setNew] = useState(true)
 
-  const itemsInProj = newProject.items
+  const itemsInProj = newProject.items ? newProject.items.sort((a,b) => {
+    return b.score - a.score
+  }) : null
+
 
   useEffect(() => {
     if(modalStatus && modalStatus.projectID){

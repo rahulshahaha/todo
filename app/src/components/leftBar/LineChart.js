@@ -4,7 +4,9 @@ import d3tip from 'd3-tip'
 import { FbContext } from '../../store/contexts/fbContext';
 import { cleanHistory, dateFormatter, decimalFormatter, xScaleTime, yScaleLinear, getToolTip } from '../../chartHelper'
 import { DataContext } from '../../store/contexts/dataContext';
+// import { ItemsContext } from '../../store/contexts/itemsContext';
 import { ModalContext } from '../../store/contexts/modalContext';
+// import { returnHistory } from '../../newChartHelper'
 
 const d3 = {
   ...d3module,
@@ -16,6 +18,9 @@ const LineChart = () => {
 
     const { FBuser } = useContext(FbContext)
     const { history } = useContext(DataContext)
+    // const { items, weights } = useContext(DataContext)
+    // const rawItemsCon = useContext(ItemsContext)
+    // const rawItems = rawItemsCon.items
     const { modalStatus } = useContext(ModalContext)
     var chartData = null
 
@@ -24,7 +29,16 @@ const LineChart = () => {
 
     //clean history and add chart configs
     chartData = cleanHistory(history)
- 
+    // chartData = returnHistory(rawItems, items, weights)
+    // if(chartData !== undefined && chartData.lines !== undefined){
+    //   chartData.lines.push({
+    //     data: cleanHistory(history),
+    //     name: "Old Line",
+    //     color: "red"
+    //   })
+    // }
+
+
     //ref to root svg
     const ref = useRef()
 
@@ -162,7 +176,7 @@ const LineChart = () => {
           // update path data
           path.data([line.data])
               .attr('fill', 'none')
-              .attr('stroke', 'black')
+              .attr('stroke', line.color)
               .attr('stroke-width', 2)
               .attr('d', pathGenerator)
               .style('opacity',0.75)

@@ -9,11 +9,11 @@ const Main = () => {
 
   const { config } = useContext(ConfigContext)
   
-  // if(config && config.downForMaintenance === true){
-  //   return(
-  //     <p className="text-3xl">Down for maintenance</p>
-  //   )
-  // }
+  if(config && config.downForMaintenance === true){
+    return(
+      <p className="text-3xl">Down for maintenance</p>
+    )
+  }
 
   return ( 
     <div className="grid grid-cols-12">

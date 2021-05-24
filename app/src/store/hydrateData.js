@@ -1,31 +1,25 @@
 import moment from 'moment';
 
 
-// var currentItems, currentWeights, currentProjects
 
 export const hydrateData = (items, weights, projects, oneOffs) => {
-  // if(items !== currentItems){
-  //   console.log('NEW ITEMS')
-  // }
-  // if(weights !== currentWeights){
-  //   console.log('NEW WEIGHTS')
-  // }
-  // if(projects !== currentProjects){
-  //   console.log('NEW PROJECTS')
-  // }
 
+  items = items ? items.filter(item => {
+    if(item.completed === false && item.deleted === false){
+      return true
+    }
+    return false
+  }) : null
 
   const newWeights = weights ? hydrateWeights(weights) : null
   const newItems = items && newWeights && projects ? hydrateItems(items, newWeights, projects) : null
   const newProjects = newItems && projects ? hydrateProjects(newItems, projects) : null
 
 
-  var totalScore = 0
-  if(newItems){
-    newItems.forEach(item => {
-      totalScore += item.score
-    })
-  }
+  var totalScore = addScores(newItems)
+  const todaysScore = getTodaysScore(newItems)
+  const tomorrowsScore = getTomorrowsScore(newItems)
+  const thisWeeksScore = getThisWeeksScore(newItems)
 
   if(oneOffs){
     oneOffs.forEach(oneOff => {
@@ -39,7 +33,50 @@ export const hydrateData = (items, weights, projects, oneOffs) => {
   // currentWeights = weights
   // currentProjects = projects
 
-  return {items: newItems, weights: newWeights, projects: newProjects, totalScore, allDataPulled}
+  return {items: newItems, weights: newWeights, projects: newProjects, totalScore, todaysScore, tomorrowsScore, thisWeeksScore, allDataPulled}
+}
+
+const getThisWeeksScore = (items) => {
+  const thisWeeksItems = items ? items.filter(item => {
+    return moment.unix(item.expectedUpdate.seconds).startOf('days').isBefore(getNextMonday())
+  }) : null
+  return addScores(thisWeeksItems)
+}
+
+const getNextMonday = () => {
+  const currentCheck = moment().startOf('day').add(1,'d')
+  var nextMonday = null;
+  while (nextMonday === null){
+    if(currentCheck.day() === 1){
+      nextMonday = currentCheck
+    }else{
+      currentCheck.add(1,'d')
+    }
+  }
+  return nextMonday;
+}
+
+const getTomorrowsScore = (items) => {
+  const tomorrowsItems = items ? items.filter(item => { 
+    return item.daysTo === 1;
+  }) : null;
+  return addScores(tomorrowsItems)
+}
+
+const getTodaysScore = (items) => {
+  const todaysItems = items ? items.filter(item => {
+    return item.daysTo <= 0;
+  }) : null;
+  return addScores(todaysItems);
+}
+
+const addScores = (itemsToAdd) => {
+  if(itemsToAdd === null) return 0
+  var score = 0
+  itemsToAdd.forEach(item => {
+    score += item.score
+  })
+  return score
 }
 
 
@@ -132,7 +169,7 @@ const hydrateItem = (item, weights, projects) =>{
 
     const colorClass = itemColorClass(item)
   
-    return {...item, deleted: itemDeleted, importanceName: importance.name, importanceWeight: importance.weight, actionTypeName: actionType.name, actionTypeWeight: actionType.weight, daysTo, score, colorClass, project}
+    return {...item, deleted: itemDeleted, importanceName: importance.name, importanceWeight: importance.weight, actionTypeName: actionType.name, actionTypeWeight: actionType.weight, daysTo, score, colorClass, project, dayDrop: weights.dayDrop}
     
   }
   return item

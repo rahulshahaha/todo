@@ -12,7 +12,7 @@ import { DataContext } from '../../../store/contexts/dataContext';
 const EditModal = () => {
 
   const node = useRef(null)
-  const { items } = useContext(DataContext)
+  const { items, weights } = useContext(DataContext)
   const { modalStatus, modalDispatch } = useContext(ModalContext)
 
   const [newItem, setNewItem] = useState({
@@ -74,7 +74,7 @@ const EditModal = () => {
 
   const deleteClicked = (e) => {
     if(window.confirm('Are you sure you want to delete?') === true){
-      deleteItem(newItem.id)
+      deleteItem(newItem.id, items, weights)
       modalDispatch({type:'HIDE_SHEET'})
     }
   }
@@ -94,7 +94,7 @@ const EditModal = () => {
 
   const completeClick = (e) => {
     if(window.confirm('Are you sure you want to complete?') === true){
-      completeItem(newItem.id)
+      completeItem(newItem.id, items, weights)
       modalDispatch({type:'HIDE_SHEET'})
     }
   }

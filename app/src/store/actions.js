@@ -84,19 +84,33 @@ export const addNewItem = (newItem) => {
   })
 }
 
-export const deleteItem = (itemID) => {
+export const deleteItem = (itemID, items, weights) => {
+  const item = items.filter(i => {
+    return i.id === itemID
+  })[0]
   const now = new Date()
   firebase.firestore().collection('users/' + currentUserID() + '/items').doc(itemID).update({
     deleted: true,
-    deletedDate: now
+    deletedDate: now,
+    actionTypeWeightEnd: item.actionTypeWeight,
+    importanceWeightEnd: item.importanceWeight,
+    dayDropEnd: item.dayDrop,
+    scoreOnDelete: item.score
   })
 }
 
-export const completeItem = (itemID) => {
+export const completeItem = (itemID, items, weights) => {
+  const item = items.filter(i => {
+    return i.id === itemID
+  })[0]
   const now = new Date()
   firebase.firestore().collection('users/' + currentUserID() + '/items').doc(itemID).update({
     completed: true,
-    completedDate: now
+    completedDate: now,
+    actionTypeWeightEnd: item.actionTypeWeight,
+    importanceWeightEnd: item.importanceWeight,
+    dayDropEnd: item.dayDrop,
+    scoreOnComplete: item.score
   })
 }
 
