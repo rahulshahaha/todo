@@ -1,5 +1,5 @@
 import firebase from '../config/fbConfig'
-
+import moment from 'moment'
 
 export const updateName = (newName, itemID) => {
   firebase.firestore().collection('users/' + currentUserID() + '/items').doc(itemID).update({
@@ -228,6 +228,17 @@ export const deleteProject = (projectID) => {
       batch.commit()
     })
   })
+}
+
+export const dropped = (item,day) => {
+  if(moment.unix(item.expectedUpdate.seconds).startOf('days').isSame(moment(day.date).startOf('days'))){
+    return
+  }else{
+    const newDate = moment(day.date).startOf('days').toDate()
+    firebase.firestore().collection('users/' + currentUserID() + '/items').doc(item.id).update({
+      expectedUpdate: newDate,
+    })
+  }
 }
 
 const currentUserID = () => {

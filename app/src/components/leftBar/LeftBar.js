@@ -1,6 +1,4 @@
 import React, { useState, useContext } from 'react'
-// import AddItem from './AddItem'
-import Login from '../auth/Login'
 import OneOffs from './OneOffs/OneOffs'
 import Config from './todoConfig/Config'
 import TotalScore from './TotalScore'
@@ -23,10 +21,8 @@ const LeftBar = () => {
   return ( 
     <div className="col-span-3 h-screen overflow-hidden" >
       <div className="h-full overflow-scroll hideBar pb-10">
-        <Login />
         { FBuser && allLoaded ? (
           <div>
-            {/* <AddItem /> */}
             <TotalScore />
             <CompletedToday />
             <OneOffs />

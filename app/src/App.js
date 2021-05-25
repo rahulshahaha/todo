@@ -14,6 +14,8 @@ import { HistoryProvider } from "./store/contexts/historyContext";
 import { ConfigProvider } from "./store/contexts/configContext";
 import DataHydrator from "./components/DataHydrator";
 import { CompltetedItemsProvider } from "./store/contexts/completedItemsContext";
+import Nav from "./components/Nav";
+import { StateProvider } from "./store/contexts/stateContext";
 
 
 
@@ -30,13 +32,16 @@ const App = () => {
                     <HistoryProvider>
                       <ConfigProvider>
                         <CompltetedItemsProvider>
-                          <DataHydrator />
-                          <div className="App">
-                            <Main />
-                            <ProjectEditSheet />
-                            <EditSheet />
-                            <EscDetect />
-                          </div>
+                          <StateProvider>
+                            <DataHydrator />
+                            <div className="App">
+                              <Nav />
+                              <Main />
+                              <ProjectEditSheet />
+                              <EditSheet />
+                              <EscDetect />
+                            </div>
+                          </StateProvider>
                         </CompltetedItemsProvider>
                       </ConfigProvider>
                     </HistoryProvider>

@@ -1,13 +1,14 @@
 import React, { useContext } from 'react'
-import LeftBar from './leftBar/LeftBar'
-import RightBar from './rightBar/RightBar'
-import CenterColumn from './centerColumn/CenterColumn'
 import { ConfigContext } from '../store/contexts/configContext'
+import { StateContext } from '../store/contexts/stateContext'
+import PlanningView from './PlanningView'
+import WorkingView from './WorkingView'
 
 
 const Main = () => {
 
   const { config } = useContext(ConfigContext)
+  const { workingView } = useContext(StateContext)
   
   if(config && config.downForMaintenance === true){
     return(
@@ -16,10 +17,12 @@ const Main = () => {
   }
 
   return ( 
-    <div className="grid grid-cols-12">
-      <LeftBar />
-      <CenterColumn />
-      <RightBar />
+    <div className="">
+      { workingView ? 
+        <WorkingView />
+        :
+        <PlanningView />
+      }
     </div>
    );
 }

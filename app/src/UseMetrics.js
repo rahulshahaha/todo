@@ -16,7 +16,7 @@ export default function useMetrics() {
     const todaysItems = items ? items.filter(item => {
       return item.daysTo <= 0;
     }) : null;
-    if(weights === null){
+    if(weights === null || oneOffs === undefined){
       setTodaysScore(0)
     }else{
       setTodaysScore(addScores(todaysItems) + (weights.oneOff * oneOffs.length));
