@@ -25,7 +25,7 @@ const TotalScore = () => {
   }
 
   return ( 
-    <div className="my-5">
+    <div className="mt-5">
       <div className="flex justify-center space-x-1">
         <h1 className="text-center text-4xl scoreLabel">{ totalScore.toFixed(2) }</h1>
         <svg onClick={toggleChart} className="w-5 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

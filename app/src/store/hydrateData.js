@@ -17,9 +17,6 @@ export const hydrateData = (items, weights, projects, oneOffs) => {
 
 
   var totalScore = addScores(newItems)
-  const todaysScore = getTodaysScore(newItems)
-  const tomorrowsScore = getTomorrowsScore(newItems)
-  const thisWeeksScore = getThisWeeksScore(newItems)
 
   if(oneOffs){
     oneOffs.forEach(oneOff => {
@@ -33,42 +30,10 @@ export const hydrateData = (items, weights, projects, oneOffs) => {
   // currentWeights = weights
   // currentProjects = projects
 
-  return {items: newItems, weights: newWeights, projects: newProjects, totalScore, todaysScore, tomorrowsScore, thisWeeksScore, allDataPulled}
+  return {items: newItems, weights: newWeights, projects: newProjects, totalScore, allDataPulled}
 }
 
-const getThisWeeksScore = (items) => {
-  const thisWeeksItems = items ? items.filter(item => {
-    return moment.unix(item.expectedUpdate.seconds).startOf('days').isBefore(getNextMonday())
-  }) : null
-  return addScores(thisWeeksItems)
-}
 
-const getNextMonday = () => {
-  const currentCheck = moment().startOf('day').add(1,'d')
-  var nextMonday = null;
-  while (nextMonday === null){
-    if(currentCheck.day() === 1){
-      nextMonday = currentCheck
-    }else{
-      currentCheck.add(1,'d')
-    }
-  }
-  return nextMonday;
-}
-
-const getTomorrowsScore = (items) => {
-  const tomorrowsItems = items ? items.filter(item => { 
-    return item.daysTo === 1;
-  }) : null;
-  return addScores(tomorrowsItems)
-}
-
-const getTodaysScore = (items) => {
-  const todaysItems = items ? items.filter(item => {
-    return item.daysTo <= 0;
-  }) : null;
-  return addScores(todaysItems);
-}
 
 const addScores = (itemsToAdd) => {
   if(itemsToAdd === null) return 0

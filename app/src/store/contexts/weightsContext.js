@@ -20,7 +20,7 @@ export const WeightsProvider = ({ children }) => {
   const importanceTypes = userData && userData.importanceTypes ? userData.importanceTypes : null;
   const oneOff = userData && userData.oneOff ? userData.oneOff : null;
   const currentUserScore = userData && userData.currentScore !== null ? userData.currentScore : null;
-  console.log(currentUserScore)
+
 
   const weights = actionTypes && dayDrop && importanceTypes && oneOff ? {
     actionTypes,

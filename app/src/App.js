@@ -13,6 +13,7 @@ import { WeightsProvider } from "./store/contexts/weightsContext";
 import { HistoryProvider } from "./store/contexts/historyContext";
 import { ConfigProvider } from "./store/contexts/configContext";
 import DataHydrator from "./components/DataHydrator";
+import { CompltetedItemsProvider } from "./store/contexts/completedItemsContext";
 
 
 
@@ -28,13 +29,15 @@ const App = () => {
                   <WeightsProvider>
                     <HistoryProvider>
                       <ConfigProvider>
-                      <DataHydrator />
-                      <div className="App">
-                        <Main />
-                        <ProjectEditSheet />
-                        <EditSheet />
-                        <EscDetect />
-                      </div>
+                        <CompltetedItemsProvider>
+                          <DataHydrator />
+                          <div className="App">
+                            <Main />
+                            <ProjectEditSheet />
+                            <EditSheet />
+                            <EscDetect />
+                          </div>
+                        </CompltetedItemsProvider>
                       </ConfigProvider>
                     </HistoryProvider>
                   </WeightsProvider>

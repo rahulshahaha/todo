@@ -1,13 +1,17 @@
-import React, { useContext } from 'react'
-import { DataContext } from '../../store/contexts/dataContext';
+import React from 'react'
+import useMetrics from '../../UseMetrics'
 
 const UpcomingWork = () => {
 
-  const { todaysScore, tomorrowsScore, thisWeeksScore } = useContext(DataContext)
+  const { todaysScore, tomorrowsScore, thisWeeksScore, filteredScore } = useMetrics()
 
 
   return ( 
-    <div className="grid grid-cols-3">
+    <div className="grid grid-cols-4">
+      <div>
+        <p className="text-center text-2xl">{filteredScore.toFixed(2)}</p>
+        <p className="text-center">Filtered View</p>
+      </div>
       <div>
         <p className="text-center text-2xl">{todaysScore.toFixed(2)}</p>
         <p className="text-center">Today</p>
