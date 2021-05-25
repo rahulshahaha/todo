@@ -7,7 +7,7 @@ export const StateContext = React.createContext();
 export const StateProvider = ({ children }) => {
 
   const [stateStatus, stateDispatch] = useReducer(stateReducer, {
-    workingView: false
+    workingView: true
   });
 
 
