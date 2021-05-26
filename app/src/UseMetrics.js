@@ -53,8 +53,31 @@ export default function useMetrics() {
         }
       })
     }
+
     setCompletedScore(completedScore)
   }, [completedItems])
+
+  //created today
+  const [createdScore, setCreatedScore] = useState(0)
+  useEffect(() => {
+    var createdScore = 0
+
+    if(completedItems){
+      completedItems.forEach(item => {
+        if(item.scoreOnComplete !== undefined && moment.unix(item.created.seconds).startOf('days').isSame(moment().startOf('days'))){
+          createdScore += item.scoreOnComplete
+        }
+      })
+    }
+    if(items){
+      items.forEach(item => {
+        if(moment.unix(item.created.seconds).startOf('days').isSame(moment().startOf('days'))){
+          createdScore += item.score
+        }
+      })
+    }
+    setCreatedScore(createdScore)
+  }, [completedItems, items])
 
   //filteredScore
   const [filteredScore, setFilteredScore] = useState(0)
@@ -85,5 +108,5 @@ export default function useMetrics() {
     return nextMonday;
   }
 
-  return {todaysScore, tomorrowsScore, thisWeeksScore, completedScore, filteredScore};
+  return {todaysScore, tomorrowsScore, thisWeeksScore, completedScore, createdScore, filteredScore};
 }
