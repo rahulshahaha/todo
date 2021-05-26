@@ -21,11 +21,11 @@ const PlanningDayItem = ({daysItem}) => {
     modalDispatch({type: 'SHOW_SHEET', itemID: daysItem.id})
   }
 
-
+  const itemScore = daysItem.newScore ? Math.max(daysItem.newScore + daysItem.score,0) : daysItem.score
 
   return ( 
     <div ref={drag} onClick={itemClick} className={"cursor-pointer my-1 overflow-hidden " + daysItem.colorClass + " " + opacityClass} key={daysItem.id}>
-      <p className="">({daysItem.score.toFixed(2)}) {daysItem.action}</p>
+      <p className="">({itemScore.toFixed(2)}) {daysItem.action}</p>
       <p className="text-xs">{daysItem.project.name}</p>
     </div>
    );

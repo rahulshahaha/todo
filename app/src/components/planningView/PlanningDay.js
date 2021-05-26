@@ -5,14 +5,37 @@ import PlanningDayItem from './PlanningDayItem';
 import { useDrop } from 'react-dnd'
 import { dropped } from '../../store/actions'
 
-const PlanningDay = ({day}) => {
+const PlanningDay = (props) => {
 
+  const day = props.day
 
-  const [, drop] = useDrop(
+  const [cp, drop] = useDrop(
     () => ({
       accept: 'ITEM',
       drop: (i,m) => {
         dropped(m.getItem(),day)
+      },
+      collect: (monitor) => {
+        const item = monitor.getItem();
+        if(!item || monitor.isOver() === false){
+          return {
+            hovered: false,
+            item: null
+          }
+        }
+
+        if(!moment.unix(item.expectedUpdate.seconds).startOf('days').isSame(day.date.startOf('days'))){
+          const diff = moment.unix(item.expectedUpdate.seconds).startOf('days').diff(day.date.startOf('days'))
+          item.newScore = (item.dayDrop * (diff/1000/60/60/24))
+          
+        }else{
+          item.newScore = 0
+        }
+        
+        return {
+          hovered: monitor.isOver(),
+          item
+        }
       }
     }),
     [day]
@@ -40,6 +63,24 @@ const PlanningDay = ({day}) => {
     return b.score - a.score
   }) : null
 
+  if(cp.item && cp.hovered === true){
+    const addOnID = cp.item.id
+    var same = false
+    daysItems.forEach(item => {
+      if(item.id === addOnID){
+        same = true;
+      }
+    })
+    if(!same){
+      daysItems.push(cp.item)
+      daysItems.sort((a,b) => {
+        const bS = b.newScore ? Math.max(b.newScore + b.score,0) : b.score;
+        const aS = a.newScore ? Math.max(a.newScore + a.score,0) : a.score;
+        return bS - aS
+      });
+    }
+  }
+
   var overdueItems = items ? items.filter(item => {
     if(day.date.isSame(getPreviousMonday()) && moment.unix(item.expectedUpdate.seconds).startOf('days').isBefore(day.date)){
       return true
@@ -51,7 +92,11 @@ const PlanningDay = ({day}) => {
 
   if(daysItems){
     daysItems.forEach(item => {
-      daysScore += item.score
+      if(item.newScore && item.newScore !== 0){
+        daysScore += Math.max((item.score + item.newScore),0)
+      }else{
+        daysScore += item.score
+      }
     })
   }
 
