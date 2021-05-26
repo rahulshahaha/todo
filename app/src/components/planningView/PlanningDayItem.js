@@ -26,7 +26,7 @@ const PlanningDayItem = ({daysItem}) => {
   return ( 
     <div ref={drag} onClick={itemClick} className={"cursor-pointer my-1 overflow-hidden " + daysItem.colorClass + " " + opacityClass} key={daysItem.id}>
       <p className="">({itemScore.toFixed(2)}) {daysItem.action}</p>
-      <p className="text-xs">{daysItem.project.name}</p>
+      <p className="text-xs">{daysItem.actionTypeName} - {daysItem.project.name}</p>
     </div>
    );
 }

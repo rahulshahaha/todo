@@ -60,6 +60,12 @@ export const addOneOff = (oneOff) => {
   })
 }
 
+export const updateOneOff = (newName, id) => {
+  firebase.firestore().collection('users/' + currentUserID() + '/oneOffs').doc(id).update({
+    name: newName
+  })
+}
+
 export const login = (email, pass) => {
   firebase.auth().signInWithEmailAndPassword(
     email,
