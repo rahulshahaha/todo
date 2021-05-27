@@ -19,7 +19,6 @@ const Nav = () => {
         <button className="btn" onClick={toggle}>Change View</button>
         <AddItem />
       </div>
-      {/* <div className="h-10"></div> */}
     </div>
    );
 }
