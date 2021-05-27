@@ -1,47 +1,7 @@
 import firebase from '../config/fbConfig'
 import moment from 'moment'
 
-export const updateName = (newName, itemID) => {
-  firebase.firestore().collection('users/' + currentUserID() + '/items').doc(itemID).update({
-    name: newName
-  })
-}
 
-export const updateImportance = (importance, itemID) => {
-  firebase.firestore().collection('users/' + currentUserID() + '/items').doc(itemID).update({
-    importance: parseInt(importance)
-  })
-}
-
-export const updateDescription = (newDesription, itemID) => {
-  firebase.firestore().collection('users/' + currentUserID() + '/items').doc(itemID).update({
-    description: newDesription
-  })
-}
-
-export const updateNotes = (newNotes, itemID) => {
-  firebase.firestore().collection('users/' + currentUserID() + '/items').doc(itemID).update({
-    notes: newNotes
-  })
-}
-
-export const updateActionType = (newActionType, itemID) => {
-  firebase.firestore().collection('users/' + currentUserID() + '/items').doc(itemID).update({
-    actionType: parseInt(newActionType)
-  })
-}
-
-export const updateAction = (newAction, itemID) => {
-  firebase.firestore().collection('users/' + currentUserID() + '/items').doc(itemID).update({
-    action: newAction
-  })
-}
-
-export const updateExpectedUpdate = (newExpectedUpdate, itemID) => {
-  firebase.firestore().collection('users/' + currentUserID() + '/items').doc(itemID).update({
-    expectedUpdate: newExpectedUpdate
-  })
-}
 
 export const completeOneOff = (id) => {
   firebase.firestore().collection('users/' + currentUserID() + '/oneOffs').doc(id).update({
@@ -77,6 +37,7 @@ export const logout = () => {
   firebase.auth().signOut()
 }
 
+
 export const addNewItem = (newItem) => {
   const now = new Date()
   firebase.firestore().collection('users/' + currentUserID() + '/items').add({
@@ -86,7 +47,8 @@ export const addNewItem = (newItem) => {
     deleted: false,
     completed: false,
     projectID: newItem.projectID,
-    created: now
+    created: now,
+    notes: newItem.notes
   })
 }
 
@@ -177,7 +139,8 @@ export const updateItem = (newItem) => {
     action: newItem.action,
     actionType: parseInt(newItem.actionType),
     expectedUpdate: newItem.expectedUpdate,
-    projectID: newItem.projectID
+    projectID: newItem.projectID,
+    notes: newItem.notes
   })
 }
 
