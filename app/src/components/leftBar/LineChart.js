@@ -2,11 +2,10 @@ import React, { useRef, useEffect, useContext } from 'react';
 import * as d3module from 'd3'
 import d3tip from 'd3-tip'
 import { FbContext } from '../../store/contexts/fbContext';
-import { cleanHistory, dateFormatter, decimalFormatter, xScaleTime, yScaleLinear, getToolTip } from '../../chartHelper'
-import { DataContext } from '../../store/contexts/dataContext';
-// import { ItemsContext } from '../../store/contexts/itemsContext';
+import { dateFormatter, decimalFormatter, xScaleTime, yScaleLinear, getToolTip } from '../../chartHelper'
 import { ModalContext } from '../../store/contexts/modalContext';
-// import { returnHistory } from '../../newChartHelper'
+import useHistory from '../../UseHistory'
+import moment from 'moment'
 
 const d3 = {
   ...d3module,
@@ -17,26 +16,20 @@ const d3 = {
 const LineChart = () => {
 
     const { FBuser } = useContext(FbContext)
-    const { history } = useContext(DataContext)
-    // const { items, weights } = useContext(DataContext)
-    // const rawItemsCon = useContext(ItemsContext)
-    // const rawItems = rawItemsCon.items
     const { modalStatus } = useContext(ModalContext)
     var chartData = null
 
     const chartClass = modalStatus.showChart ? 'block' : 'hidden'
 
 
-    //clean history and add chart configs
-    chartData = cleanHistory(history)
-    // chartData = returnHistory(rawItems, items, weights)
-    // if(chartData !== undefined && chartData.lines !== undefined){
-    //   chartData.lines.push({
-    //     data: cleanHistory(history),
-    //     name: "Old Line",
-    //     color: "red"
-    //   })
-    // }
+    chartData = useHistory()
+    if(chartData){
+      chartData.lines.forEach(line => {
+        line.data.forEach(point => {
+          point.x = moment(point.x).toDate()
+        })
+      })
+    }
 
 
     //ref to root svg

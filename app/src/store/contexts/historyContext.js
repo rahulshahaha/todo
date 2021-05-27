@@ -11,9 +11,12 @@ export const HistoryProvider = ({ children }) => {
 
   const { FBuser } = useContext(FbContext)
   const userID = FBuser ? FBuser.uid : null
+  const today = new Date()
+  today.setHours(0, 0, 0, 0);
+  today.setDate(today.getDate() - 30);
 
 
-  const [history, historyLoading] = useCollectionData(firebase.firestore().collection('users/' + userID + '/history').orderBy('date','asc'))
+  const [history, historyLoading] = useCollectionData(firebase.firestore().collection('users/' + userID + '/history').where("date",">=",today).orderBy('date','asc'))
 
 
   return (
