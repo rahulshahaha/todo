@@ -5,7 +5,6 @@ import { ItemsContext } from '../store/contexts/itemsContext'
 import { OneOffsContext } from '../store/contexts/oneOffsContext'
 import { ProjectsContext } from '../store/contexts/projectsContext'
 import { WeightsContext } from '../store/contexts/weightsContext'
-import { HistoryContext } from '../store/contexts/historyContext'
 
 
 const DataHydrator = () => {
@@ -14,10 +13,9 @@ const DataHydrator = () => {
   const { oneOffs, oneOffsLoading } = useContext(OneOffsContext)
   const { projects, projectsLoading } = useContext(ProjectsContext)
   const { weights, weightsLoading } = useContext(WeightsContext)
-  const { history, historyLoading } = useContext(HistoryContext)
   const { dataDispatch } = useContext(DataContext)
 
-  const allLoaded = !itemsLoading && !oneOffsLoading && !projectsLoading && !weightsLoading && !historyLoading ? true : false;
+  const allLoaded = !itemsLoading && !oneOffsLoading && !projectsLoading && !weightsLoading ? true : false;
 
 
   useEffect(() => {
@@ -27,10 +25,6 @@ const DataHydrator = () => {
     }
   }, [items, projects, weights, oneOffs, dataDispatch, allLoaded])
 
-  useEffect(() => {
-    console.log('history effect')
-    dataDispatch({type: 'SET_HISTORY', history: history})
-  },[dataDispatch, history])
 
   useEffect(() => {
     console.log('oneoff effect')

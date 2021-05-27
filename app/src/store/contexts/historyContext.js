@@ -1,7 +1,5 @@
-import React, { useContext } from "react";
-import firebase from '../../config/fbConfig'
-import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { FbContext } from "./fbContext";
+import React, { useState, useEffect } from "react";
+
 
 
 export const HistoryContext = React.createContext();
@@ -9,18 +7,29 @@ export const HistoryContext = React.createContext();
 
 export const HistoryProvider = ({ children }) => {
 
-  const { FBuser } = useContext(FbContext)
-  const userID = FBuser ? FBuser.uid : null
-  const today = new Date()
-  today.setHours(0, 0, 0, 0);
-  today.setDate(today.getDate() - 30);
+  const [history, setHistory] = useState(null)
+  
+  useEffect(() => {
+    const req = new XMLHttpRequest();
+      
+    req.onload = function() {
+      console.log("PULL")
+      setHistory(JSON.parse(req.response))
+    }
+    req.onerror = function() {
+      console.log(req.response)
+    }
+      
+    const fullPath = "https://us-central1-todo-8303f.cloudfunctions.net/history/all"
+    req.open("GET", fullPath, true);
 
+    // req.send(JSON.stringify(params));
+    req.send();
 
-  const [history, historyLoading] = useCollectionData(firebase.firestore().collection('users/' + userID + '/history').where("date",">=",today).orderBy('date','asc'))
-
+  }, [])
 
   return (
-    <HistoryContext.Provider value={{ history, historyLoading }}>{children}</HistoryContext.Provider>
+    <HistoryContext.Provider value={{ history, historyLoading:false }}>{children}</HistoryContext.Provider>
   );
 };
 

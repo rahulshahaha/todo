@@ -4,8 +4,8 @@ import d3tip from 'd3-tip'
 import { FbContext } from '../../store/contexts/fbContext';
 import { dateFormatter, decimalFormatter, xScaleTime, yScaleLinear, getToolTip } from '../../chartHelper'
 import { ModalContext } from '../../store/contexts/modalContext';
-import useHistory from '../../UseHistory'
 import moment from 'moment'
+import { HistoryContext } from '../../store/contexts/historyContext';
 
 const d3 = {
   ...d3module,
@@ -20,9 +20,10 @@ const LineChart = () => {
     var chartData = null
 
     const chartClass = modalStatus.showChart ? 'block' : 'hidden'
+    const { history } = useContext(HistoryContext)
 
 
-    chartData = useHistory()
+    chartData = history
     if(chartData){
       chartData.lines.forEach(line => {
         line.data.forEach(point => {
