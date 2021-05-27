@@ -104,18 +104,18 @@ const EditModal = () => {
 
 
   return ( 
-      <div ref={node} id="modal" className="relative overflow-scroll bg-white h-5/6 mt-10 p-5">
+      <div ref={node} id="modal" className="relative overflow-scroll bg-white h-2/4 mt-10 p-5">
         <div onClick={exitClick} className="h-10 w-10 absolute top-0 right-0">
           <ExitIcon />
         </div>
         { isNew ? (
           <p className="text-xl font-bold">New Item</p>
-        ) : (
-          <p className="text-xl font-bold">Edit Item</p>
-        )}
+        ) : null
+          //<p className="text-xl font-bold">Edit Item</p>
+        }
         <EditProject value={newItem.projectID} change={change} />
-        <EditActionType value={newItem.actionType} change={change} />
         <EditExpectedUpdate value={newItem.expectedUpdate} change={dateChange} />
+        <EditActionType value={newItem.actionType} change={change} />
         <EditAction value={newItem.action} change={change} />
         <EditNotes value={newItem.notes} change={change} />
         {

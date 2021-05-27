@@ -15,10 +15,14 @@ const EditExpectedUpdate = ({value, change}) => {
     }
   }
 
+  const focus = (e) => {
+    e.target.select()
+  }
+
   return ( 
-    <div className="mt-2">
-      <p>Expected Update</p>
-      <DatePicker id='expectedUpdate' isClearable={false} className='formInput' selected={expectedUpdate} onChange={dateChange} />
+    <div className="mt-2 flex space-x-2">
+      <p className="font-bold text-md">Due:</p>
+      <DatePicker id='expectedUpdate' isClearable={false} className='cursor-pointer hover:underline' selected={expectedUpdate} onFocus={focus} onChange={dateChange} />
     </div>
    );
 }

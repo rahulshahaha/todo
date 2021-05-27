@@ -1,12 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TextareaAutosize from 'react-textarea-autosize';
 
 
 const EditAction = ({value, change}) => {
+  const [editing, setEditing] = useState(false)
+
+  const click = (e) => {
+    setEditing(!editing)
+  }
+
+  const focus = (e) => {
+    e.target.select()
+  }
+
   return ( 
-    <div className="mt-2">
-      <p>Action</p>
-      <TextareaAutosize id='action' onChange={change} className={'focus:outline-none border-2 border-black '} value={value}></TextareaAutosize>
+    <div className="">
+      { editing ? 
+        <TextareaAutosize onFocus={focus} onBlur={click} autoFocus id='action' onChange={change} className={'focus:outline-none border-2 border-black '} value={value}></TextareaAutosize>
+        :
+        <p className="cursor-pointer hover:underline inline-block" onClick={click}>{value}</p>
+      }
     </div>
    );
 }
