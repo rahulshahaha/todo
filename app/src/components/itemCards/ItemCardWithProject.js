@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import moment from 'moment'
 import ImportanceIcon from '../icons/ImportanceIcon'
 import { ModalContext } from '../../store/contexts/modalContext'
+import ReactTooltip from 'react-tooltip';
 
 
 const ItemCardWithProject = ({item}) => {
@@ -21,7 +22,7 @@ const projectClick = (e) => {
 const daysToText = item && item.daysTo === 1 ? 'Tomorrow' : item && item.daysTo === 0 ? 'Today' : item && item.daysTo > 0 ? item.daysTo + ' days' : item && item.daysTo === -1 ? '1 day ago' : item && item.daysTo < 0 ? item.daysTo * -1 + ' days ago' : null;
 
   return ( 
-    <div className={'rounded-md border-2 border-black my-2 w-full self-center grid grid-cols-12 '}>
+    <div data-tip={item.notes} className={'rounded-md border-2 border-black my-2 w-full self-center grid grid-cols-12 '}>
       <div onClick={projectClick} className='hover:bg-opacity-50 mainInfo flex flex-col col-span-4 p-2 bg-black text-white'>
         <p className='text-xs'>{item.score ? item.score.toFixed(2) : 0}</p>
         <p className='text-xl'>{item.project ? item.project.name : ''}</p>
@@ -34,6 +35,7 @@ const daysToText = item && item.daysTo === 1 ? 'Tomorrow' : item && item.daysTo 
         <p className='text-base'>{item.actionTypeName}</p>
         <p className="absolute right-1 top-0">{daysToText}</p>
       </div>
+      <ReactTooltip delayShow={500} />
     </div>
    );
 }

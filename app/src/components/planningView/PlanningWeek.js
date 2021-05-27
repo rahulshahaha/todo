@@ -31,7 +31,6 @@ const PlanningWeek = ({week}) => {
     }
   }
 
-  console.log(days)
 
   return ( 
     <div className="grid grid-cols-5 w-full border-b-8 border-black">
