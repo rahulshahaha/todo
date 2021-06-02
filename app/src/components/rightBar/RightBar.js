@@ -46,7 +46,7 @@ const RightBar = () => {
             <ImportanceFilters />
             <DayFilter />
             <ActionTypeFilter />
-            <button onClick={removeAllFilters} className="importantBtn mt-10">Remove All Filters</button>
+            <button onClick={removeAllFilters} className="doneBtn mt-10">Clear Filters</button>
           </div>
           : null
         }
