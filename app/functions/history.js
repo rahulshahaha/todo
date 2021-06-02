@@ -16,11 +16,10 @@ const firestore = new Firestore({
 const history = express();
 history.use(cors({ origin: true }));
 
-history.get("/all", (req, res) => {
+history.post("/all", (req, res) => {
 
-  // const body = req.body;
-  // const id = body.id;
-  const id = "f6tnPMjmNnPO6rnutT0EbEMjCOg2"
+  const body = JSON.parse(req.body);
+  const id = body.id;
 
   const now = new Date();
   now.setHours(0, 0, 0, 0);
