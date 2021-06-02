@@ -9,7 +9,7 @@ const Nav = () => {
 
 
   const toggle = (e) => {
-    stateDispatch({type: 'TOGGLE'})
+    stateDispatch({type: 'TOGGLE_VIEW'})
   }
 
   return ( 

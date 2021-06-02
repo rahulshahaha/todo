@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import moment from 'moment'
 import PlanningDay from '../planningView/PlanningDay'
+import { StateContext } from '../../store/contexts/stateContext'
 
 const PreviewDays = () => {
 
   const daysToShow = 3
   const days = []
-  const [showPreview, setShowPreview] = useState(false)
+  const { showPreview, stateDispatch } = useContext(StateContext)
 
 
   for(var i = 0; i < daysToShow; i++){
@@ -19,7 +20,8 @@ const PreviewDays = () => {
   }
 
   const togglePreview = (e) => {
-    setShowPreview(!showPreview)
+    // setShowPreview(!showPreview)
+    stateDispatch({type:'TOGGLE_PREVIEW'})
   }
 
 

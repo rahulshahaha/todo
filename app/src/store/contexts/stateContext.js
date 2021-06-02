@@ -7,14 +7,16 @@ export const StateContext = React.createContext();
 export const StateProvider = ({ children }) => {
 
   const [stateStatus, stateDispatch] = useReducer(stateReducer, {
-    workingView: true
+    workingView: true,
+    showFilters: true,
+    showPreview: false
   });
 
 
 
 
   return (
-    <StateContext.Provider value={{ workingView: stateStatus.workingView, stateDispatch }}>{children}</StateContext.Provider>
+    <StateContext.Provider value={{ ...stateStatus, stateDispatch }}>{children}</StateContext.Provider>
   );
 };
 
