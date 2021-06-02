@@ -5,6 +5,9 @@ import { FilterContext } from '../../store/contexts/filterContext';
 import ActionTypeFilter from './ActionTypeFilter';
 import DayFilter from './DayFilter';
 import ImportanceFilters from './ImportanceFilters';
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import PreviewDays from './PreviewDays';
 
 const RightBar = () => {
 
@@ -32,16 +35,21 @@ const RightBar = () => {
   }
 
   return ( 
-    <div className="col-span-3 p-5 h-screen overflow-hidden">
-      <p onClick ={toggleFilters} className="cursor-pointer underline">{collapseFilters ? "Show Filters" : "Hide Filters"}</p>
-      { collapseFilters ? null : 
-        <div className="">
-          <ImportanceFilters />
-          <DayFilter />
-          <ActionTypeFilter />
-          <button onClick={removeAllFilters} className="importantBtn mt-10">Remove All Filters</button>
-        </div>
-      }
+    <div className="col-span-3 p-5 h-screen overflow-hidden pb-10">
+      <div className="overflow-scroll h-full">
+        <p onClick ={toggleFilters} className="cursor-pointer underline">{collapseFilters ? "Show Filters" : "Hide Filters"}</p>
+        { collapseFilters ? null : 
+          <div className="">
+            <ImportanceFilters />
+            <DayFilter />
+            <ActionTypeFilter />
+            <button onClick={removeAllFilters} className="importantBtn mt-10">Remove All Filters</button>
+          </div>
+        }
+        <DndProvider backend={HTML5Backend}>
+          <PreviewDays />
+        </DndProvider>
+      </div>
     </div>
    );
 }

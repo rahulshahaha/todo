@@ -5,9 +5,8 @@ import PlanningDayItem from './PlanningDayItem';
 import { useDrop } from 'react-dnd'
 import { dropped } from '../../store/actions'
 
-const PlanningDay = (props) => {
+const PlanningDay = ({day}) => {
 
-  const day = props.day
 
   const [cp, drop] = useDrop(
     () => ({
@@ -104,7 +103,7 @@ const PlanningDay = (props) => {
   const bgClass = day.today === 0 ? 'bg-green-200' : day.today === -1 ? 'bg-gray-400' : ''
 
   return ( 
-    <div ref={drop} className={" h-full border-r-2 border-black " + bgClass}>
+    <div ref={drop} className={"  border-l-2 border-r-2 border-black " + bgClass}>
       <div className="border-b-4 border-black">
         <p className={"text-center font-bold "}>{day.weekday}</p>
         <p className="text-center">{day.date.format("MM/DD/YYYY")}</p>
