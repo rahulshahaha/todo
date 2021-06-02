@@ -19,10 +19,17 @@ const EditExpectedUpdate = ({value, change}) => {
     e.target.select()
   }
 
+  const filterDate = (d) => {
+    if(d.getDay() === 0 || d.getDay() === 6){
+      return false
+    }
+    return true
+  }
+
   return ( 
     <div className="mt-2 flex space-x-2">
       <p className="font-bold text-md">Due:</p>
-      <DatePicker id='expectedUpdate' isClearable={false} className='cursor-pointer hover:underline' selected={expectedUpdate} onFocus={focus} onChange={dateChange} />
+      <DatePicker id='expectedUpdate' filterDate={filterDate} isClearable={false} className='cursor-pointer hover:underline' selected={expectedUpdate} onFocus={focus} onChange={dateChange} />
     </div>
    );
 }
