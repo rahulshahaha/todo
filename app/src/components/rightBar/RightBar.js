@@ -39,7 +39,7 @@ const RightBar = () => {
 
   return ( 
     <div className="col-span-3 p-5 h-screen overflow-hidden pb-10">
-      <div className="overflow-scroll h-full">
+      <div className="overflow-scroll h-full hideBar">
         <p onClick ={toggleFilters} className="cursor-pointer underline">{showFilters ? "Hide Filters" : "Show Filters"}</p>
         { showFilters ? 
           <div className="">
