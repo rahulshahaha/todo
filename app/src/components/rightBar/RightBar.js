@@ -42,7 +42,7 @@ const RightBar = () => {
       <div className="overflow-scroll h-full hideBar">
         <p onClick ={toggleFilters} className="cursor-pointer underline">{showFilters ? "Hide Filters" : "Show Filters"}</p>
         { showFilters ? 
-          <div className="">
+          <div className="mb-10">
             <ImportanceFilters />
             <DayFilter />
             <ActionTypeFilter />
