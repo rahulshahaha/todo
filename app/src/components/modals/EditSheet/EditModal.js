@@ -8,6 +8,7 @@ import ExitIcon from '../../icons/ExitIcon';
 import { ModalContext } from '../../../store/contexts/modalContext';
 import { DataContext } from '../../../store/contexts/dataContext';
 import EditNotes from './EditNotes';
+import EditLink from './EditLink';
 
 
 const EditModal = () => {
@@ -21,7 +22,8 @@ const EditModal = () => {
     actionType: 1,
     expectedUpdate: new Date(),
     projectID: '',
-    notes: ''
+    notes: '',
+    link: ''
   })
 
   const [changed, setChanged] = useState(false)
@@ -43,7 +45,8 @@ const EditModal = () => {
         actionType: 1,
         expectedUpdate: new Date(),
         projectID: modalStatus.itemProjectID,
-        notes: ''
+        notes: '',
+        link: ''
       })
     }
   }, [modalStatus, items])
@@ -118,6 +121,7 @@ const EditModal = () => {
         <EditActionType value={newItem.actionType} change={change} />
         <EditAction value={newItem.action} change={change} />
         <EditNotes value={newItem.notes} change={change} />
+        <EditLink value={newItem.link} change={change} />
         {
           isNew ? (
             <div className="flex space-x-2 mt-5">

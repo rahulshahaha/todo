@@ -18,6 +18,9 @@ const EditAction = ({value, change}) => {
       { editing ? 
         <TextareaAutosize onFocus={focus} onBlur={click} autoFocus id='action' onChange={change} className={'focus:outline-none border-2 border-black '} value={value}></TextareaAutosize>
         :
+        value === "" ? 
+        <p className="italic text-gray-500 cursor-pointer underline inline-block" onClick={click}>{"Add Action"}</p>
+        :
         <p className="cursor-pointer hover:underline inline-block" onClick={click}>{value}</p>
       }
     </div>

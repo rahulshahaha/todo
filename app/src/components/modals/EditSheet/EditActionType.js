@@ -15,8 +15,9 @@ const EditActionType = ({value, change}) => {
   }
 
   const actionType = actionTypes ? actionTypes.filter(aType => {
-    return aType.id === value
+    return aType.id === parseInt(value)
   })[0] : null;
+
 
   const click = (e) => {
     setEditing(!editing)
@@ -24,6 +25,7 @@ const EditActionType = ({value, change}) => {
 
   const changed = (e) => {
     change(e)
+
     setEditing(false)
   }
 
@@ -36,7 +38,7 @@ const EditActionType = ({value, change}) => {
           })}
         </select>
         :
-        <p className="font-bold text-md inline-block cursor-pointer hover:underline" onClick={click} >{actionType.name}:</p>
+        <p className="font-bold text-md inline-block cursor-pointer hover:underline" onClick={click} >{actionType ? actionType.name : ""}:</p>
       }
 
     </div>

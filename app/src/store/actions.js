@@ -48,7 +48,8 @@ export const addNewItem = (newItem) => {
     completed: false,
     projectID: newItem.projectID,
     created: now,
-    notes: newItem.notes
+    notes: newItem.notes,
+    link: newItem.link
   })
 }
 
@@ -140,7 +141,8 @@ export const updateItem = (newItem) => {
     actionType: parseInt(newItem.actionType),
     expectedUpdate: newItem.expectedUpdate,
     projectID: newItem.projectID,
-    notes: newItem.notes
+    notes: newItem.notes,
+    link: newItem.link
   })
 }
 
