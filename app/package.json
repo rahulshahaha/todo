@@ -28,9 +28,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "build-css": "npx tailwindcss-cli@latest build ./src/styles/tailwindCustom.css -o ./src/styles/tailwind.css"
+    "predeploy": "npm run build-prod-css && npm run build",
+    "deploy": "npm run git-deploy && npm run build-css",
+    "git-deploy": "gh-pages -d build",
+    "build-css": "npx tailwindcss-cli@latest build ./src/styles/tailwindCustom.css -c ./src/styles/tailwind.config.js -o ./src/styles/tailwind.css",
+    "build-prod-css": "NODE_ENV=production npx tailwindcss-cli@latest build ./src/styles/tailwindCustom.css -c ./src/styles/tailwind.config.js -o ./src/styles/tailwind.css"
   },
   "eslintConfig": {
     "extends": [
