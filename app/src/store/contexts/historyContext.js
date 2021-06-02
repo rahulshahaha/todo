@@ -16,8 +16,8 @@ export const HistoryProvider = ({ children }) => {
     if(user === null) return
     const req = new XMLHttpRequest();
       
+    console.log("PULL HISTORY")
     req.onload = function() {
-      console.log("PULL HISTORY")
       setHistory(JSON.parse(req.response))
     }
     req.onerror = function() {
