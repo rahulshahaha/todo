@@ -127,7 +127,7 @@ const EditModal = () => {
               <div className="flex space-x-2 mt-5">
                 <button onClick={doneClick} className={changed ? "doneBtn" : "inactiveBtn"}>Save</button>
                 <button onClick={completeClick} className="completeBtn">Complete Task</button>
-                <button onClick={deleteClicked} className="importantBtn">Delete Item</button>
+                <button onClick={deleteClicked} className="importantBtn">Delete Task</button>
               </div>
               <div>
               </div>
