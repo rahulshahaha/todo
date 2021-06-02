@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { DataContext } from '../../store/contexts/dataContext';
 import { FbContext } from '../../store/contexts/fbContext';
 import { FilterContext } from '../../store/contexts/filterContext';
@@ -14,6 +14,8 @@ const RightBar = () => {
   const importances = weights ? weights.importanceTypes : {}
   const actionTypes = weights ? weights.actionTypes : {}
 
+  const [collapseFilters, setCollapseFilters] = useState(false)
+
 
   const removeAllFilters = (e) => {
     filterDispatch({type: 'ALL_IMPORTANCE', value: true, importances})
@@ -25,13 +27,21 @@ const RightBar = () => {
     return null
   }
 
+  const toggleFilters = (e) => {
+    setCollapseFilters(!collapseFilters)
+  }
 
   return ( 
     <div className="col-span-3 p-5 h-screen overflow-hidden">
-      <ImportanceFilters />
-      <DayFilter />
-      <ActionTypeFilter />
-      <button onClick={removeAllFilters} className="importantBtn mt-10">Remove All Filters</button>
+      <p onClick ={toggleFilters} className="cursor-pointer underline">{collapseFilters ? "Show Filters" : "Hide Filters"}</p>
+      { collapseFilters ? null : 
+        <div className="">
+          <ImportanceFilters />
+          <DayFilter />
+          <ActionTypeFilter />
+          <button onClick={removeAllFilters} className="importantBtn mt-10">Remove All Filters</button>
+        </div>
+      }
     </div>
    );
 }
