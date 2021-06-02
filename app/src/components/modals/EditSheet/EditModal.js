@@ -111,11 +111,6 @@ const EditModal = () => {
         <div onClick={exitClick} className="h-10 w-10 absolute top-0 right-0">
           <ExitIcon />
         </div>
-        { isNew ? (
-          <p className="text-xl font-bold">New Item</p>
-        ) : null
-          //<p className="text-xl font-bold">Edit Item</p>
-        }
         <EditProject value={newItem.projectID} change={change} />
         <EditExpectedUpdate value={newItem.expectedUpdate} change={dateChange} />
         <EditActionType value={newItem.actionType} change={change} />

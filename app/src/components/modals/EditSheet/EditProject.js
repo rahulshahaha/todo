@@ -1,10 +1,18 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { DataContext } from '../../../store/contexts/dataContext'
 
 const EditProject = ({value, change}) => {
 
   const { projects } = useContext(DataContext)
   const [editing, setEditing] = useState(false)
+
+  useEffect(() => {
+    if(value === ''){
+      setEditing(true)
+    }else{
+      setEditing(false)
+    }
+  }, [value])
 
   var sortedProjects = []
   if(projects){
