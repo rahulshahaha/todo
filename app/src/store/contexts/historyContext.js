@@ -25,7 +25,8 @@ export const HistoryProvider = ({ children }) => {
     }
 
     const params = {
-      "id": user.uid
+      "id": user.uid,
+      "days": 30
     }
       
     // const fullPath = "http://localhost:5001/todo-8303f/us-central1/history/all"

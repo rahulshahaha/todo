@@ -20,7 +20,7 @@ history.post("/all", (req, res) => {
 
   const body = JSON.parse(req.body);
   const id = body.id;
-  const lookBack = body.days ? body.days : 30
+  const lookBack = body.days ? parseInt(body.days) : 30
 
   const now = new Date();
   now.setHours(0, 0, 0, 0);
