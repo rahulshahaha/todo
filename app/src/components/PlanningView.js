@@ -7,7 +7,7 @@ const PlanningView = () => {
 
 
   return ( 
-    <div className="overflow-scroll h-screen">
+    <div className="overflow-scroll max-h-screen pb-10 h-screen">
       <DndProvider backend={HTML5Backend}>
         <PlanningWeek week={0} />
         <PlanningWeek week={1} />
