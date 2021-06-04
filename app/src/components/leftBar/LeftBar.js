@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import OneOffs from './OneOffs/OneOffs'
-import Config from './todoConfig/Config'
+// import Config from './todoConfig/Config'
 import TotalScore from './TotalScore'
 import ProjectList from './ProjectList'
 import { FbContext } from '../../store/contexts/fbContext'
@@ -19,18 +19,18 @@ const LeftBar = () => {
   }
 
   return ( 
-    <div className="col-span-3 h-screen overflow-hidden" >
-      <div className="max-h-screen overflow-scroll hideBar pb-10">
+    <div className="col-span-3 max-h-screen overflow-hidden mb-2" >
+      <div className="max-h-full overflow-scroll hideBar">
         { FBuser && allLoaded ? (
           <div>
             <TotalScore />
             <CompletedToday />
             <OneOffs />
             <ProjectList />
-            <p className="mt-10 cursor-pointer underline m-auto w-56" onClick={click}>{showConfig ? 'Hide Config' : 'Show Config'}</p>
+            {/* <p className="mt-10 cursor-pointer underline m-auto w-56" onClick={click}>{showConfig ? 'Hide Config' : 'Show Config'}</p> */}
             { showConfig ? (
               <div>
-                <Config />
+                {/* <Config /> */}
               </div>
             ) : null}
           </div>
