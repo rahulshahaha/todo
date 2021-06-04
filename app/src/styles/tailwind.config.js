@@ -3,12 +3,18 @@ module.exports = {
     './src/**/*.html',
     './src/**/*.js'
   ],
-  darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
-  },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
+    extend: {
+      colors: {
+        'overdue': '#DC2626',
+        // 'doToday': '#6D28D9',
+        'doToday': '#2563EB',
+        'notDoToday': '#4B5563',
+        // 'doLater': '#C4B5FD',
+        'doLater': '#93C5FD',
+        'notDoLater': '#9CA3AF',
+        'neverDo': '#D1D5DB'
+      }
+    }
+  }
 }

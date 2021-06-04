@@ -177,17 +177,17 @@ const itemColorClass = (item) => {
   const expectedUpdate = moment.unix(item.expectedUpdate.seconds).startOf('day')
 
   if(expectedUpdate.isBefore(now) && item.actionType !== 5 && item.actionType !== 6){
-    return 'bg-red-600 text-white'
+    return 'bg-overdue text-white'
   }else if(expectedUpdate.isSame(now) && (item.actionType === 1 || item.actionType === 4)){
-    return 'bg-purple-700 text-white'
+    return 'bg-doToday text-white'
   }else if(expectedUpdate.isSame(now) && (item.actionType === 2 || item.actionType === 3)){
-    return 'bg-gray-600 text-white'
+    return 'bg-notDoToday text-white'
   }else if(item.actionType === 1 || item.actionType === 4){
-    return 'bg-purple-300'
+    return 'bg-doLater'
   }else if(item.actionType === 2 || item.actionType === 3){
-    return 'bg-gray-400'
+    return 'bg-notDoLater'
   }
 
-  return 'bg-gray-300'
+  return 'bg-neverDo'
 
 }

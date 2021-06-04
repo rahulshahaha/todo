@@ -10,13 +10,14 @@ import CompletedToday from './CompletedToday'
 
 const LeftBar = () => {
 
-  const [showConfig, setShowConfig] = useState(false)
+  const [showConfig] = useState(false)
+  // const [showConfig, setShowConfig] = useState(false)
   const { FBuser } = useContext(FbContext)
   const { allLoaded } = useContext(DataContext)
 
-  const click = (e) => {
-    setShowConfig(!showConfig)
-  }
+  // const click = (e) => {
+  //   setShowConfig(!showConfig)
+  // }
 
   return ( 
     <div className="col-span-3 max-h-screen overflow-hidden mb-2" >
