@@ -20,7 +20,7 @@ const LeftBar = () => {
 
   return ( 
     <div className="col-span-3 h-screen overflow-hidden" >
-      <div className="h-full overflow-scroll hideBar pb-10">
+      <div className="max-h-screen overflow-scroll hideBar pb-10">
         { FBuser && allLoaded ? (
           <div>
             <TotalScore />

@@ -34,7 +34,7 @@ const App = () => {
                         <CompltetedItemsProvider>
                           <StateProvider>
                             <DataHydrator />
-                            <div className="App">
+                            <div className="App max-h-screen">
                               <Nav />
                               <Main />
                               <ProjectEditSheet />
