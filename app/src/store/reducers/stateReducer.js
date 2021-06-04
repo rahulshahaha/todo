@@ -11,11 +11,6 @@ export const stateReducer = (state, action) => {
         ...state,
         showFilters: !state.showFilters
       }
-    case 'TOGGLE_PREVIEW':
-      return {
-        ...state,
-        showPreview: !state.showPreview
-      }
     default: 
       return state
   }

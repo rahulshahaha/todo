@@ -6,7 +6,7 @@ import RightBar from './rightBar/RightBar';
 
 const WorkingView = () => {
   return ( 
-    <div className="grid grid-cols-12">
+    <div className="max-h-screen grid grid-cols-12">
       <LeftBar />
       <CenterColumn />
       <RightBar />

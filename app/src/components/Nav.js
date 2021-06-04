@@ -5,19 +5,30 @@ import AddItem from './leftBar/AddItem'
 
 const Nav = () => {
 
-  const { stateDispatch } = useContext(StateContext)
+  const { showFilters, stateDispatch } = useContext(StateContext)
 
 
   const toggle = (e) => {
     stateDispatch({type: 'TOGGLE_VIEW'})
   }
 
+  const toggleFilter = (e) => {
+    stateDispatch({type: 'TOGGLE_FILTERS'})
+  }
+
   return ( 
     <div>
       <div className="bg-gray-400 w-full h-10">
-        <Login />
-        <button className="btn" onClick={toggle}>Change View</button>
-        <AddItem />
+        <div className="flex justify-between mx-5">
+          <div>
+            <Login />
+            <button className="btn" onClick={toggle}>Change View</button>
+            <AddItem />
+          </div>
+          <div>
+            <button className="btn" onClick={toggleFilter}>{showFilters ? "Preview" : "Filter"}</button>
+          </div>
+        </div>
       </div>
     </div>
    );
