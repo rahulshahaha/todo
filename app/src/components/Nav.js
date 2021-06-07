@@ -30,7 +30,7 @@ const Nav = () => {
           <div className="flex justify-between col-span-3 self-center justify-self-start p1-2">
             <Login />
             {/* <button className="btn" onClick={toggle}>Change View</button> */}
-            <NavLink className="btn" to={to}>Change View</NavLink>
+            <NavLink className="" to={to}><button className="btn">Change View</button></NavLink>
             <AddItem />
           </div>
           <div className="col-span-6">

@@ -682,7 +682,7 @@ table th{
   border-radius: 0.375rem;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
-  min-height: 2rem;
+  /* min-height: 2rem; */
 }
 
 .inactiveBtn{
@@ -692,7 +692,7 @@ table th{
   cursor: default;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
-  min-height: 2rem;
+  /* min-height: 2rem; */
 }
 
 .importantBtn{
@@ -701,7 +701,7 @@ table th{
   border-radius: 0.375rem;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
-  min-height: 2rem;
+  /* min-height: 2rem; */
 }
 
 .doneBtn{
@@ -712,7 +712,7 @@ table th{
   padding-right: 1.25rem;
   --tw-text-opacity: 1;
   color: rgba(255, 255, 255, var(--tw-text-opacity));
-  min-height: 2rem;
+  /* min-height: 2rem; */
 }
 
 .completeBtn{
@@ -723,7 +723,7 @@ table th{
   padding-right: 1.25rem;
   --tw-text-opacity: 1;
   color: rgba(255, 255, 255, var(--tw-text-opacity));
-  min-height: 2rem;
+  /* min-height: 2rem; */
 }
 
 tr:hover td .trashIcon{
