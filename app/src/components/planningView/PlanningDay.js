@@ -100,12 +100,13 @@ const PlanningDay = ({day}) => {
   }
 
 
-  const bgClass = day.today === 0 ? 'bg-green-200' : day.today === -1 ? 'bg-gray-400' : ''
+  const bgClass = day.today === 0 ? 'bg-doToday p-2 rounded-b-lg text-white' : day.today === -1 ? 'bg-gray-400' : ''
+
 
   return ( 
-    <div ref={drop} className={" flex flex-col overflow-hidden max-h-full border-l-2 border-r-2 border-black " + bgClass}>
+    <div ref={drop} className={" flex flex-col overflow-hidden max-h-full border-l-2 border-r-2 border-black "}>
       <div className="border-b-4 border-black">
-        <p className={"text-center font-bold "}>{day.weekday}</p>
+        <p className={"text-center font-bold "}><span className={" " + bgClass}>{day.weekday}</span></p>
         <p className="text-center">{day.date.format("MM/DD/YYYY")}</p>
         <p className="text-center">{daysScore.toFixed(2)}</p>
       </div>
