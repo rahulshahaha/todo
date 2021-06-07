@@ -36,7 +36,10 @@ const Nav = () => {
             <UpcomingWork />
           </div>
           <div className="col-span-3 self-center justify-self-end pr-2">
-            <button className="btn" onClick={toggleFilter}>{showFilters ? "Preview" : "Filter"}</button>
+            { loc.pathname !== "/planning" ? 
+              <button className="btn" onClick={toggleFilter}>{showFilters ? "Preview" : "Filter"}</button>
+            : null
+            }
           </div>
         </div>
       </div>

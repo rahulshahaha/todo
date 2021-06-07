@@ -100,15 +100,14 @@ const PlanningDay = ({day}) => {
   }
 
 
-  const bgClass = day.today === 0 ? 'bg-doToday rounded-full p-1 text-white' : day.today === -1 ? 'bg-gray-400 rounded-full p-1' : ''
+  const bgClass = day.today === 0 ? 'bg-doToday rounded-full p-1 text-white' : day.today === -1 ? 'bg-gray-400 rounded-full p-1' : 'bg-gray-200 rounded-full p-1'
 
 
   return ( 
     <div ref={drop} className={" flex flex-col overflow-hidden max-h-full border-l-2 border-r-2 border-black "}>
-      <div className="border-b-4 border-black">
+      <div className="border-b-4 border-black pb-1">
         <p className={"text-center font-bold "}><span className={" "}>{day.weekday}</span></p>
-        <p className="text-center"><span className={bgClass} >{day.date.format("DD")}</span></p>
-        <p className="text-center">{daysScore.toFixed(2)}</p>
+        <p className="text-center"><span className={bgClass} >{day.date.format("DD")}</span><span> - {daysScore.toFixed(2)}</span></p>
       </div>
       <div className="flex-shrink px-1 overflow-scroll">
       { overdueItems && overdueItems.length > 0 ? 
