@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { StateContext } from '../store/contexts/stateContext'
 import Login from './auth/Login'
+import UpcomingWork from './centerColumn/UpcomingWork'
 import AddItem from './leftBar/AddItem'
 
 const Nav = () => {
@@ -18,14 +19,17 @@ const Nav = () => {
 
   return ( 
     <div>
-      <div className="bg-gray-400 w-full h-10">
-        <div className="flex justify-between mx-5">
-          <div>
+      <div className="bg-gray-400 w-full h-14 ">
+        <div className="grid grid-cols-12">
+          <div className="flex justify-between col-span-3 self-center justify-self-start p1-2">
             <Login />
             <button className="btn" onClick={toggle}>Change View</button>
             <AddItem />
           </div>
-          <div>
+          <div className="col-span-6">
+            <UpcomingWork />
+          </div>
+          <div className="col-span-3 self-center justify-self-end pr-2">
             <button className="btn" onClick={toggleFilter}>{showFilters ? "Preview" : "Filter"}</button>
           </div>
         </div>

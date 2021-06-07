@@ -32,7 +32,7 @@ const ProjectList = () => {
   
 
   return ( 
-    <div className="m-auto w-60 mt-10">
+    <div className="mt-10 px-7">
       <div className="flex space-x-1">
         <p className='self-center text-xl font-bold'>Projects</p>
         <div onClick={addProject} className="self-center w-6 h-6 cursor-pointer">

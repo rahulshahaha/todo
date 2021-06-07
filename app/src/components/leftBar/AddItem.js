@@ -14,7 +14,7 @@ const AddItem = () => {
   if(FBuser === null) return false
 
   return ( 
-    <button className="btn" onClick={addItem}>Add Action</button>
+    <button className="doneBtn" onClick={addItem}>Add ToDo</button>
    );
 }
  

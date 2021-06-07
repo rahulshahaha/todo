@@ -7,7 +7,7 @@ import UpcomingWork from './UpcomingWork'
 const CenterColumn = () => {
   return ( 
     <div className='flex flex-col w-full col-span-6 col-start-4 p-2 overflow-hidden'>
-      <UpcomingWork />
+      {/* <UpcomingWork /> */}
       <LineChart />
       <CardCollection />
     </div>
