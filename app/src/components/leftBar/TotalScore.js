@@ -3,21 +3,23 @@ import { FbContext } from '../../store/contexts/fbContext';
 import { logHistory } from '../../store/actions'
 import { DataContext } from '../../store/contexts/dataContext';
 import { ModalContext } from '../../store/contexts/modalContext';
+import { HistoryContext } from '../../store/contexts/historyContext';
 
 const TotalScore = () => {
 
   const { FBuser } = useContext(FbContext)
   const { weights, totalScore, allLoaded } = useContext(DataContext)
   const { modalDispatch } = useContext(ModalContext)
+  const { historyDispatch } = useContext(HistoryContext)
 
 
   useEffect(() => {
 
      if(allLoaded === true && FBuser !== null && weights !== null && weights.currentUserScore !== null && weights.currentUserScore.toFixed(2) !== totalScore.toFixed(2)){
-       logHistory(totalScore)
+       logHistory(totalScore, historyDispatch)
      }
  
-   }, [allLoaded, FBuser, totalScore, weights])
+   }, [allLoaded, FBuser, totalScore, weights, historyDispatch])
 
 
   const toggleChart = (e) => {

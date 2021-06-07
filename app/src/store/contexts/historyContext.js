@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import firebase from '../../config/fbConfig'
+import { historyReducer } from '../reducers/historyReducer'
 
 export const HistoryContext = React.createContext();
 
@@ -10,6 +11,10 @@ export const HistoryProvider = ({ children }) => {
   const [history, setHistory] = useState(null)
 
   const [user] = useAuthState(firebase.auth());
+
+  const [historyStatus, historyDispatch] = useReducer(historyReducer, {
+    updates: 0
+  });
 
   
   useEffect(() => {
@@ -35,10 +40,10 @@ export const HistoryProvider = ({ children }) => {
 
     req.send(JSON.stringify(params));
 
-  }, [user])
+  }, [user,historyStatus.updates])
 
   return (
-    <HistoryContext.Provider value={{ history, historyLoading:false }}>{children}</HistoryContext.Provider>
+    <HistoryContext.Provider value={{ history, historyLoading:false,  historyDispatch}}>{children}</HistoryContext.Provider>
   );
 };
 

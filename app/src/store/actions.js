@@ -117,7 +117,7 @@ export const updateActionTypes = (newATypes, oldATypes) => {
   })
 }
 
-export const logHistory = (newScore) => {
+export const logHistory = (newScore, historyDispatch) => {
   const now = new Date()
   firebase.firestore().collection('users').doc(currentUserID()).get().then(userDoc => {
     if(userDoc.data().currentScore.toFixed(2) !== newScore.toFixed(2)){
@@ -128,6 +128,8 @@ export const logHistory = (newScore) => {
         firebase.firestore().collection('users/' + currentUserID() + '/history').add({
           date: now,
           score: parseFloat(newScore.toFixed(2))
+        }).then(t => {
+          historyDispatch({type:'LOG'})
         })
       })
     }
