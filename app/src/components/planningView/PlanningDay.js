@@ -100,7 +100,7 @@ const PlanningDay = ({day}) => {
   }
 
 
-  const bgClass = day.today === 0 ? 'bg-doToday rounded-full p-1 text-white' : day.today === -1 ? 'bg-gray-400' : ''
+  const bgClass = day.today === 0 ? 'bg-doToday rounded-full p-1 text-white' : day.today === -1 ? 'bg-gray-400 rounded-full p-1' : ''
 
 
   return ( 

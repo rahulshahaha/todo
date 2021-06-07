@@ -16,6 +16,8 @@ import DataHydrator from "./components/DataHydrator";
 import { CompltetedItemsProvider } from "./store/contexts/completedItemsContext";
 import Nav from "./components/Nav";
 import { StateProvider } from "./store/contexts/stateContext";
+import { HashRouter } from 'react-router-dom'
+
 
 
 
@@ -35,8 +37,10 @@ const App = () => {
                           <StateProvider>
                             <DataHydrator />
                             <div className="App max-h-screen">
-                              <Nav />
-                              <Main />
+                              <HashRouter basename="/">
+                                <Nav />
+                                <Main />
+                              </HashRouter>
                               <ProjectEditSheet />
                               <EditSheet />
                               <EscDetect />

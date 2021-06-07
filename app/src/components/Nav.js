@@ -3,14 +3,20 @@ import { StateContext } from '../store/contexts/stateContext'
 import Login from './auth/Login'
 import UpcomingWork from './centerColumn/UpcomingWork'
 import AddItem from './leftBar/AddItem'
+import { useLocation, NavLink } from 'react-router-dom'
 
 const Nav = () => {
 
   const { showFilters, stateDispatch } = useContext(StateContext)
+  const loc = useLocation()
 
 
-  const toggle = (e) => {
-    stateDispatch({type: 'TOGGLE_VIEW'})
+  const to = () => {
+    if(loc.pathname === '/working' || loc.pathname === '/'){
+      return "/planning"
+    }else{
+      return "/working"
+    }
   }
 
   const toggleFilter = (e) => {
@@ -23,7 +29,8 @@ const Nav = () => {
         <div className="grid grid-cols-12">
           <div className="flex justify-between col-span-3 self-center justify-self-start p1-2">
             <Login />
-            <button className="btn" onClick={toggle}>Change View</button>
+            {/* <button className="btn" onClick={toggle}>Change View</button> */}
+            <NavLink className="btn" to={to}>Change View</NavLink>
             <AddItem />
           </div>
           <div className="col-span-6">
