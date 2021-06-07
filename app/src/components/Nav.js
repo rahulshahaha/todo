@@ -29,7 +29,6 @@ const Nav = () => {
         <div className="grid grid-cols-12">
           <div className="flex justify-between col-span-3 self-center justify-self-start p1-2">
             <Login />
-            {/* <button className="btn" onClick={toggle}>Change View</button> */}
             <NavLink className="" to={to}><button className="btn">Change View</button></NavLink>
             <AddItem />
           </div>
