@@ -52,7 +52,7 @@ table th{
 }
 
 .doneBtn{
-  @apply bg-blue-600 rounded-md px-5 text-white;
+  @apply bg-doToday rounded-md px-5 text-white;
   /* min-height: 2rem; */
 }
 
