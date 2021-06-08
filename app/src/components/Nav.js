@@ -25,7 +25,7 @@ const Nav = () => {
 
   return ( 
     <div>
-      <div className="bg-gray-400 w-full h-14 ">
+      <div className="bg-black w-full h-14 ">
         <div className="grid grid-cols-12">
           <div className="flex justify-between col-span-3 self-center justify-self-start p1-2">
             <Login />

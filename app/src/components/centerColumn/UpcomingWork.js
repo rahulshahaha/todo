@@ -7,7 +7,7 @@ const UpcomingWork = () => {
 
 
   return ( 
-    <div className="grid grid-cols-4">
+    <div className="grid grid-cols-4 text-white">
       <div>
         <p className="text-center text-2xl">{filteredScore.toFixed(2)}</p>
         <p className="text-center">Filtered View</p>
