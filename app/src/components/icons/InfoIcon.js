@@ -2,7 +2,7 @@ import React from 'react'
 import ReactTooltip from 'react-tooltip';
 
 
-const InfoIcon = () => {
+const InfoIcon = () => { 
 
 
   return ( 
