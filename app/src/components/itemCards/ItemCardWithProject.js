@@ -23,7 +23,7 @@ const daysToText = item && item.daysTo === 1 ? 'Tomorrow' : item && item.daysTo 
 
   return ( 
     <div className={'rounded-md border-2 border-black my-2 w-full self-center grid grid-cols-12 '}>
-      <div onClick={projectClick} className='hover:bg-opacity-50 mainInfo flex flex-col col-span-4 p-2 bg-black text-white'>
+      <div onClick={projectClick} className='hover:bg-opacity-50 mainInfo flex flex-col col-span-4 p-2 bg-darkGray text-white'>
         <p className='text-xs'>{item.score ? item.score.toFixed(2) : 0}</p>
         <p className='text-xl'>{item.project ? item.project.name : ''}</p>
         <ImportanceIcon importance={item.project ? item.project.importance : 3} />
