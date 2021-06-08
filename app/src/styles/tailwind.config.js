@@ -13,7 +13,8 @@ module.exports = {
         // 'doLater': '#C4B5FD',
         'doLater': '#93C5FD',
         'notDoLater': '#9CA3AF',
-        'neverDo': '#D1D5DB'
+        'neverDo': '#D1D5DB',
+        'offWhite': '#f8f8ff'
       }
     }
   }
