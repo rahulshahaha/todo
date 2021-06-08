@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       colors: {
         'overdue': '#DC2626',
-        // 'doToday': '#6D28D9',
+        // 'doToday': '#932432',
         'doToday': '#2563EB',
         'notDoToday': '#4B5563',
         // 'doLater': '#C4B5FD',
@@ -18,5 +18,14 @@ module.exports = {
         'darkGray': '#283747'
       }
     }
-  }
+  },
+  variants: {
+    extend: {
+      backgroundColor: ['checked'],
+      borderColor: ['checked'],
+    }
+  },
+  plugins: [
+    require('@tailwindcss/custom-forms'),
+  ]
 }

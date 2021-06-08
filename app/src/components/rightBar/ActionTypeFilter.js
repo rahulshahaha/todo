@@ -41,7 +41,7 @@ const ActionTypeFilter = () => {
         { filters.map(filt => {
           return(
             <div className="flex space-x-1" key={filt.id}>
-              <input className="self-center" id={filt.id} onChange={onCheck} checked={!filterData.actionFilters || filterData.actionFilters[filt.id] === undefined ? true : filterData.actionFilters[filt.id]} type="checkbox" />
+              <input className="self-center form-checkbox text-darkGray" id={filt.id} onChange={onCheck} checked={!filterData.actionFilters || filterData.actionFilters[filt.id] === undefined ? true : filterData.actionFilters[filt.id]} type="checkbox" />
               <label className="self-center">{filt.name}</label>
             </div>
           )

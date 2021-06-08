@@ -26,7 +26,7 @@ const DayFilter = () => {
         { filterTypes.map(filt => {
           return (
             <div key={filt.id} className="flex space-x-1">
-              <input className="self-center" onChange={change} type="radio" name={filt.filtName} value={filt.value} checked={value === filt.value}></input>
+              <input className="self-center form-radio text-darkGray" onChange={change} type="radio" name={filt.filtName} value={filt.value} checked={value === filt.value}></input>
               <label className="self-center">{filt.name}</label>
             </div>
           )

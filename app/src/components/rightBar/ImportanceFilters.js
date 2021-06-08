@@ -46,7 +46,7 @@ const ImportanceFilters = () => {
         { filters.map(filt => {
           return(
             <div className="flex space-x-1" key={filt.id}>
-              <input className="self-center" id={filt.id} onChange={onCheck} checked={!filterData.importanceFilters || filterData.importanceFilters[filt.id] === undefined ? true : filterData.importanceFilters[filt.id]} type="checkbox" />
+              <input className="self-center form-checkbox text-darkGray focus:outline-none" id={filt.id} onChange={onCheck} checked={!filterData.importanceFilters || filterData.importanceFilters[filt.id] === undefined ? true : filterData.importanceFilters[filt.id]} type="checkbox" />
               <label className="self-center">{filt.name}</label>
             </div>
           )
