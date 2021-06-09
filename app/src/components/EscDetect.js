@@ -3,11 +3,13 @@ import { ModalContext } from '../store/contexts/modalContext'
 import { completeItem } from '../store/actions'
 import { DataContext } from '../store/contexts/dataContext'
 import { useHistory, useLocation } from 'react-router-dom'
+import { StateContext } from '../store/contexts/stateContext'
 
 const EscDetect = () => {
 
   const { modalStatus, modalDispatch } = useContext(ModalContext)
   const { items, weights } = useContext(DataContext)
+  const { stateDispatch } = useContext(StateContext)
   const history = useHistory()
   const loc = useLocation()
 
@@ -24,6 +26,7 @@ const EscDetect = () => {
     }
 
     const keyDownEvent = (e) => {
+      if(document.activeElement.nodeName === 'TEXTAREA' || document.activeElement.nodeName === "INPUT") return;
       if(e.code === "KeyD" && e.ctrlKey && modalStatus.itemID){
         completeItem(modalStatus.itemID, items, weights)
         modalDispatch({type:'HIDE_SHEET'})
@@ -49,6 +52,10 @@ const EscDetect = () => {
           modalDispatch({type:'SHOW_SHEET'}) 
         }
       }
+      if(e.code === "KeyW"){
+        stateDispatch({type: 'TOGGLE_FILTERS'})
+      }
+
     }
 
     document.addEventListener("keyup", keyEvent);

@@ -1,9 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { addOneOff } from '../../../store/actions'
 
 const AddOneOff = () => {
 
   const [newOneOff, setNewOneOff] = useState('')
+  const ref = useRef(null);
+
+  useEffect(() => {
+
+    const keyupOne = (e) => {
+      if(e.code === "Slash" && document.activeElement.nodeName !== 'TEXTAREA' && document.activeElement.nodeName !== "INPUT"){
+        ref.current.focus()
+      }
+    }
+
+    document.addEventListener("keyup", keyupOne);
+
+    return(() => {
+      document.removeEventListener("keyup", keyupOne);
+    })
+  })
 
   const change = (e) => {
     setNewOneOff(e.target.value)
@@ -15,9 +31,10 @@ const AddOneOff = () => {
     setNewOneOff('')
   }
 
+
   return ( 
     <form onSubmit={submit}>
-      <input className="formInput mt-2" placeholder="Add One Off" value={newOneOff} onChange={change}></input>
+      <input ref={ref} className="formInput mt-2" placeholder="Add One Off" value={newOneOff} onChange={change}></input>
     </form>
    );
 }

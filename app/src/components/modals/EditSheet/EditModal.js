@@ -87,6 +87,7 @@ const EditModal = () => {
 
 
   const doneClick = (e) => {
+    console.log(e)
     if(!changed) return;
     updateItem(newItem)
     modalDispatch({type:'HIDE_SHEET'})
