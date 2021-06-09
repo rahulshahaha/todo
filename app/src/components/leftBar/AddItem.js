@@ -31,7 +31,7 @@ const AddItem = () => {
 
   return ( 
     // <button className="doneBtn" onClick={addItem}>Add ToDo</button>
-    <select autoFocus className='border-2 border-none w-32 bg-doToday rounded-md text-white' id='projectID' onChange={changed} value=''>
+    <select autoFocus className='border-2 border-none pl-5 w-32 bg-doToday rounded-md text-white' id='projectID' onChange={changed} value=''>
       <option disabled value={''}>Add ToDo</option>
       { sortedProjects && sortedProjects.map(project => {
         return <option key={project.id} value={project.id}>{project.name}</option> 
