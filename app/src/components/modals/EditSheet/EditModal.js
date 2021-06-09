@@ -107,7 +107,7 @@ const EditModal = () => {
 
 
   return ( 
-      <div ref={node} id="modal" className="relative overflow-scroll bg-white h-2/4 mt-10 p-5">
+      <div ref={node} id="modal" className="relative overflow-scroll bg-white h-2/4 mt-10 p-5 w-1/3">
         <div onClick={exitClick} className="h-10 w-10 absolute top-0 right-0">
           <ExitIcon />
         </div>
