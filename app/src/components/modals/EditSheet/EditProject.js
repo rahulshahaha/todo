@@ -38,13 +38,11 @@ const EditProject = ({value, change}) => {
 
 
   const click = (e) => {
-    console.log('here')
     setEditing(!editing)
   }
 
 
   const changed = (e) => {
-    console.log(e)
     const data = {
       target: {
         id: 'projectID',
