@@ -28,7 +28,7 @@ const EscDetect = () => {
         completeItem(modalStatus.itemID, items, weights)
         modalDispatch({type:'HIDE_SHEET'})
       }
-      if(e.code === "KeyQ" && e.ctrlKey){
+      if(e.code === "KeyQ"){
         if(loc.pathname === '/' || loc.pathname === '/working'){
           history.push('/planning')
         }else{
@@ -42,7 +42,7 @@ const EscDetect = () => {
         modalDispatch({type: 'SHOW_PROJECT_SHEET', projectID: item.projectID})
         modalDispatch({type: 'HIDE_SHEET'})
       }
-      if(e.code === "KeyN" && e.ctrlKey){
+      if(e.code === "KeyN"){
         if(modalStatus.projectID){
           modalDispatch({type:'SHOW_SHEET',itemProjectID: modalStatus.projectID})
         }else{
