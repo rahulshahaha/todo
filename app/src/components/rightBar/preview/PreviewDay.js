@@ -103,8 +103,8 @@ const PreviewDay = ({day, simple}) => {
   const bgClass = day.today === 0 ? 'bg-doToday rounded-full p-1 text-white' : day.today === -1 ? 'bg-gray-400 rounded-full p-1' : 'bg-gray-200 rounded-full p-1'
 
   return ( 
-    <div ref={drop} className={"pt-1 h-1/3 flex flex-col overflow-hidden border-l-2 border-r-2 border-black "}>
-      <div className="border-b-4 border-black">
+    <div ref={drop} className={"pt-1 h-1/3 flex flex-col overflow-hidden border-l-2 border-r-2 border-darkGray "}>
+      <div className="border-b-4 border-darkGray">
         <p className={"text-center font-bold "}><span className={bgClass}>{day.weekday}</span></p>
         <p className="text-center">{daysScore.toFixed(2)}</p>
       </div>
@@ -122,7 +122,7 @@ const PreviewDay = ({day, simple}) => {
           })
           }
           { overdueItems && overdueItems.length > 0 ? 
-            <hr className="border-4 border-black"></hr>
+            <hr className="border-4 border-darkGray"></hr>
             :
             null
           }

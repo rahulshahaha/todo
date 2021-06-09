@@ -33,7 +33,7 @@ const PlanningWeek = ({week}) => {
 
 
   return ( 
-    <div className="max-h-1/2 h-1/2 grid grid-cols-5 w-full border-b-8 border-black bg-offWhite">
+    <div className="max-h-1/2 h-1/2 grid grid-cols-5 w-full border-b-8 border-darkGray bg-offWhite">
       { days && days.map(day => {
         return(
           <PlanningDay key={day.weekday} day={day} />

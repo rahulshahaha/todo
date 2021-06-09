@@ -104,8 +104,8 @@ const PlanningDay = ({day}) => {
 
 
   return ( 
-    <div ref={drop} className={" flex flex-col overflow-hidden max-h-full border-l-2 border-r-2 border-black "}>
-      <div className="border-b-4 border-black pb-1">
+    <div ref={drop} className={" flex flex-col overflow-hidden max-h-full border-l-2 border-r-2 border-darkGray "}>
+      <div className="border-b-4 border-darkGray pb-1">
         <p className={"text-center font-bold "}><span className={" "}>{day.weekday}</span></p>
         <p className="text-center"><span className={bgClass} >{day.date.format("DD")}</span><span> - {daysScore.toFixed(2)}</span></p>
       </div>
@@ -122,7 +122,7 @@ const PlanningDay = ({day}) => {
         })
         }
         { overdueItems && overdueItems.length > 0 ? 
-          <hr className="border-4 border-black"></hr>
+          <hr className="border-4 border-darkGray"></hr>
           :
           null
         }
