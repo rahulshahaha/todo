@@ -69,18 +69,20 @@ export const deleteItem = (itemID, items, weights) => {
 }
 
 export const completeItem = (itemID, items, weights) => {
-  const item = items.filter(i => {
-    return i.id === itemID
-  })[0]
-  const now = new Date()
-  firebase.firestore().collection('users/' + currentUserID() + '/items').doc(itemID).update({
-    completed: true,
-    completedDate: now,
-    actionTypeWeightEnd: item.actionTypeWeight,
-    importanceWeightEnd: item.importanceWeight,
-    dayDropEnd: item.dayDrop,
-    scoreOnComplete: item.score
-  })
+  if(window.confirm('Are you sure you want to complete?') === true){
+    const item = items.filter(i => {
+      return i.id === itemID
+    })[0]
+    const now = new Date()
+    firebase.firestore().collection('users/' + currentUserID() + '/items').doc(itemID).update({
+      completed: true,
+      completedDate: now,
+      actionTypeWeightEnd: item.actionTypeWeight,
+      importanceWeightEnd: item.importanceWeight,
+      dayDropEnd: item.dayDrop,
+      scoreOnComplete: item.score
+    })
+  }
 }
 
 export const updateImportanceTypes = (newITypes, oldITypes) => {

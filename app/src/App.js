@@ -40,10 +40,10 @@ const App = () => {
                               <HashRouter basename="/">
                                 <Nav />
                                 <Main />
+                                <EscDetect />
                               </HashRouter>
                               <ProjectEditSheet />
                               <EditSheet />
-                              <EscDetect />
                             </div>
                           </StateProvider>
                         </CompltetedItemsProvider>

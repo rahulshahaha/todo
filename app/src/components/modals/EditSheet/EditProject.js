@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState } from 'react'
 import { DataContext } from '../../../store/contexts/dataContext'
 import Select from 'react-select'
 import { ModalContext } from '../../../store/contexts/modalContext'
@@ -9,14 +9,6 @@ const EditProject = ({value, change}) => {
   const { projects } = useContext(DataContext)
   const [editing, setEditing] = useState(false)
   const { modalDispatch } = useContext(ModalContext)
-
-  useEffect(() => {
-    if(value === ''){
-      setEditing(true)
-    }else{
-      setEditing(false)
-    }
-  }, [value])
 
   var sortedProjects = []
   if(projects){
@@ -42,6 +34,11 @@ const EditProject = ({value, change}) => {
     setEditing(!editing)
   }
 
+  const blur = (e) => {
+    // if(e.target.value === '') return
+    setEditing(!editing)
+  }
+
 
   const changed = (e) => {
     const data = {
@@ -63,12 +60,12 @@ const EditProject = ({value, change}) => {
     <div>
       <div className="pr-5 mt-5">
         { editing ? 
-          <Select className="w-1/2" options={options} id='projectID' onBlur={click} onClick={click} placeholder={project.name} onChange={changed} autoFocus={true} maxMenuHeight={200} menuIsOpen={true} controlShouldRenderValue={true} />
+          <Select className="w-1/2" options={options} id='projectID' onBlur={blur} onClick={click} placeholder={project ? project.name : 'Select Project'} onChange={changed} autoFocus={true} maxMenuHeight={200} menuIsOpen={true} controlShouldRenderValue={true} />
           :
           <div>
             <div className="flex space-x-1">
               <BeakerIcon />
-              <p className="text-lg hover:underline cursor-pointer inline-block" onClick={click}>{project ? project.name : ''}</p>
+              <p className="text-lg hover:underline cursor-pointer inline-block" onClick={click}>{project ? project.name : 'Select Project'}</p>
             </div>
             <div></div>
             <p className="text-sm text-gray-400 cursor-pointer inline-block" onClick={viewProject}>View Project</p>

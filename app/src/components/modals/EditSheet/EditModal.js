@@ -99,10 +99,8 @@ const EditModal = () => {
   }
 
   const completeClick = (e) => {
-    if(window.confirm('Are you sure you want to complete?') === true){
       completeItem(newItem.id, items, weights)
       modalDispatch({type:'HIDE_SHEET'})
-    }
   }
 
 
