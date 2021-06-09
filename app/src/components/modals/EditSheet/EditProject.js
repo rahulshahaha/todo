@@ -7,7 +7,7 @@ const EditProject = ({value, change}) => {
 
   const { projects } = useContext(DataContext)
   const [editing, setEditing] = useState(false)
-  const { modalStatus, modalDispatch } = useContext(ModalContext)
+  const { modalDispatch } = useContext(ModalContext)
 
   useEffect(() => {
     if(value === ''){
