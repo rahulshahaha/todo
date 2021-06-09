@@ -14,7 +14,7 @@ import { HistoryProvider } from "./store/contexts/historyContext";
 import { ConfigProvider } from "./store/contexts/configContext";
 import DataHydrator from "./components/DataHydrator";
 import { CompltetedItemsProvider } from "./store/contexts/completedItemsContext";
-import Nav from "./components/Nav";
+import Nav from "./components/nav/Nav";
 import { StateProvider } from "./store/contexts/stateContext";
 import { HashRouter } from 'react-router-dom'
 

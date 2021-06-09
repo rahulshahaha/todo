@@ -1,26 +1,13 @@
-import React, { useState, useContext } from 'react'
-import { FbContext } from '../../store/contexts/fbContext';
-import { login, logout } from '../../store/actions'
-import LogoutIcon from '../icons/LogoutIcon'
+import React, { useState } from 'react'
+import { login } from '../../store/actions'
+
 
 const Login = () => {
 
-  const { FBuser } = useContext(FbContext)
   const [creds, setCreds] = useState({
     email: '',
     pass: ''
   })
-
-  const logoutClick = (e) => {
-    logout();
-  }
-
-  if(FBuser){
-    return(
-      // <button onClick={logoutClick} className="btn">Logout</button>
-      <LogoutIcon click={logoutClick} />
-    )
-  }
 
   const submit = (e) => {
     e.preventDefault();

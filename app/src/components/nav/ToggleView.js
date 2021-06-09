@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLocation, NavLink } from 'react-router-dom'
-import CalendarIcon from './icons/CalendarIcon'
-import ListIcon from './icons/ListIcon'
+import CalendarIcon from '../icons/CalendarIcon'
+import ListIcon from '../icons/ListIcon'
 
 
 const ToggleView = () => {
