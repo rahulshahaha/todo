@@ -60,7 +60,7 @@ const EditProject = ({value, change}) => {
     <div>
       <div className="pr-5 mt-5">
         { editing ? 
-          <Select className="w-1/2" options={options} id='projectID' onBlur={blur} onClick={click} placeholder={project ? project.name : 'Select Project'} onChange={changed} autoFocus={true} maxMenuHeight={200} menuIsOpen={true} controlShouldRenderValue={true} />
+          <Select className="w-3/4" options={options} id='projectID' onBlur={blur} onClick={click} placeholder={project ? project.name : 'Select Project'} onChange={changed} autoFocus={true} maxMenuHeight={200} menuIsOpen={true} controlShouldRenderValue={true} />
           :
           <div>
             <div className="flex space-x-1">
