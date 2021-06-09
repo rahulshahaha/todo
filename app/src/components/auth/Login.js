@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { FbContext } from '../../store/contexts/fbContext';
 import { login, logout } from '../../store/actions'
+import LogoutIcon from '../icons/LogoutIcon'
 
 const Login = () => {
 
@@ -16,7 +17,8 @@ const Login = () => {
 
   if(FBuser){
     return(
-      <button onClick={logoutClick} className="btn">Logout</button>
+      // <button onClick={logoutClick} className="btn">Logout</button>
+      <LogoutIcon click={logoutClick} />
     )
   }
 

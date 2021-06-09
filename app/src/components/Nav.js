@@ -27,7 +27,7 @@ const Nav = () => {
     <div>
       <div className="bg-darkGray w-full h-14 ">
         <div className="grid grid-cols-12">
-          <div className="flex justify-between col-span-3 self-center justify-self-start p1-2">
+          <div className="flex col-span-3 self-center justify-self-start pl-2 space-x-2">
             <Login />
             <NavLink className="" to={to}><button className="btn">Change View</button></NavLink>
             <AddItem />
