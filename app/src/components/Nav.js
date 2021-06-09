@@ -3,7 +3,8 @@ import { StateContext } from '../store/contexts/stateContext'
 import Login from './auth/Login'
 import UpcomingWork from './centerColumn/UpcomingWork'
 import AddItem from './leftBar/AddItem'
-import { useLocation, NavLink } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import ToggleView from './ToggleView'
 
 const Nav = () => {
 
@@ -11,13 +12,7 @@ const Nav = () => {
   const loc = useLocation()
 
 
-  const to = () => {
-    if(loc.pathname === '/working' || loc.pathname === '/'){
-      return "/planning"
-    }else{
-      return "/working"
-    }
-  }
+
 
   const toggleFilter = (e) => {
     stateDispatch({type: 'TOGGLE_FILTERS'})
@@ -27,9 +22,9 @@ const Nav = () => {
     <div>
       <div className="bg-darkGray w-full h-14 ">
         <div className="grid grid-cols-12">
-          <div className="flex col-span-3 self-center justify-self-start pl-2 space-x-2">
+          <div className="flex col-span-3 self-center justify-self-start pl-2 space-x-4">
             <Login />
-            <NavLink className="" to={to}><button className="btn">Change View</button></NavLink>
+            <ToggleView />
             <AddItem />
           </div>
           <div className="col-span-6">
