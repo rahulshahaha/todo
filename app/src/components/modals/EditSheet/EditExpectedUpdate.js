@@ -27,8 +27,8 @@ const EditExpectedUpdate = ({value, change}) => {
   }
 
   return ( 
-    <div className="mt-2 flex space-x-2">
-      <p className="font-bold text-md">Due:</p>
+    <div className=" flex space-x-2">
+      {/* <p className="font-bold text-md">Due:</p> */}
       <DatePicker id='expectedUpdate' filterDate={filterDate} isClearable={false} className='cursor-pointer hover:underline' selected={expectedUpdate} onFocus={focus} onChange={dateChange} />
     </div>
    );

@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { DataContext } from '../../../store/contexts/dataContext'
 import Select from 'react-select'
 import { ModalContext } from '../../../store/contexts/modalContext'
+import BeakerIcon from '../../icons/BeakerIcon'
 
 const EditProject = ({value, change}) => {
 
@@ -60,13 +61,17 @@ const EditProject = ({value, change}) => {
 
   return ( 
     <div>
-      <div className="mt-2 pr-5">
+      <div className="pr-5 mt-5">
         { editing ? 
-          <Select options={options} id='projectID' onBlur={click} onClick={click} placeholder={project.name} onChange={changed} autoFocus={true} maxMenuHeight={200} menuIsOpen={true} controlShouldRenderValue={true} />
+          <Select className="w-1/2" options={options} id='projectID' onBlur={click} onClick={click} placeholder={project.name} onChange={changed} autoFocus={true} maxMenuHeight={200} menuIsOpen={true} controlShouldRenderValue={true} />
           :
           <div>
-            <p className="text-xl font-bold hover:underline cursor-pointer" onClick={click}>{project ? project.name : ''}</p>
-            <p className="text-sm text-gray-400 cursor-pointer" onClick={viewProject}>View Project</p>
+            <div className="flex space-x-1">
+              <BeakerIcon />
+              <p className="text-lg hover:underline cursor-pointer inline-block" onClick={click}>{project ? project.name : ''}</p>
+            </div>
+            <div></div>
+            <p className="text-sm text-gray-400 cursor-pointer inline-block" onClick={viewProject}>View Project</p>
           </div>
         }
       </div>

@@ -16,7 +16,7 @@ const EditNotes = ({value, change}) => {
 
 
   return ( 
-    <div className="mt-2">
+    <div className="mt-5">
       <p className="text-md font-bold">Notes</p>
       { editing ?
         <TextareaAutosize id='notes' autoFocus onBlur={click} onFocus={focus} onChange={change} className={'focus:outline-none border-2 border-black '} value={value}></TextareaAutosize>

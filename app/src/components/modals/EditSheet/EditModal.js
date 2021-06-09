@@ -111,10 +111,10 @@ const EditModal = () => {
         <div onClick={exitClick} className="h-10 w-10 absolute top-0 right-0">
           <ExitIcon />
         </div>
-        <EditProject value={newItem.projectID} change={change} />
-        <EditExpectedUpdate value={newItem.expectedUpdate} change={dateChange} />
         <EditActionType value={newItem.actionType} change={change} />
         <EditAction value={newItem.action} change={change} />
+        <EditExpectedUpdate value={newItem.expectedUpdate} change={dateChange} />
+        <EditProject value={newItem.projectID} change={change} />
         <EditNotes value={newItem.notes} change={change} />
         <EditLink value={newItem.link} change={change} />
         {

@@ -25,7 +25,7 @@ const EditLink = ({value, change}) => {
 
   if(editing){
     return(
-      <div className="mt-2">
+      <div className="">
         <input placeholder="Enter URL" id='link' autoFocus onFocus={focus} onBlur={toggleEditing} onChange={change} value={value} />
       </div>
     )

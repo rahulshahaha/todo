@@ -44,11 +44,11 @@ const EditActionType = ({value, change}) => {
   }
 
   return ( 
-    <div className="mt-5">
+    <div className="">
       { editing ? 
         <Select className="w-1/2" options={options} id='actionType' onBlur={click} onClick={click} placeholder={actionType.name} onChange={changed} autoFocus={true} maxMenuHeight={200} menuIsOpen={true} controlShouldRenderValue={true} />
         :
-        <p className="font-bold text-md inline-block cursor-pointer hover:underline" onClick={click} >{actionType ? actionType.name : ""}:</p>
+        <p className="text-md inline-block cursor-pointer hover:underline" onClick={click} >{actionType ? actionType.name : ""}</p>
       }
 
     </div>
