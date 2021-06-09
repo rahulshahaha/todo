@@ -1,11 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { DataContext } from '../../../store/contexts/dataContext'
 import Select from 'react-select'
+import { ModalContext } from '../../../store/contexts/modalContext'
 
 const EditProject = ({value, change}) => {
 
   const { projects } = useContext(DataContext)
   const [editing, setEditing] = useState(false)
+  const { modalStatus, modalDispatch } = useContext(ModalContext)
 
   useEffect(() => {
     if(value === ''){
@@ -53,14 +55,21 @@ const EditProject = ({value, change}) => {
     setEditing(false)
   }
 
-  return ( 
-    <div className="mt-2 pr-5">
-      { editing ? 
-        <Select options={options} id='projectID' onBlur={click} onClick={click} placeholder={project.name} onChange={changed} autoFocus={true} maxMenuHeight={200} menuIsOpen={true} controlShouldRenderValue={true} />
-        :
-        <p className="text-xl font-bold hover:underline cursor-pointer" onClick={click}>{project ? project.name : ''}</p>
-      }
+  const viewProject = (e) => {
+    modalDispatch({type:'HIDE_SHEET'})
+    modalDispatch({type:'SHOW_PROJECT_SHEET', projectID: project.id})
+  }
 
+  return ( 
+    <div>
+      <div className="mt-2 pr-5">
+        { editing ? 
+          <Select options={options} id='projectID' onBlur={click} onClick={click} placeholder={project.name} onChange={changed} autoFocus={true} maxMenuHeight={200} menuIsOpen={true} controlShouldRenderValue={true} />
+          :
+          <p className="text-xl font-bold hover:underline cursor-pointer" onClick={click}>{project ? project.name : ''}</p>
+        }
+      </div>
+      <p className="text-sm text-gray-400 cursor-pointer" onClick={viewProject}>View Project</p>
     </div>
    );
 }
