@@ -19,10 +19,10 @@ const Nav = () => {
   }
 
   return ( 
-    <div>
-      <div className="bg-darkGray w-full h-14 ">
+    <div className="">
+      <div className="bg-darkGray w-full h-14 px-2">
         <div className="grid grid-cols-12">
-          <div className="flex col-span-3 self-center justify-self-start pl-2 space-x-4">
+          <div className="flex col-span-3 self-center justify-self-start space-x-4">
             <Login />
             <ToggleView />
             <AddItem />
@@ -30,7 +30,7 @@ const Nav = () => {
           <div className="col-span-6">
             <UpcomingWork />
           </div>
-          <div className="col-span-3 self-center justify-self-end pr-2">
+          <div className="col-span-3 self-center justify-self-end">
             { loc.pathname !== "/planning" ? 
               <button className="btn" onClick={toggleFilter}>{showFilters ? "Preview" : "Filter"}</button>
             : null
