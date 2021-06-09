@@ -1,65 +1,33 @@
 const moment = require('moment')
 
+const Firestore = require("@google-cloud/firestore");
+const firestore = new Firestore({
+  projectId: "todo-8303f",
+  timestampsInSnapshots: true,
+});
+
 // var currentItems, currentWeights, currentProjects
 
-exports.hydrateData = (items, weights, projects, oneOffs) => {
 
-  // if(items !== currentItems){
-  //   console.log('NEW ITEMS')
-  // }
-  // if(weights !== currentWeights){
-  //   console.log('NEW WEIGHTS')
-  // }
-  // if(projects !== currentProjects){
-  //   console.log('NEW PROJECTS')
-  // }
-
+exports.hydrateData = (items, weights, projects, start) => {
 
   const newWeights = weights ? hydrateWeights(weights) : null
-  const newItems = items && newWeights && projects ? hydrateItems(items, newWeights, projects) : null
-  const newProjects = newItems && projects ? hydrateProjects(newItems, projects) : null
+  const newItems = items && newWeights && projects ? hydrateItems(items, newWeights, projects, start) : null
 
   var totalScore = 0
   if(newItems){
     newItems.forEach(item => {
-      totalScore += item.score
+      if(item.completedDate){
+        if(moment.unix(item.completedDate.seconds).startOf('days').isAfter(start)){
+          totalScore += item.score
+        }
+      }else{
+        totalScore += item.score
+      }
     })
   }
 
-  if(oneOffs){
-    oneOffs.forEach(oneOff => {
-      totalScore += weights.oneOff
-    })
-  }
-
-  const allDataPulled = items && weights && projects && oneOffs ? true : false
-
-  // currentItems = items
-  // currentWeights = weights
-  // currentProjects = projects
-
-  return {items: newItems, weights: newWeights, projects: newProjects, totalScore, allDataPulled}
-}
-
-
-const hydrateProjects = (items, projects) => {
-  const newProjects = projects.map(proj => {
-    const itemsInProj = itemsInProject(items, proj)
-    var projScore = 0;
-    itemsInProj.forEach(item => projScore += item.score)
-    return {...proj, totalScore: projScore, items: itemsInProj}
-  })
-  return newProjects
-}
-
-const itemsInProject = (items, project) => {
-  if(project && items){
-    return items.filter(item => {
-      return item.projectID === project.id
-    })
-  }else{
-    return null
-  }
+  return {date: moment(start), score:totalScore}
 }
 
 const hydrateWeights = (weights) => {
@@ -96,17 +64,17 @@ const actionTypeArray = (actionTypes) => {
 
 
 
-const hydrateItems = (items, weights, projects) => {
+const hydrateItems = (items, weights, projects, start) => {
   if(!items || !weights || !projects) return null
   for(var i = 0; i < items.length; i++){
-    items[i] = hydrateItem(items[i], weights, projects)
+    items[i] = hydrateItem(items[i], weights, projects, start)
   }
   return items
 }
 
 
 
-const hydrateItem = (item, weights, projects) =>{
+const hydrateItem = (item, weights, projects, start) =>{
 
 
   if(weights && item && projects){
@@ -115,7 +83,9 @@ const hydrateItem = (item, weights, projects) =>{
     })[0]
 
     const itemDeleted = project ? false : true;
-    if(itemDeleted) return null
+    if(itemDeleted){
+      // return null
+    } 
 
     const importance = weights.importanceArray.filter(iType => {
       return iType.id === project.importance
@@ -125,23 +95,20 @@ const hydrateItem = (item, weights, projects) =>{
       return aType.id === item.actionType
     })[0]
 
-    const daysTo = weekDaysBetween(item.expectedUpdate)
+    const daysTo = weekDaysBetween(item.expectedUpdate, start)
     const score = item.expectedUpdate ? Math.max(0,(1 * importance.weight * actionType.weight) - (daysTo * weights.dayDrop)) : 0;
-
-
-    const colorClass = itemColorClass(item)
   
-    return {...item, deleted: itemDeleted, importanceName: importance.name, importanceWeight: importance.weight, actionTypeName: actionType.name, actionTypeWeight: actionType.weight, daysTo, score, colorClass, project}
+    return {...item, deleted: itemDeleted, importanceName: importance.name, importanceWeight: importance.weight, actionTypeName: actionType.name, actionTypeWeight: actionType.weight, daysTo, score, project}
     
   }
   return item
 }
 
 
-const weekDaysBetween = (timestamp) => {
+const weekDaysBetween = (timestamp, startDay) => {
   if(timestamp === null) return 0;
   const expectedUpdate = moment.unix(timestamp.seconds).startOf('days')
-  const now = moment().startOf('days');
+  const now = startDay;
   var end = moment(expectedUpdate).startOf('days')
   var start = moment(now).startOf('days')
   var multiplier = 1
@@ -165,26 +132,5 @@ const weekDaysBetween = (timestamp) => {
   }
 
   return totalDays * multiplier
-
-}
-
-const itemColorClass = (item) => {
-  if(item.expectedUpdate === null) return 'bg-white'
-  const now = moment().startOf('day');
-  const expectedUpdate = moment.unix(item.expectedUpdate.seconds).startOf('day')
-
-  if(expectedUpdate.isBefore(now) && item.actionType !== 5 && item.actionType !== 6){
-    return 'bg-red-600 text-white'
-  }else if(expectedUpdate.isSame(now) && (item.actionType === 1 || item.actionType === 4)){
-    return 'bg-purple-700 text-white'
-  }else if(expectedUpdate.isSame(now) && (item.actionType === 2 || item.actionType === 3)){
-    return 'bg-gray-600 text-white'
-  }else if(item.actionType === 1 || item.actionType === 4){
-    return 'bg-purple-300'
-  }else if(item.actionType === 2 || item.actionType === 3){
-    return 'bg-gray-400'
-  }
-
-  return 'bg-gray-300'
 
 }
