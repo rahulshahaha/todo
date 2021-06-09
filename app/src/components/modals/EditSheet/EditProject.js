@@ -66,10 +66,12 @@ const EditProject = ({value, change}) => {
         { editing ? 
           <Select options={options} id='projectID' onBlur={click} onClick={click} placeholder={project.name} onChange={changed} autoFocus={true} maxMenuHeight={200} menuIsOpen={true} controlShouldRenderValue={true} />
           :
-          <p className="text-xl font-bold hover:underline cursor-pointer" onClick={click}>{project ? project.name : ''}</p>
+          <div>
+            <p className="text-xl font-bold hover:underline cursor-pointer" onClick={click}>{project ? project.name : ''}</p>
+            <p className="text-sm text-gray-400 cursor-pointer" onClick={viewProject}>View Project</p>
+          </div>
         }
       </div>
-      <p className="text-sm text-gray-400 cursor-pointer" onClick={viewProject}>View Project</p>
     </div>
    );
 }
