@@ -21,7 +21,7 @@ const Filters = () => {
   }
 
   return ( 
-    <div className="mb-10">
+    <div className="mb-10 p-2">
       <ImportanceFilters />
       <DayFilter />
       <ActionTypeFilter />
