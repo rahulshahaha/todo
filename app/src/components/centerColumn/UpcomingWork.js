@@ -3,6 +3,8 @@ import { FilterContext } from '../../store/contexts/filterContext'
 import useMetrics from '../../UseMetrics'
 import moment from 'moment'
 import { DataContext } from '../../store/contexts/dataContext'
+import { useLocation } from 'react-router-dom'
+
 
 const UpcomingWork = () => {
 
@@ -12,6 +14,12 @@ const UpcomingWork = () => {
   const { weights } = useContext(DataContext)
   const importances = weights ? weights.importanceTypes : {}
   const actionTypes = weights ? weights.actionTypes : {}
+  const loc = useLocation()
+
+  const isPlanning = () => {
+    if(loc.pathname === '/planning') return true;
+    return false
+  }
 
   useEffect(() => {
     var days = 0;
@@ -28,6 +36,7 @@ const UpcomingWork = () => {
 
 
   const todayClick = (e) => {
+    if(isPlanning()) return
     if(filterData.dayFilter === "0"){
       filterDispatch({type: 'SET_DAY_FILTER', value: "all"})
     }else{
@@ -36,6 +45,7 @@ const UpcomingWork = () => {
   }
 
   const tomorrowClick = (e) => {
+    if(isPlanning()) return
     if(filterData.dayFilter === "1"){
       filterDispatch({type: 'SET_DAY_FILTER', value: "all"})
     }else{
@@ -44,7 +54,7 @@ const UpcomingWork = () => {
   }
 
   const weekClick = (e) => {
-
+    if(isPlanning()) return
     if(filterData.dayFilter === weekDays.toString()){
       filterDispatch({type: 'SET_DAY_FILTER', value: "all"})
     }else{
@@ -53,6 +63,7 @@ const UpcomingWork = () => {
   }
 
   const totalClick = (e) => {
+    if(isPlanning()) return
     filterDispatch({type: 'ALL_IMPORTANCE', value: true, importances})
     filterDispatch({type: 'ALL_ACTION', value: true, actionTypes})
     filterDispatch({type: 'SET_DAY_FILTER', value: 'all'})
