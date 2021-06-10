@@ -15,7 +15,17 @@ const UpcomingWork = () => {
     }
   }
 
-  const colorClass = filterData.dayFilter === "0" ? 'text-yellow-300' : 'text-white'
+  const tomorrowClick = (e) => {
+    if(filterData.dayFilter === "1"){
+      filterDispatch({type: 'SET_DAY_FILTER', value: "all"})
+    }else{
+      filterDispatch({type: 'SET_DAY_FILTER', value: "1"})
+    }
+  }
+
+
+  const todayColorClass = filterData.dayFilter === "0" ? 'text-yellow-300' : 'text-white'
+  const tomorrowColorClass = filterData.dayFilter === "1" ? 'text-yellow-300' : 'text-white'
 
   return ( 
     <div className="grid grid-cols-4 text-white">
@@ -23,11 +33,11 @@ const UpcomingWork = () => {
         <p className="text-center text-2xl">{filteredScore.toFixed(2)}</p>
         <p className="text-center">Filtered View</p>
       </div>
-      <div className={"cursor-pointer " + colorClass} onClick={todayClick}>
+      <div className={"cursor-pointer " + todayColorClass} onClick={todayClick}>
         <p className="text-center text-2xl">{todaysScore.toFixed(2)}</p>
         <p className="text-center">Today</p>
       </div>
-      <div>
+      <div className={"cursor-pointer " + tomorrowColorClass} onClick={tomorrowClick}>
         <p className="text-center text-2xl">{tomorrowsScore.toFixed(2)}</p>
         <p className="text-center">Tomorrow</p>
       </div>
