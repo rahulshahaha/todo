@@ -50,6 +50,8 @@ const EditModal = () => {
     }
   }, [modalStatus, items])
 
+
+  //count changes
   useEffect(() => {
     var changes = 0
     const valuesToCheck = ['action','actionType','projectID','notes','link']
@@ -73,6 +75,7 @@ const EditModal = () => {
 
   },[newItem, initialItem])
 
+  
   const change = (e) => {
     setNewItem({
       ...newItem,
