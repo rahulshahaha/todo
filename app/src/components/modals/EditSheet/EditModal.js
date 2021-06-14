@@ -9,6 +9,7 @@ import { ModalContext } from '../../../store/contexts/modalContext';
 import { DataContext } from '../../../store/contexts/dataContext';
 import EditNotes from './EditNotes';
 import EditLink from './EditLink';
+import moment from 'moment'
 
 
 const EditModal = () => {
@@ -17,48 +18,60 @@ const EditModal = () => {
   const { items, weights } = useContext(DataContext)
   const { modalStatus, modalDispatch } = useContext(ModalContext)
 
-  const [newItem, setNewItem] = useState({
-    action: '',
-    actionType: 1,
-    expectedUpdate: new Date(),
-    projectID: '',
-    notes: '',
-    link: ''
-  })
+  const blankItem = (projID) => {
+    const projectID = projID ? projID : ''
+    return {
+      action: '',
+      actionType: 1,
+      expectedUpdate: moment().startOf('day').toDate(),
+      projectID,
+      notes: '',
+      link: ''
+    }
+  }
 
+  const [newItem, setNewItem] = useState(blankItem())
+  const [initialItem, setInitialItem] = useState(blankItem())
   const [changed, setChanged] = useState(false)
-
   const [isNew, setNew] = useState(true)
 
   useEffect(() => {
     if(modalStatus && modalStatus.itemID){
       if(items){
         setNewItem(items.filter(item => {return item.id === modalStatus.itemID})[0])
+        setInitialItem(items.filter(item => {return item.id === modalStatus.itemID})[0])
         setNew(false)
       }else{
         setNew(true)
       }
     }
     if(modalStatus.itemProjectID){
-      setNewItem({
-        action: '',
-        actionType: 1,
-        expectedUpdate: new Date(),
-        projectID: modalStatus.itemProjectID,
-        notes: '',
-        link: ''
-      })
+      setNewItem(blankItem(modalStatus.itemProjectID))
     }
   }, [modalStatus, items])
 
-
   useEffect(() => {
-    if(newItem.projectID === '' || newItem.action === ''){
-      setChanged(false)
-    }else{
-      setChanged(true)
+    var changes = 0
+    const valuesToCheck = ['action','actionType','projectID','notes','link']
+    valuesToCheck.forEach(key => {
+      if(newItem[key] !== initialItem[key]) changes++
+    })
+    const newItemExpectedUpdate = newItem.expectedUpdate.seconds ? moment.unix(newItem.expectedUpdate.seconds).startOf('day') : moment(newItem.expectedUpdate).startOf('day')
+
+    const initialItemExpectedUpdate = initialItem.expectedUpdate.seconds ? moment.unix(initialItem.expectedUpdate.seconds).startOf('day') : moment(initialItem.expectedUpdate).startOf('day')
+
+    if(!newItemExpectedUpdate.isSame(initialItemExpectedUpdate)){
+      changes++
     }
-  },[newItem.projectID, newItem.action])
+
+    if(changes > 0){
+      setChanged(true)
+    }else{
+      setChanged(false)
+    }
+
+
+  },[newItem, initialItem])
 
   const change = (e) => {
     setNewItem({
@@ -111,7 +124,7 @@ const EditModal = () => {
           <ExitIcon />
         </div>
         <EditActionType value={newItem.actionType} change={change} />
-        <EditAction value={newItem.action} change={change} />
+        <EditAction isNew={isNew} initial={initialItem.action} value={newItem.action} change={change} />
         <EditExpectedUpdate value={newItem.expectedUpdate} change={dateChange} />
         <EditProject value={newItem.projectID} change={change} />
         <EditNotes value={newItem.notes} change={change} />
