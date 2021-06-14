@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import EditAction from './EditAction';
 import EditActionType from './EditActionType';
 import EditExpectedUpdate from './EditExpectedUpdate';
@@ -14,11 +14,10 @@ import moment from 'moment'
 
 const EditModal = () => {
 
-  const node = useRef(null)
   const { items, weights } = useContext(DataContext)
   const { modalStatus, modalDispatch } = useContext(ModalContext)
 
-  const blankItem = (projID) => {
+  const blankItem = (projID, bool) => {
     const projectID = projID ? projID : ''
     return {
       action: '',
@@ -32,8 +31,18 @@ const EditModal = () => {
 
   const [newItem, setNewItem] = useState(blankItem())
   const [initialItem, setInitialItem] = useState(blankItem())
+  const [changedItems, setChangedItems] = useState({
+    action: false,
+    actionType: false,
+    expectedUpdate: false,
+    projectID: false,
+    notes: false,
+    link: false
+  })
   const [changed, setChanged] = useState(false)
   const [isNew, setNew] = useState(true)
+  const changedClass = isNew ? '' : 'bg-gray-300'
+
 
   useEffect(() => {
     if(modalStatus && modalStatus.itemID){
@@ -55,8 +64,20 @@ const EditModal = () => {
   useEffect(() => {
     var changes = 0
     const valuesToCheck = ['action','actionType','projectID','notes','link']
+    const newChangedItems = {
+      action: false,
+      actionType: false,
+      expectedUpdate: false,
+      projectID: false,
+      notes: false,
+      link: false
+    }
+
     valuesToCheck.forEach(key => {
-      if(newItem[key] !== initialItem[key]) changes++
+      if(newItem[key] !== initialItem[key]){
+        changes++
+        newChangedItems[key] = true
+      }
     })
     const newItemExpectedUpdate = newItem.expectedUpdate.seconds ? moment.unix(newItem.expectedUpdate.seconds).startOf('day') : moment(newItem.expectedUpdate).startOf('day')
 
@@ -64,6 +85,7 @@ const EditModal = () => {
 
     if(!newItemExpectedUpdate.isSame(initialItemExpectedUpdate)){
       changes++
+      newChangedItems.expectedUpdate = true
     }
 
     if(changes > 0){
@@ -72,6 +94,7 @@ const EditModal = () => {
       setChanged(false)
     }
 
+    setChangedItems(newChangedItems)
 
   },[newItem, initialItem])
 
@@ -103,7 +126,6 @@ const EditModal = () => {
 
 
   const doneClick = (e) => {
-    console.log(e)
     if(!changed) return;
     updateItem(newItem)
     modalDispatch({type:'HIDE_SHEET'})
@@ -122,16 +144,16 @@ const EditModal = () => {
 
 
   return ( 
-      <div ref={node} id="modal" className="relative overflow-scroll bg-white h-2/4 mt-10 p-5 w-1/3">
+      <div id="modal" className="relative overflow-scroll bg-white h-2/4 mt-10 p-5 w-1/3">
         <div onClick={exitClick} className="h-10 w-10 absolute top-0 right-0">
           <ExitIcon />
         </div>
-        <EditActionType value={newItem.actionType} change={change} />
-        <EditAction isNew={isNew} initial={initialItem.action} value={newItem.action} change={change} />
-        <EditExpectedUpdate value={newItem.expectedUpdate} change={dateChange} />
-        <EditProject value={newItem.projectID} change={change} />
-        <EditNotes value={newItem.notes} change={change} />
-        <EditLink value={newItem.link} change={change} />
+        <EditActionType changed={changedItems.actionType} changedClass={changedClass} value={newItem.actionType} change={change} />
+        <EditAction changed={changedItems.action} changedClass={changedClass} value={newItem.action} change={change} />
+        <EditExpectedUpdate changed={changedItems.expectedUpdate} changedClass={changedClass} value={newItem.expectedUpdate} change={dateChange} />
+        <EditProject changed={changedItems.projectID} changedClass={changedClass} value={newItem.projectID} change={change} />
+        <EditNotes changed={changedItems.notes} changedClass={changedClass} value={newItem.notes} change={change} />
+        <EditLink changed={changedItems.link} changedClass={changedClass} value={newItem.link} change={change} />
         {
           isNew ? (
             <div className="flex space-x-2 mt-5">

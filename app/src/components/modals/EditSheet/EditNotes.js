@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import TextareaAutosize from 'react-textarea-autosize';
 
 
-const EditNotes = ({value, change}) => {
+const EditNotes = ({value, change, changed, changedClass}) => {
   const [editing, setEditing] = useState(false)
 
   const click = (e) => {
@@ -13,7 +13,7 @@ const EditNotes = ({value, change}) => {
     e.target.select()
   }
 
-
+  const bgClass = changed ? changedClass : ''
 
   return ( 
     <div className="mt-5">
@@ -22,9 +22,9 @@ const EditNotes = ({value, change}) => {
         <TextareaAutosize id='notes' autoFocus onBlur={click} onFocus={focus} onChange={change} className={'focus:outline-none border-2 border-black '} value={value}></TextareaAutosize>
         :
         value === "" ? 
-        <p className="italic text-gray-500 cursor-pointer underline inline-block" onClick={click}>{"Add Note"}</p>
+        <p className={"italic text-gray-500 cursor-pointer underline inline-block " + bgClass} onClick={click}>{"Add Note"}</p>
         :
-        <p className="cursor-pointer hover:underline inline-block" onClick={click}>{value}</p>
+        <p className={"cursor-pointer hover:underline inline-block " + bgClass} onClick={click}>{value}</p>
       }
     </div>
    );

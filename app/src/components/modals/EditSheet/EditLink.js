@@ -3,7 +3,7 @@ import PencilIcon from '../../icons/PencilIcon'
 
 
 
-const EditLink = ({value, change}) => {
+const EditLink = ({value, change, changed, changedClass}) => {
 
   const [editing, setEditing] = useState(false)
 
@@ -15,10 +15,12 @@ const EditLink = ({value, change}) => {
     e.target.select()
   }
 
+  const bgClass = changed ? changedClass : ''
+
   if(value === "" && !editing){
     return(
       <div className="mt-2">
-        <p className="italic text-gray-500 cursor-pointer underline inline-block" onClick={toggleEditing}>{"Add Link"}</p>
+        <p className={"italic text-gray-500 cursor-pointer underline inline-block " + bgClass} onClick={toggleEditing}>{"Add Link"}</p>
       </div>
     )
   }
@@ -34,7 +36,7 @@ const EditLink = ({value, change}) => {
   return ( 
     <div className="mt-2">
       <div className="flex space-x-1">
-        <a target="_blank" rel="noreferrer" href={value} className="text-blue-500 underline text-md font-bold">Link</a>
+        <a target="_blank" rel="noreferrer" href={value} className={"text-blue-500 underline text-md font-bold " + bgClass}>Link</a>
         <div onClick={toggleEditing} className="w-4 h-4 cursor-pointer self-center">
           <PencilIcon />
         </div>

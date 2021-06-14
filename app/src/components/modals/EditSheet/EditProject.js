@@ -4,7 +4,7 @@ import Select from 'react-select'
 import { ModalContext } from '../../../store/contexts/modalContext'
 import BeakerIcon from '../../icons/BeakerIcon'
 
-const EditProject = ({value, change}) => {
+const EditProject = ({value, change, changed, changedClass}) => {
 
   const { projects } = useContext(DataContext)
   const [editing, setEditing] = useState(false)
@@ -40,7 +40,7 @@ const EditProject = ({value, change}) => {
   }
 
 
-  const changed = (e) => {
+  const changeValue = (e) => {
     const data = {
       target: {
         id: 'projectID',
@@ -56,16 +56,18 @@ const EditProject = ({value, change}) => {
     modalDispatch({type:'SHOW_PROJECT_SHEET', projectID: project.id})
   }
 
+  const bgClass = changed ? changedClass : ''
+
   return ( 
     <div>
       <div className="pr-5 mt-5">
         { editing ? 
-          <Select className="w-3/4" options={options} id='projectID' onBlur={blur} onClick={click} placeholder={project ? project.name : 'Select Project'} onChange={changed} autoFocus={true} maxMenuHeight={200} menuIsOpen={true} controlShouldRenderValue={true} />
+          <Select className="w-3/4" options={options} id='projectID' onBlur={blur} onClick={click} placeholder={project ? project.name : 'Select Project'} onChange={changeValue} autoFocus={true} maxMenuHeight={200} menuIsOpen={true} controlShouldRenderValue={true} />
           :
           <div>
             <div className="flex space-x-1">
               <BeakerIcon />
-              <p className="text-lg hover:underline cursor-pointer inline-block" onClick={click}>{project ? project.name : 'Select Project'}</p>
+              <p className={"text-lg hover:underline cursor-pointer inline-block " + bgClass} onClick={click}>{project ? project.name : 'Select Project'}</p>
             </div>
             <div></div>
             <p className="text-sm text-gray-400 cursor-pointer inline-block" onClick={viewProject}>View Project</p>
