@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { DataContext } from '../../../store/contexts/dataContext';
 import Select from 'react-select'
 
@@ -43,6 +43,40 @@ const EditActionType = ({value, change, changed, changedClass, reset}) => {
     setEditing(false)
   }
 
+  const rotate = () => {
+    const length = options.length
+    var index = 0;
+    for(var i = 0; i < length; i++){
+      if(options[i].value === value){
+        index = i;
+      }
+    }
+    const newIndex = index === options.length - 1 ? 0 : index + 1 
+    const data = {
+      target: {
+        id: 'actionType',
+        value: options[newIndex].value
+      }
+    }
+    change(data)
+  }
+
+
+  useEffect(() => {
+
+    const aTypeKey = (e) => {
+      if(e.code === "Comma" && document.activeElement.nodeName !== 'TEXTAREA' && document.activeElement.nodeName !== "INPUT"){
+        rotate()
+      }
+    }
+
+    document.addEventListener("keyup", aTypeKey);
+
+    return(() => {
+      document.removeEventListener("keyup", aTypeKey);
+    })
+  })
+
   const bgClass = changed ? changedClass : ''
 
   return ( 
@@ -52,7 +86,6 @@ const EditActionType = ({value, change, changed, changedClass, reset}) => {
         :
         <p className={"text-md inline-block cursor-pointer hover:underline " + bgClass} onClick={click} >{actionType ? actionType.name : ""}</p>
       }
-
     </div>
    );
 }
