@@ -9,6 +9,17 @@ const EditAction = ({value, change, changed, changedClass}) => {
     setEditing(!editing)
   }
 
+  const blur = (e) => {
+    setEditing(!editing)
+    const data = {
+      target: {
+        value: e.target.value.replace(/^\s+|\s+$/g, ''),
+        id: 'action'
+      }
+    }
+    change(data)
+  }
+
   const focus = (e) => {
     e.target.select()
   }
@@ -22,7 +33,7 @@ const EditAction = ({value, change, changed, changedClass}) => {
   return ( 
     <div className={"mt-2 "}>
       { editing ? 
-        <TextareaAutosize onFocus={focus} onBlur={click} autoFocus id='action' onChange={editAction} className={'focus:outline-none border-2 border-black text-xl font-bold w-11/12 max-w-11/12 '} value={value}></TextareaAutosize>
+        <TextareaAutosize onFocus={focus} onBlur={blur} autoFocus id='action' onChange={editAction} className={'focus:outline-none border-2 border-black text-xl font-bold w-11/12 max-w-11/12 '} value={value}></TextareaAutosize>
         :
         value === "" ? 
         <p className="italic text-gray-500 cursor-pointer underline inline-block" onClick={click}>{"Add Action"}</p>
