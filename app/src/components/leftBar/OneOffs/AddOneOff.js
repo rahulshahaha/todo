@@ -1,15 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import { addOneOff } from '../../../store/actions'
+import { ModalContext } from '../../../store/contexts/modalContext'
 
 const AddOneOff = () => {
 
   const [newOneOff, setNewOneOff] = useState('')
+  const { modalStatus } = useContext(ModalContext)
   const ref = useRef(null);
 
   useEffect(() => {
 
     const keyupOne = (e) => {
-      if(e.code === "Slash" && document.activeElement.nodeName !== 'TEXTAREA' && document.activeElement.nodeName !== "INPUT"){
+      if(e.code === "Slash" && document.activeElement.nodeName !== 'TEXTAREA' && document.activeElement.nodeName !== "INPUT" && !modalStatus.showProjectSheet && !modalStatus.showSheet){
         ref.current.focus()
       }
     }
