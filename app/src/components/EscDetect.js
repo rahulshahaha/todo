@@ -27,7 +27,7 @@ const EscDetect = () => {
 
     const keyDownEvent = (e) => {
       if(document.activeElement.nodeName === 'TEXTAREA' || document.activeElement.nodeName === "INPUT") return;
-      if(e.code === "KeyD" && e.ctrlKey && modalStatus.itemID){
+      if(e.code === "KeyD" && modalStatus.itemID){
         completeItem(modalStatus.itemID, items, weights)
         modalDispatch({type:'HIDE_SHEET'})
       }
