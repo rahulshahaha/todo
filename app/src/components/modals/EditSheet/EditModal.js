@@ -17,7 +17,7 @@ const EditModal = () => {
   const { items, weights } = useContext(DataContext)
   const { modalStatus, modalDispatch } = useContext(ModalContext)
 
-  const blankItem = (projID, bool) => {
+  const blankItem = (projID) => {
     const projectID = projID ? projID : ''
     return {
       action: '',
