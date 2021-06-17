@@ -119,7 +119,7 @@ const ProjectEditModal = () => {
       { isNew ? null : (
         <div>
           <div className="flex space-x-1 mt-10">
-            <p className="text-xl font-bold self-center">Actions In Project</p>
+            <p className="text-xl font-bold self-center">ToDos In Project</p>
             <div onClick={addItem} className="w-7 h-7 cursor-pointer self-center">
               <PlusIcon />
             </div>
