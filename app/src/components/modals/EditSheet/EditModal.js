@@ -132,7 +132,7 @@ const EditModal = () => {
   }
 
   const addClick = (e) => {
-    if(!changed) return;
+    if(!changed || newItem.projectID === "" || newItem.action === "") return;
     addNewItem(newItem)
     modalDispatch({type:'HIDE_SHEET'})
   }
@@ -157,12 +157,12 @@ const EditModal = () => {
         {
           isNew ? (
             <div className="flex space-x-2 mt-5">
-              <button onClick={addClick} className={changed ? "doneBtn" : "inactiveBtn"}>Add</button>
+              <button onClick={addClick} className={changed && newItem.projectID !== "" && newItem.action !== "" ? "doneBtn" : "inactiveBtn"}>Add</button>
             </div>
           ) : (
             <div>
               <div className="flex space-x-2 mt-5">
-                <button onClick={doneClick} className={changed ? "doneBtn" : "inactiveBtn"}>Save</button>
+                <button onClick={doneClick} className={changed && newItem.projectID !== "" && newItem.action !== "" ? "doneBtn" : "inactiveBtn"}>Save</button>
                 <button onClick={completeClick} className="completeBtn">Complete Task</button>
                 <button onClick={deleteClicked} className="importantBtn">Delete Task</button>
               </div>
