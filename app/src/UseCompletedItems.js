@@ -1,28 +1,29 @@
-import { useEffect, useContext, useState } from 'react';
-import firebase from './config/fbConfig'
-import { FbContext } from './store/contexts/fbContext';
+import { useContext, useState, useEffect } from 'react';
+import { CompletedItemsContext } from './store/contexts/completedItemsContext';
+import  moment from 'moment'
 
 
 export default function useHistory(projectID) {
 
-  const [items,setItems] = useState([])
-  const { FBuser } = useContext(FbContext)
-  const userID = FBuser ? FBuser.uid : null
+  const [items, setItems] = useState([])
+  const { completedItems } = useContext(CompletedItemsContext)
 
 
   useEffect(() => {
-    const unsubCompleted = firebase.firestore().collection('users/' + userID + '/items').where('deleted','==',false).where('completed','==',true).where('projectID','==',projectID).orderBy("completedDate","desc").limit(5).onSnapshot(snap => {
-      const newItems = []
-      snap.docs.forEach(doc => {
-        newItems.push({...doc.data(),id:doc.id, score:doc.data().scoreOnComplete, expectedUpdate: doc.data().completedDate })
-      })
-      // newItems.sort((a,b) => { return b.score - a.score })
-      setItems(newItems)
-    })
-    return () => {
-      unsubCompleted()
-    }
-  }, [projectID, userID])
+    const newItems = completedItems.filter(item => {
+      return item.projectID === projectID
+    }).map(item => {
+      return {...item, score:item.scoreOnComplete, expectedUpdate: item.completedDate}
+    }).sort((a,b) => {
+      if(moment.unix(a.completedDate.seconds).isBefore(moment.unix(b.completedDate.seconds))){
+        return 1
+      }else if(moment.unix(b.completedDate.seconds).isBefore(moment.unix(a.completedDate.seconds))){
+        return -1
+      }
+      return 0
+    }).slice(0, 5)
+    setItems(newItems)
+  }, [completedItems,projectID])
 
 
   return items;
