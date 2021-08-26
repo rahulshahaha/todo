@@ -1,18 +1,33 @@
 import React from 'react'
-import firebase from '../config/fbConfig'
-
+import ApiCalendar from 'react-google-calendar-api';
 
 const Temp = () => {
 
 
-  firebase.firestore().collection('users').doc('f6tnPMjmNnPO6rnutT0EbEMjCOg2').get().then(userSnap => {
-    firebase.firestore().collection('users').doc('A7C42qyQDOd3MeNo9UBMEw7CHAQ2').set({
-      ...userSnap.data()
-    })
-  })
+  const test = () => {
+    ApiCalendar.handleAuthClick();
+  }
+
+  const out = () => {
+    ApiCalendar.handleSignoutClick();
+  }
+
+  const events = () => {
+    if (ApiCalendar.sign){
+      ApiCalendar.listUpcomingEvents(10).then(({ result }) => {
+        console.log(result.items);
+      });
+    }else{
+      console.log('signed out')
+    }
+  }
 
   return ( 
-    <div></div>
+    <div>
+      <button onClick={test} className="btn">Authorize</button>
+      <button onClick={events} className="btn">List</button>
+      <button onClick={out} className="btn">Signout</button>
+    </div>
    );
 }
  

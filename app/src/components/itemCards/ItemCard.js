@@ -3,15 +3,18 @@ import moment from 'moment'
 import { ModalContext } from '../../store/contexts/modalContext'
 
 
-const ItemCard = ({item}) => {
+const ItemCard = ({item, clickable}) => {
 
 const { modalDispatch } = useContext(ModalContext)
 
 const expectedUpdate = item.expectedUpdate ? moment.unix(item.expectedUpdate.seconds).format('MM/DD/YY') : null
 
 const click = (e) => {
-  modalDispatch({type: 'SHOW_SHEET', itemID: item.id})
+  if(clickable !== false){
+    modalDispatch({type: 'SHOW_SHEET', itemID: item.id})
+  }
 }
+
 
   return ( 
     <div onClick={click} className={'border-2 border-black my-2 w-full self-center grid grid-cols-12 '}>

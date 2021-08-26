@@ -8,6 +8,7 @@ import ExitIcon from '../../icons/ExitIcon';
 import PlusIcon from '../../icons/PlusIcon';
 import { ModalContext } from '../../../store/contexts/modalContext';
 import { DataContext } from '../../../store/contexts/dataContext';
+import useCompletedItems from '../../../UseCompletedItems'
 
 const ProjectEditModal = () => {
 
@@ -29,6 +30,7 @@ const ProjectEditModal = () => {
     return b.score - a.score
   }) : null
 
+  const doneItems = useCompletedItems(modalStatus.projectID)
 
   useEffect(() => {
     if(modalStatus && modalStatus.projectID){
@@ -118,6 +120,7 @@ const ProjectEditModal = () => {
       }
       { isNew ? null : (
         <div>
+        <div>
           <div className="flex space-x-1 mt-10">
             <p className="text-xl font-bold self-center">ToDos In Project</p>
             <div onClick={addItem} className="w-7 h-7 cursor-pointer self-center">
@@ -130,6 +133,19 @@ const ProjectEditModal = () => {
             )
           })}
         </div>
+
+        <div>
+          <p className="text-xl font-bold self-center">Recently Completed</p>
+          { doneItems && doneItems.map(item => {
+            return(
+              <ItemCardContainer clickable={false} showProject={false} key={item.id} item={item} done={true} />
+            )
+          })}
+        </div>
+
+        </div>
+
+
       )}
     </div>
    );
