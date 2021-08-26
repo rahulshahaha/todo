@@ -138,7 +138,7 @@ const ProjectEditModal = () => {
           <p className="text-xl font-bold self-center">Recently Completed</p>
           { doneItems && doneItems.map(item => {
             return(
-              <ItemCardContainer clickable={false} showProject={false} key={item.id} item={item} done={true} />
+              <ItemCardContainer showProject={false} key={item.id} item={item} done={true} />
             )
           })}
         </div>

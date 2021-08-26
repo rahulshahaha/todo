@@ -1,17 +1,20 @@
 import React, { useContext } from 'react'
 import moment from 'moment'
 import { ModalContext } from '../../store/contexts/modalContext'
+import { unCompleteItem } from '../../store/actions'
 
 
-const ItemCard = ({item, clickable}) => {
+const ItemCard = ({item, done}) => {
 
 const { modalDispatch } = useContext(ModalContext)
 
 const expectedUpdate = item.expectedUpdate ? moment.unix(item.expectedUpdate.seconds).format('MM/DD/YY') : null
 
 const click = (e) => {
-  if(clickable !== false){
+  if(done !== true){
     modalDispatch({type: 'SHOW_SHEET', itemID: item.id})
+  }else{
+    unCompleteItem(item.id)
   }
 }
 

@@ -85,6 +85,19 @@ export const completeItem = (itemID, items, weights) => {
   }
 }
 
+export const unCompleteItem = (itemID) => {
+  if(window.confirm('Are you sure you want to un-complete?') === true){
+    firebase.firestore().collection('users/' + currentUserID() + '/items').doc(itemID).update({
+      completed: false,
+      completedDate: firebase.firestore.FieldValue.delete(),
+      actionTypeWeightEnd: firebase.firestore.FieldValue.delete(),
+      importanceWeightEnd: firebase.firestore.FieldValue.delete(),
+      dayDropEnd: firebase.firestore.FieldValue.delete(),
+      scoreOnComplete: firebase.firestore.FieldValue.delete()
+    })
+  }
+}
+
 export const updateImportanceTypes = (newITypes, oldITypes) => {
   const keys = Object.keys(newITypes)
   for (const key of keys) {

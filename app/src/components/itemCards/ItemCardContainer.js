@@ -2,15 +2,15 @@ import React from 'react'
 import ItemCardWithProject from './ItemCardWithProject'
 import ItemCard from './ItemCard'
 
-const ItemCardContainer = ({item, showProject, clickable}) => {
+const ItemCardContainer = ({item, showProject, done}) => {
 
 
   return ( 
-    <div className={clickable === false ? 'cursor-default' : 'cursor-pointer'}>
+    <div className={'cursor-pointer'}>
       { showProject ? (
         <ItemCardWithProject item={item} />
       ): (
-        <ItemCard item={item} clickable={clickable} />
+        <ItemCard item={item} done={done} />
       )}
     </div>
    );
